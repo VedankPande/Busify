@@ -16,6 +16,7 @@ public class login_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_activity);
         signup = (Button) findViewById(R.id.gotosignup);
+        //check update
         signup.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(login_activity.this, signup.class);
