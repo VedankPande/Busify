@@ -3,17 +3,17 @@ package com.mitapp.busify;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
-
+    boolean logged_in = false; //change this later (check from database)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        boolean logged_in = false; //change this later
         super.onCreate(savedInstanceState);
         if(logged_in){
-            Intent intent = new Intent(MainActivity.this, MainActivity.class);
-            startActivity(intent);
+            setContentView(R.layout.activity_main);
         }
         else{
             Intent intent = new Intent(MainActivity.this, login_activity.class);

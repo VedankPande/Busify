@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 public class login_activity extends AppCompatActivity {
 
+    boolean Boolean = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +24,7 @@ public class login_activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(login_activity.this, MainActivity.class);
+                intent.putExtra("Boolean", true);
                 startActivity(intent);
             }
         });
