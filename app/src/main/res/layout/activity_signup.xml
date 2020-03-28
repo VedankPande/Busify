@@ -9,50 +9,58 @@
     android:padding="30dp">
 
     <TextView
-        android:layout_weight="10"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#37474F"
+        android:paddingBottom="10dp"
         android:textSize="25sp"
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="For that,\n\t we'll need some details" />
+        android:text="Fill in your details:" />
 
     <EditText
-        android:padding="20dp"
-        android:hint="Email:"
+        android:hint="Email"
         android:id="@+id/new_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textEmailAddress" />
 
-    <EditText
-        android:padding="20dp"
-        android:id="@+id/new_password"
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <EditText
+        android:layout_weight="1"
+        android:id="@+id/new_password"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword" />
 
     <EditText
-        android:padding="20dp"
+        android:layout_weight="1"
         android:hint="Re-enter Password"
         android:id="@+id/new_re_password"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword" />
+    </LinearLayout>
 
     <Spinner
-        android:padding="20dp"
-        android:id="@+id/spinner"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:autofillHints="Specify you bus"
+        android:id="@+id/bus_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
-        android:layout_marginRight="70sp"
-        android:layout_marginLeft="70sp"
-        android:id="@+id/button"
+        android:layout_marginTop="5dp"
+        android:background="#37474F"
+        android:textColor="#ffffff"
+        android:id="@+id/signup_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sign Up" />

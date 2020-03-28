@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Busify</string>
+    <string-array name="buses_list">
+        <item> Specify your Bus </item>
+        <item> A1 </item>
+        <item> A2 </item>
+        <item> B1 </item>
+        <item> B2 </item>
+        <item> C1 </item>
+        <item> C2 </item>
+        <item> D </item>
+        <item> E </item>
+        <item> EB </item>
+        <item> EF </item>
+        <item> F </item>
+        <item> G </item>
+        <item> H </item>
+        <item> I </item>
+    </string-array>
 </resources>
