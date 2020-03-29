@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
-    boolean logged_in = false; //change this later (check from firebase)
+    boolean logged_in = false; //change this later to check from firebase
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
