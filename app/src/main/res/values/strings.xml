@@ -17,4 +17,7 @@
         <item> H </item>
         <item> I </item>
     </string-array>
+    <string name="driver_name">Nitin</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
