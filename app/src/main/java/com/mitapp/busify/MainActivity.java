@@ -7,6 +7,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         if(logged_in){
             setContentView(R.layout.activity_main);
 
-            nDrawerLayout = (DrawerLayout) findViewById(R.id.home_page);
+            nDrawerLayout = (DrawerLayout) findViewById(R.id.nav_menu);
             nToggle = new ActionBarDrawerToggle(this, nDrawerLayout, R.string.open, R.string.close);
 
             nDrawerLayout.addDrawerListener(nToggle);
