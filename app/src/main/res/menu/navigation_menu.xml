@@ -17,6 +17,7 @@
         android:title="Logout" />
 
     <item
+        android:id="@+id/app_info"
         android:icon="@drawable/round_info_black_48"
         android:title="App info"/>
 </menu>

@@ -51,8 +51,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();
+        if(id == R.id.change_bus_preference){
+
+        }
+        if(id == R.id.bug_report){
+
+        }
         if(id == R.id.logout_nav){
             //write you code here
+        }
+        if(id == R.id.app_info){
+
         }
         return false;
     }
