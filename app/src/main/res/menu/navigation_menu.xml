@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/driver_name"
+    <item android:id="@+id/change_bus_preference"
         android:icon="@drawable/round_edit_black_48"
         android:title="Change bus preference">
     </item>
 
     <item
+        android:id="@+id/bug_report"
         android:icon="@drawable/round_bug_report_black_48"
         android:title="Report a Bug"/>
 

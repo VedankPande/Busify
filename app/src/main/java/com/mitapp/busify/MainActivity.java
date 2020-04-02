@@ -28,6 +28,14 @@ public class MainActivity extends AppCompatActivity {
             nToggle.syncState();
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+            Button logout = (Button) findViewById(R.id.logout_nav);
+            logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
         else{
             Intent intent = new Intent(MainActivity.this, login_activity.class);
