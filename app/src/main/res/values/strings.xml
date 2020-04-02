@@ -29,4 +29,10 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="google_signin_promt">Sign in with Google</string>
+    <string name="welcome">Welcome to Busify</string>
+    <string name="motto">never miss your bus again</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="new_here_signup_for_a_new_account">New here? signup for a new account</string>
 </resources>

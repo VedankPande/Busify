@@ -2,7 +2,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".login_activity"
@@ -14,7 +13,7 @@
         android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome to Busify"
+        android:text="@string/welcome"
         android:textSize="30sp"
         tools:layout_editor_absoluteX="146dp"
         tools:layout_editor_absoluteY="12dp" />
@@ -25,22 +24,22 @@
         android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="never miss your bus again"
+        android:text="@string/motto"
         tools:layout_editor_absoluteX="138dp"
         tools:layout_editor_absoluteY="52dp"/>
 
     <ImageView
         android:layout_weight="20"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo" />
+        android:layout_height="0dp"
+        android:src="@drawable/logo"/>
 
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Email"
+        android:hint="@string/email"
         android:inputType="textEmailAddress" />
 
     <EditText
@@ -48,14 +47,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login" />
+        android:text="@string/login" />
 
     <Button
         android:drawablePadding="18dp"
@@ -72,6 +71,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
-        android:text="New here? signup for a new account" />
+        android:text="@string/new_here_signup_for_a_new_account" />
 
 </LinearLayout>
