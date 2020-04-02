@@ -1,5 +1,6 @@
 package com.mitapp.busify;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -10,11 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.android.material.navigation.NavigationView;
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout nDrawerLayout;
     private ActionBarDrawerToggle nToggle;
-    boolean logged_in = false; //change this later to check from firebase
+    boolean logged_in = true; //change this later to check from firebase
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,14 +31,6 @@ public class MainActivity extends AppCompatActivity {
             nToggle.syncState();
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-            Button logout = (Button) findViewById(R.id.logout_nav);
-            logout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
         }
         else{
             Intent intent = new Intent(MainActivity.this, login_activity.class);
@@ -51,5 +46,14 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        int id = menuItem.getItemId();
+        if(id == R.id.logout_nav){
+            //write you code here
+        }
+        return false;
     }
 }
