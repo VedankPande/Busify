@@ -25,10 +25,10 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class login_activity extends AppCompatActivity {
 
-    /*GoogleSignInOptions gso;
+    GoogleSignInOptions gso;
     GoogleSignInClient mGoogleSignInClient;
     private final static int RC_SIGN_IN = 1337;
-    FirebaseAuth mAuth;*/
+    FirebaseAuth mAuth;
 
 
 
@@ -37,7 +37,7 @@ public class login_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_activity);
-        /*mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         createRequest();
 
@@ -45,15 +45,15 @@ public class login_activity extends AppCompatActivity {
 
         if(signInAccount!=null || mAuth.getCurrentUser() != null)
         {
-            startActivity(new Intent(this, signup.class));
+            startActivity(new Intent(this,MainActivity.class));
         }
 
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.Sign_in_google).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signIn();
             }
-        });*/
+        });
 
 
         Button goto_signup = (Button) findViewById(R.id.gotosignup);
@@ -63,7 +63,7 @@ public class login_activity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(login_activity.this, signup.class);
+                Intent intent = new Intent(login_activity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -71,7 +71,7 @@ public class login_activity extends AppCompatActivity {
         goto_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(login_activity.this, signup.class);
+                Intent intent = new Intent(login_activity.this, MainActivity.class);
                 startActivity(intent);
 
             }
@@ -79,7 +79,7 @@ public class login_activity extends AppCompatActivity {
     }
 
     //Google signin functions
-    /*private void createRequest() {
+    private void createRequest() {
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -108,7 +108,7 @@ public class login_activity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             //FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent = new Intent(getApplicationContext(),signup.class);
+                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                             startActivity(intent);
 
                         } else {
@@ -133,26 +133,25 @@ public class login_activity extends AppCompatActivity {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                startActivity(new Intent(this, signup.class));
+                /*startActivity(new Intent(this, MainActivity.class));
                 AuthCredential authCredential = GoogleAuthProvider.getCredential(account.getIdToken(),null);
                 mAuth.signInWithCredential(authCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        startActivity(new Intent(getApplicationContext(), signup.class));
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
 
                     }
-                });
-
-                //firebaseAuthWithGoogle(account);
+                });*/
+                firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
-    }*/
+    }
 
 
 

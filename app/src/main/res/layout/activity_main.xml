@@ -47,6 +47,14 @@
                 android:text="Call Driver" >
             </Button>
 
+            <Button
+                android:id="@+id/log_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="logout"
+                android:text="Button" />
+
         </LinearLayout>
 
     </LinearLayout>
