@@ -25,15 +25,16 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:background="@drawable/bottom_menu">
+
             <TextView
-                android:textAlignment="center"
-                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Estimated time not found!"
+                android:textAlignment="center"
+                android:textColor="#000000"
                 android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="#000000"/>
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/button"
