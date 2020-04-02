@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout nDrawerLayout;
     private ActionBarDrawerToggle nToggle;
-    boolean logged_in = true; //change this later to check from firebase
+    boolean logged_in = false; //change this later to check from firebase
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

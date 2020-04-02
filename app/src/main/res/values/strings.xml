@@ -28,4 +28,5 @@
     <string name="driver_name">Nitin</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="google_signin_promt">Sign in with Google</string>
 </resources>
