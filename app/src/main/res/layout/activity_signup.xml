@@ -57,11 +57,13 @@
         android:layout_height="wrap_content" />
 
     <Button
-        android:layout_marginTop="5dp"
-        android:background="#37474F"
-        android:textColor="#ffffff"
         android:id="@+id/signup_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign Up" />
+        android:layout_marginTop="5dp"
+        android:background="#37474F"
+        android:onClick="signupfunction"
+        android:text="Sign Up"
+        android:textColor="#ffffff" />
+
 </LinearLayout>

@@ -29,10 +29,10 @@
         tools:layout_editor_absoluteY="52dp"/>
 
     <ImageView
-        android:layout_weight="20"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:src="@drawable/logo"/>
+        android:layout_weight="20"
+        android:src="@drawable/logo" />
 
     <EditText
         android:id="@+id/email"
@@ -54,6 +54,7 @@
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="Email_login"
         android:text="@string/login" />
 
     <Button
@@ -73,5 +74,12 @@
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:text="@string/new_here_signup_for_a_new_account" />
+
+    <Button
+        android:id="@+id/locationtester"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="go_to_location_tester"
+        android:text="Button" />
 
 </LinearLayout>
