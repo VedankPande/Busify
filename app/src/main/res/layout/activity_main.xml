@@ -10,52 +10,59 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#004D40">
+        android:orientation="vertical">
 
 
-        <fragment
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="662dp"
-            tools:context=".MapsActivity" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bottom_menu"
-            android:elevation="20dp"
-            android:padding="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:background="@drawable/bottom_menu"
+                android:elevation="20dp"
+                android:padding="10dp">
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_style"
-                android:text="Call Driver"
-                android:textAllCaps="false"
-                android:textColor="#ECEFF1"
-                android:textSize="15sp"></Button>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/log_out"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="logout"
-                android:text="Button" />
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_style"
+                    android:text="Call Driver"
+                    android:textAllCaps="false"
+                    android:textColor="#ECEFF1"
+                    android:textSize="15sp" />
 
-        </LinearLayout>
+                <Button
+                    android:id="@+id/log_out"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="logout"
+                    android:text="Button" />
+
+            </LinearLayout>
+
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="662dp"
+                tools:context=".MapsActivity" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 
