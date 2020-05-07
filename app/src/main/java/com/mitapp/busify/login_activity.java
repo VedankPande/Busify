@@ -116,7 +116,6 @@ public class login_activity extends AppCompatActivity {
 
     public void Email_login(View view)
     {
-
         mAuth = FirebaseAuth.getInstance();
         pre_email = findViewById(R.id.email);
         pre_password = findViewById(R.id.password);
