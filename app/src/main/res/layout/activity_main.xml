@@ -42,7 +42,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_style"
-                android:onClick="gotomaps"
                 android:text="Call Driver"
                 android:textAllCaps="false"
                 android:textColor="#ECEFF1"
