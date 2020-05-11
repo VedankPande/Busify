@@ -2,14 +2,15 @@ package com.mitapp.busify;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,32 +19,42 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class signup extends AppCompatActivity {
+import java.util.Objects;
+
+public class register extends AppCompatActivity {
 
     public FirebaseAuth mAuth;
     public EditText det_pwd,det_email;
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
-        Spinner spinner = (Spinner) findViewById(R.id.bus_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.buses_list, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        setContentView(R.layout.activity_register);
+        Toolbar my_toolbar = findViewById(R.id.action_bar);
+        my_toolbar.setTitle("");
+        setSupportActionBar(my_toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
+        final ImageButton register = findViewById(R.id.goto_signup);
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(register.this, sign_up.class));
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onBackPressed();
+        return true;
     }
 
     public void signupfunction(View view)
     {
         mAuth = FirebaseAuth.getInstance();
-        det_email = findViewById(R.id.new_email);
-        det_pwd = findViewById(R.id.new_password);
+        det_email = findViewById(R.id.signup_email);
+        det_pwd = findViewById(R.id.signup_password);
         mAuth.createUserWithEmailAndPassword(det_email.getText().toString(),det_pwd.getText().toString())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -51,12 +62,12 @@ public class signup extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(signup.this, "You will be redirected to the details page", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(register.this, "You will be redirected to the details page", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), login_activity.class));
 
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(signup.this, "Authentication failed.",
+                            Toast.makeText(register.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
 
                         }
@@ -65,5 +76,4 @@ public class signup extends AppCompatActivity {
                     }
                 });
     }
-
 }

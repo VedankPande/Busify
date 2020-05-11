@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFA000</color>
-    <color name="colorPrimaryDark">#FFC107</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimary">#ffc931</color>
+    <color name="colorPrimaryDark">#FFC107</color>FFBD5E
+    <color name="colorAccent">#333333</color>
+    <color name="colorEditTextHintColor">#666666</color>
+    <color name="colorEditTextColor">#555555</color>
+    <color name="colorEditTextBackground">#F4F4F4</color>
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorStatusbarBackground">#33FFFFFF</color>
+    <color name="colorText">#333333</color>
+    <color name="colorButtonText">#333333</color>
+    <color name="colorFabBackground">#B3ffc931</color>
+    <color name="colorError">#CCB00020</color>
 </resources>

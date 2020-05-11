@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFC931</color>
+    <color name="colorPrimaryDark">#FFC107</color>
+    <color name="colorAccent">#FFC931</color>
+    <color name="colorEditTextHintColor">#999999</color>
+    <color name="colorEditTextColor">#aaaaaa</color>
+    <color name="colorEditTextBackground">#000000</color>
+    <color name="colorBackground">#000000</color>
+    <color name="colorStatusbarBackground">#96FFFFFF</color>
+    <color name="colorText">#FFFFFF</color>
+    <color name="colorButtonText">#000000</color>
+</resources>

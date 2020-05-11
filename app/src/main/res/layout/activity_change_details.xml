@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/action_bar"
+        android:id="@+id/action_bar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="30dp"
+        android:background="@color/colorBackground">
+
+        <TextView
+            android:id="@+id/register_text"
+            android:textColor="@color/colorText"
+            android:textStyle="bold"
+            android:fontFamily="monospace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Make Changes"
+            android:textAllCaps="true"
+            android:textSize="25sp"/>
+
+        <View
+            android:id="@+id/first_seperator"
+            android:layout_marginVertical="20dp"
+            android:layout_below="@id/register_text"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#777777"/>
+
+        <EditText
+            android:layout_marginVertical="10dp"
+            android:textColor="@color/colorEditTextColor"
+            android:textColorHint="@color/colorEditTextHintColor"
+            android:id="@+id/signup_name"
+            android:layout_below="@id/first_seperator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:background="@drawable/style_edittext"
+            android:padding="10dp"
+            android:hint="Full name"
+            android:fontFamily="sans-serif"
+            android:textSize="18sp"/>
+
+        <EditText
+            android:layout_marginVertical="10dp"
+            android:textColor="@color/colorEditTextColor"
+            android:textColorHint="@color/colorEditTextHintColor"
+            android:id="@+id/signup_phone"
+            android:layout_below="@id/signup_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:background="@drawable/style_edittext"
+            android:padding="10dp"
+            android:hint="Phone"
+            android:fontFamily="sans-serif"
+            android:textSize="18sp"/>
+
+        <RelativeLayout
+            android:id="@+id/layout_bus_letter"
+            android:background="@drawable/style_edittext"
+            android:layout_below="@id/signup_phone"
+            android:padding="10dp"
+            android:layout_marginVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:fontFamily="sans-serif"
+                android:textSize="18sp"
+                android:textColor="@color/colorEditTextColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2.5dp"
+                android:text="Bus letter" />
+
+            <Spinner
+                android:id="@+id/bus_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="viewEnd" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_stop"
+            android:background="@drawable/style_edittext"
+            android:layout_below="@id/layout_bus_letter"
+            android:padding="10dp"
+            android:layout_marginVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:fontFamily="sans-serif"
+                android:textSize="18sp"
+                android:textColor="@color/colorEditTextColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2.5dp"
+                android:text="Stop" />
+
+            <Spinner
+                android:id="@+id/stop_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="viewEnd" />
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/second_seperator"
+            android:layout_marginVertical="20dp"
+            android:layout_below="@id/layout_stop"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#777777"/>
+
+        <ImageButton
+            android:id="@+id/confirm_changes_button"
+            android:layout_margin="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/second_seperator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/round_navigate_next_black_36"
+            android:background="@drawable/style_button"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

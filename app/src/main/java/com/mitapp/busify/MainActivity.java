@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -54,9 +55,10 @@ import com.google.firebase.firestore.GeoPoint;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback{
 
     private DrawerLayout nDrawerLayout;
     private ActionBarDrawerToggle nToggle;
@@ -74,22 +76,90 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     String UName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
     String UId = FirebaseAuth.getInstance().getUid();
     public int check = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        nDrawerLayout = (DrawerLayout) findViewById(R.id.nav_menu);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
+        Toolbar my_toolbar = findViewById(R.id.action_bar);
+        my_toolbar.setTitle("");
+        setSupportActionBar(my_toolbar);
+
+        nDrawerLayout = findViewById(R.id.nav_menu);
         nToggle = new ActionBarDrawerToggle(this, nDrawerLayout, R.string.open, R.string.close);
 
         nDrawerLayout.addDrawerListener(nToggle);
         nToggle.syncState();
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        View status_bar_background = findViewById(R.id.statusbar_tint);
+        status_bar_background.bringToFront();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (nToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.change_details){
+            startActivity(new Intent(getApplicationContext(), change_details.class));
+        }
+        if (id == R.id.app_info){
+            startActivity(new Intent(getApplicationContext(), app_info.class));
+        }
+        if (id == R.id.theme_black){
+            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this,R.raw.night));
+        }
+        if (id == R.id.theme_dark){
+            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this,R.raw.dark));
+        }
+        if (id == R.id.logout_nav){
+            FirebaseAuth.getInstance().signOut();
+            GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .build()).signOut().addOnSuccessListener(new OnSuccessListener<Void>(){
+                @Override
+                public void onSuccess(Void aVoid){
+                    startActivity(new Intent(getApplicationContext(), login_activity.class));
+                }});
+        }
+        return false;
+    }
+
+//    @Override
+//    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//        int id = item.getItemId();
+//        if(id == R.id.change_details) startActivity(new Intent(getApplicationContext(), change_details.class));
+//        if(id == R.id.app_info) startActivity(new Intent(getApplicationContext(), app_info.class));
+//        if (id == R.id.theme_black) mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this,R.raw.night));
+//        if (id == R.id.theme_dark) mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this,R.raw.dark));
+//        if(id == R.id.logout_nav){
+//            FirebaseAuth.getInstance().signOut();
+//            GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                    .build()).signOut().addOnSuccessListener(new OnSuccessListener<Void>(){
+//                @Override
+//                public void onSuccess(Void aVoid){
+//                    startActivity(new Intent(getApplicationContext(), login_activity.class));
+//                }});
+//        }
+//        return false;
+//    }
 
     @Override
     protected void onResume()
@@ -288,46 +358,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }*/
-    }
-
-    public void change(View view)
-    {
-
-        if(check==1)
-        {
-            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this,R.raw.night));
-            check =2;
-        }
-        else if(check==2)
-        {
-            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this,R.raw.dark));
-            check =1;
-        }
-
-    }
-
-
-    public void logout(View view)
-    {
-        FirebaseAuth.getInstance().signOut();
-        GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()).signOut().addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                startActivity(new Intent(getApplicationContext(), login_activity.class));
-            }
-
-        });
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (nToggle.onOptionsItemSelected(item)) {
-
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public void sendCoordinateToFirebase(View view)

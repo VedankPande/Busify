@@ -5,66 +5,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:id="@+id/nav_menu">
+    android:id="@+id/nav_menu"
+    android:background="@color/colorBackground">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/statusbar_tint"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:background="@color/colorStatusbarBackground"/>
 
-        <RelativeLayout
+        <include
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/statusbar_tint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/action_bar_main"
+            android:id="@+id/action_bar"/>
+
+        <Button
+            android:textColor="#FFFFFF"
+            android:elevation="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="70dp"
+            android:layout_margin="20dp"
+            android:paddingHorizontal="15dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/style_stop_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Request STOP"
+            android:textAllCaps="false"/>
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            tools:context=".MapsActivity" />
 
-            <LinearLayout
-                android:layout_alignParentBottom="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bottom_menu"
-                android:elevation="20dp"
-                android:padding="10dp">
-
-                <Button
-                    android:id="@+id/coordinate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="sendCoordinateToFirebase"
-                    android:text="send coordinate" />
-
-                <Button
-                    android:id="@+id/log_out"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="logout"
-                    android:text="Button" />
-
-                <Button
-                    android:id="@+id/senddata"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="change"
-                    android:text="Button" />
-
-            </LinearLayout>
-
-            <fragment
-                android:id="@+id/map"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="662dp"
-                tools:context=".MapsActivity" />
-
-        </RelativeLayout>
-
-    </LinearLayout>
+    </RelativeLayout>
 
 
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         app:menu="@menu/navigation_menu"

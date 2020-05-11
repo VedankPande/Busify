@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/change_bus_preference"
+    <item android:id="@+id/change_details"
         android:icon="@drawable/round_edit_black_48"
-        android:title="Change bus preference">
+        android:title="Change Account details">
     </item>
 
     <item
-        android:id="@+id/bug_report"
-        android:icon="@drawable/round_bug_report_black_48"
-        android:title="Report a Bug"/>
+        android:id="@+id/setting"
+        android:icon="@drawable/ic_setting"
+        android:title="Settings"/>
 
     <item
         android:id="@+id/logout_nav"
@@ -17,7 +17,24 @@
         android:title="Logout" />
 
     <item
+        android:id="@+id/bug_report"
+        android:icon="@drawable/round_bug_report_black_48"
+        android:title="Report Bug"/>
+
+    <item
         android:id="@+id/app_info"
         android:icon="@drawable/round_info_black_48"
         android:title="App info"/>
+
+    <item
+        android:title="Change Theme">
+        <menu>
+            <item
+                android:id="@+id/theme_dark"
+                android:title="Dark"/>
+            <item
+                android:id="@+id/theme_black"
+                android:title="Black"/>
+        </menu>
+    </item>
 </menu>

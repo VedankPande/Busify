@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffbb00"
+    android:background="#FFC931"
     tools:context=".Splash">
-
 
     <ImageView
         android:id="@+id/imageView2"
@@ -20,6 +19,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/busifylogofinal" />
+        android:src="@drawable/new_logo_yellow"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

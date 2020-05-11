@@ -1,78 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    tools:context=".login_activity"
+    android:background="@color/colorBackground"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login_activity"
-    android:padding="30dp"
     android:orientation="vertical">
 
-    <TextView
-        android:textStyle="bold"
-        android:textAlignment="center"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/welcome"
-        android:textSize="30sp"
-        tools:layout_editor_absoluteX="146dp"
-        tools:layout_editor_absoluteY="12dp" />
+        android:layout_height="match_parent"
+        android:padding="20dp">
 
-    <TextView
-        android:padding="3dp"
-        android:textSize="15sp"
-        android:textAlignment="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/motto"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="52dp"/>
+        <ImageView
+            android:layout_margin="20dp"
+            android:id="@+id/welcome_image"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:src="@drawable/busify_round_yellow_icon"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="20"
-        android:src="@drawable/logo" />
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress" />
+        <EditText
+            android:layout_below="@id/welcome_image"
+            android:textColor="@color/colorEditTextColor"
+            android:textColorHint="@color/colorEditTextHintColor"
+            android:id="@+id/login_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:hint="Email"
+            android:includeFontPadding="true"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="18sp"
+            android:background="@drawable/style_edittext"
+            android:padding="10dp" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword" />
+        <EditText
+            android:padding="10dp"
+            android:includeFontPadding="true"
+            android:layout_below="@id/login_email"
+            android:textColor="@color/colorEditTextColor"
+            android:textColorHint="@color/colorEditTextHintColor"
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/style_edittext"
+            android:fontFamily="sans-serif"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:layout_marginVertical="10dp"
+            android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="Email_login"
-        android:text="@string/login" />
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/password"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/style_button"
+            android:fontFamily="sans-serif-medium"
+            android:onClick="Email_login"
+            android:text="@string/login"
+            android:textColor="@color/colorButtonText"
+            android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/Sign_in_google"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_google_signin_light_normal_xxxhdpi"
-        android:drawablePadding="18dp"
-        android:includeFontPadding="true"
-        android:text="@string/google_signin_promt" />
 
-    <Button
-        android:id="@+id/gotosignup"
-        android:background="@null"
-        android:textAlignment="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:text="@string/new_here_signup_for_a_new_account" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login">
 
+            <Button
+                android:paddingRight="10dp"
+                android:textAlignment="textEnd"
+                android:layout_alignRight="@id/button_seperator"
+                android:textColor="@color/colorEditTextColor"
+                android:fontFamily="sans-serif"
+                android:background="@null"
+                android:textAllCaps="false"
+                android:id="@+id/forgot_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Forgot password"/>
+
+            <View
+                android:background="@color/colorText"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/button_seperator"
+                android:layout_width="1dp"
+                android:layout_height="15dp"/>
+
+            <Button
+                android:paddingLeft="10dp"
+                android:textAlignment="viewStart"
+                android:layout_toEndOf="@id/button_seperator"
+                android:textColor="@color/colorEditTextColor"
+                android:fontFamily="sans-serif"
+                android:background="@null"
+                android:textAllCaps="false"
+                android:id="@+id/home_signup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="New here? Sign up"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:paddingHorizontal="15dp"
+            android:layout_marginVertical="10dp"
+            android:elevation="1dp"
+            android:clickable="true"
+            android:id="@+id/Sign_in_google"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/google_button">
+
+            <ImageView
+                android:id="@+id/myimg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/btn_google_light_normal_xxxhdpi"/>
+
+            <TextView
+                android:paddingEnd="15dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/myimg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#777777"
+                android:textAllCaps="false"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/google_signin_promt"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
 </LinearLayout>

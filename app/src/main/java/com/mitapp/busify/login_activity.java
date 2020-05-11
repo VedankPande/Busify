@@ -38,7 +38,7 @@ public class login_activity extends AppCompatActivity {
         setContentView(R.layout.activity_login_activity);
 
         mAuth = FirebaseAuth.getInstance();
-        pre_email = findViewById(R.id.email);
+        pre_email = findViewById(R.id.login_email);
         pre_password = findViewById(R.id.password);
 
         createRequest();
@@ -47,7 +47,7 @@ public class login_activity extends AppCompatActivity {
 
         if(signInAccount!=null || mAuth.getCurrentUser() != null)
         {
-            startActivity(new Intent(this, Details.class));
+            startActivity(new Intent(this, sign_up.class));
         }
 
         findViewById(R.id.Sign_in_google).setOnClickListener(new View.OnClickListener() {
@@ -57,17 +57,20 @@ public class login_activity extends AppCompatActivity {
             }
         });
 
-
-
-        Button goto_signup = (Button) findViewById(R.id.gotosignup);
-
-
-        goto_signup.setOnClickListener(new View.OnClickListener() {
+        Button login = findViewById(R.id.login);
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(login_activity.this, signup.class);
+                Intent intent = new Intent(login_activity.this, MainActivity.class);
                 startActivity(intent);
+            }
+        });
 
+        final Button signup = findViewById(R.id.home_signup);
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(login_activity.this, register.class));
             }
         });
     }
@@ -103,11 +106,12 @@ public class login_activity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             //FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent = new Intent(getApplicationContext(),Details.class);
+                            Intent intent = new Intent(getApplicationContext(),sign_up.class);
                             startActivity(intent);
 
                         } else {
-                            Toast.makeText(login_activity.this, "Sorry auth failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(login_activity.this, "Sorry auth failed.",
+                                    Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -119,7 +123,7 @@ public class login_activity extends AppCompatActivity {
     public void Email_login(View view)
     {
         mAuth = FirebaseAuth.getInstance();
-        pre_email = findViewById(R.id.email);
+        pre_email = findViewById(R.id.login_email);
         pre_password = findViewById(R.id.password);
         String email = pre_email.getText().toString();
         String password = pre_password.getText().toString();
@@ -130,7 +134,7 @@ public class login_activity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            startActivity(new Intent(getApplicationContext(), Details.class));
+                            startActivity(new Intent(getApplicationContext(), sign_up.class));
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(login_activity.this, "Authentication failed.",
