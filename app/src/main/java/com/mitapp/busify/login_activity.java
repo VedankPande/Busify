@@ -40,6 +40,7 @@ public class login_activity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         pre_email = findViewById(R.id.email);
         pre_password = findViewById(R.id.password);
+
         createRequest();
 
         GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
@@ -141,11 +142,6 @@ public class login_activity extends AppCompatActivity {
                         // ...
                     }
                 });
-    }
-
-    public void go_to_location_tester(View view)
-    {
-        startActivity(new Intent(getApplicationContext(), LocationTester.class));
     }
 
 

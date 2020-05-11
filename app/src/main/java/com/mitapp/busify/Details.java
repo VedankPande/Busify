@@ -28,6 +28,7 @@ public class Details extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +45,6 @@ public class Details extends AppCompatActivity {
                 database = FirebaseDatabase.getInstance();
                 reference = database.getReference();
 
-
-
-
                 String name = Name.getText().toString();
                 String bus = Bus.getText().toString();
                 String stop = Stop.getText().toString();
@@ -54,10 +52,10 @@ public class Details extends AppCompatActivity {
                 User user = new User(name, stop, bus, phone);
                 Toast.makeText(Details.this, "values:"+ " "+name+" "+bus, Toast.LENGTH_SHORT).show();
                 reference.child("users").child(""+name).setValue(user);
-
-                /*Intent intent = new Intent(getApplicationContext(), phone_verification.class);
-                intent.putExtra("phoneNo",phone);
-                startActivity(intent);*/
+                reference.child("users").child("test").child("value").setValue("hello");
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("bus",bus);
+                startActivity(intent);
 
 
 
