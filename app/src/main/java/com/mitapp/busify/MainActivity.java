@@ -338,7 +338,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // position on right bottom
         rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
         rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-        rlp.setMargins(0, 0, 300, 200);
+        rlp.setMargins(0, 0, 200, 200);
 
             try {
                 // Customise the styling of the base map using a JSON object defined
