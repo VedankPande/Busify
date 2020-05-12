@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FirebaseDatabase database;
     DatabaseReference reference;
     FirebaseFirestore mDB = FirebaseFirestore.getInstance();
-    String UName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
     String UId = FirebaseAuth.getInstance().getUid();
     public int check = 1;
 
