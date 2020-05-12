@@ -96,8 +96,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         nToggle.syncState();
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        View status_bar_background = findViewById(R.id.statusbar_tint);
-        status_bar_background.bringToFront();
+       View status_bar_background = findViewById(R.id.statusbar_tint);
+       status_bar_background.bringToFront();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -341,23 +341,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.e(TAG, "Can't find style. Error: ", e);
             }
 
-        mMap.setMyLocationEnabled(true);
+
         //googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         //sendlastknownlocation();
 
 
-        /*if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             isLocationGranted = true;
             initmap();
-            sendlastknownlocation();
+            googleMap.setMyLocationEnabled(true);
             //Toast.makeText(this, "constant", Toast.LENGTH_SHORT).show();
         } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-        }*/
+        }
     }
 
     public void sendCoordinateToFirebase(View view)
@@ -390,30 +390,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
     }
 
-    private void startLocationService(){
-        if(!isLocationServiceRunning()){
-            Intent serviceIntent = new Intent(this, LocationService.class);
-//        this.startService(serviceIntent);
-
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
-
-                MainActivity.this.startForegroundService(serviceIntent);
-            }else{
-                startService(serviceIntent);
-            }
-        }
-    }
-
-    private boolean isLocationServiceRunning() {
-        ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)){
-            if("com.codingwithmitch.googledirectionstest.services.LocationService".equals(service.service.getClassName())) {
-                Log.d(TAG, "isLocationServiceRunning: location service is already running.");
-                return true;
-            }
-        }
-        Log.d(TAG, "isLocationServiceRunning: location service is not running.");
-        return false;
-    }
 }
 
