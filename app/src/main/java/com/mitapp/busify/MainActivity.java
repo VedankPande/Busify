@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
+import android.app.ActionBar;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -20,12 +21,15 @@ import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -61,7 +65,6 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback{
 
-    private DrawerLayout nDrawerLayout;
     private ActionBarDrawerToggle nToggle;
     private static final int LOCATION_PERMISSION_CODE = 1337;
     private static final String TAG = "MainActivity";
@@ -82,6 +85,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //This is for UI
+        View status_bar_tint = findViewById(R.id.statusbar_tint);
+        status_bar_tint.bringToFront();
+        status_bar_tint.getLayoutParams().height = getResources().getDimensionPixelSize(getResources().
+                getIdentifier("status_bar_height", "dimen", "android"));
+        status_bar_tint.requestLayout();
+
+        View nav_bar = findViewById(R.id.nav_bar_view);
+        nav_bar.bringToFront();
+        nav_bar.getLayoutParams().height = getResources().getDimensionPixelSize(getResources().
+                getIdentifier("navigation_bar_height", "dimen", "android"));
+        nav_bar.requestLayout();
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
@@ -89,18 +105,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         my_toolbar.setTitle("");
         setSupportActionBar(my_toolbar);
 
-        nDrawerLayout = findViewById(R.id.nav_menu);
+        DrawerLayout nDrawerLayout = findViewById(R.id.nav_menu);
         nToggle = new ActionBarDrawerToggle(this, nDrawerLayout, R.string.open, R.string.close);
+
 
         nDrawerLayout.addDrawerListener(nToggle);
         nToggle.syncState();
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-       View status_bar_background = findViewById(R.id.statusbar_tint);
-       status_bar_background.bringToFront();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+
+
+
+
+
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -141,25 +163,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return false;
     }
-
-//    @Override
-//    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//        int id = item.getItemId();
-//        if(id == R.id.change_details) startActivity(new Intent(getApplicationContext(), change_details.class));
-//        if(id == R.id.app_info) startActivity(new Intent(getApplicationContext(), app_info.class));
-//        if (id == R.id.theme_black) mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this,R.raw.night));
-//        if (id == R.id.theme_dark) mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this,R.raw.dark));
-//        if(id == R.id.logout_nav){
-//            FirebaseAuth.getInstance().signOut();
-//            GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                    .build()).signOut().addOnSuccessListener(new OnSuccessListener<Void>(){
-//                @Override
-//                public void onSuccess(Void aVoid){
-//                    startActivity(new Intent(getApplicationContext(), login_activity.class));
-//                }});
-//        }
-//        return false;
-//    }
 
     @Override
     protected void onResume()

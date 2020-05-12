@@ -3,8 +3,7 @@
 
     <item android:id="@+id/change_details"
         android:icon="@drawable/round_edit_black_48"
-        android:title="Change Account details">
-    </item>
+        android:title="Change Account details"/>
 
     <item
         android:id="@+id/setting"
@@ -14,7 +13,7 @@
     <item
         android:id="@+id/logout_nav"
         android:icon="@drawable/round_delete_black_48"
-        android:title="Logout" />
+        android:title="Logout"/>
 
     <item
         android:id="@+id/bug_report"
