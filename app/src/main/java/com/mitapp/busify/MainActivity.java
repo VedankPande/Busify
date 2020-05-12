@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -325,6 +326,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+
+        View locationButton = ((View) mapFragment.getView().findViewById(Integer.parseInt("1")).
+                getParent()).findViewById(Integer.parseInt("2"));
+
+        // and next place it, for exemple, on bottom right (as Google Maps app)
+        RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
+        // position on right bottom
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+        rlp.setMargins(0, 0, 300, 200);
 
             try {
                 // Customise the styling of the base map using a JSON object defined

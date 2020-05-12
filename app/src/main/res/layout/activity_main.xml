@@ -27,19 +27,21 @@
             android:id="@+id/action_bar"/>
 
         <Button
-            android:textColor="#FFFFFF"
-            android:elevation="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="70dp"
-            android:layout_margin="20dp"
-            android:paddingHorizontal="15dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:background="@drawable/style_stop_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="267dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="43dp"
+            android:background="@drawable/style_stop_button"
+            android:elevation="10dp"
+            android:paddingHorizontal="15dp"
             android:text="Request STOP"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF" />
 
         <fragment
             android:id="@+id/map"
@@ -47,6 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".MapsActivity" />
+
 
     </RelativeLayout>
 
