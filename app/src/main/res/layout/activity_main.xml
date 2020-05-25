@@ -27,27 +27,50 @@
             android:id="@+id/action_bar"/>
 
         <Button
-            android:textColor="#FFFFFF"
-            android:elevation="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="70dp"
-            android:layout_margin="20dp"
-            android:paddingHorizontal="15dp"
-            android:layout_above="@id/nav_bar_view"
-            android:layout_alignParentEnd="true"
-            android:background="@drawable/style_stop_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_above="@id/nav_bar_view"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="279dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="36dp"
+            android:background="@drawable/style_stop_button"
+            android:elevation="10dp"
+            android:onClick="changeM"
+            android:paddingHorizontal="15dp"
             android:text="Request STOP"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/nav_bar_view"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="139dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="35dp"
+            android:background="@drawable/style_stop_button"
+            android:elevation="10dp"
+            android:onClick="sendCoordinateToFirebase"
+            android:paddingHorizontal="15dp"
+            android:text="send location"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF" />
 
         <fragment
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".MapsActivity"
-            android:layout_above="@id/nav_bar_view"/>
+            android:layout_above="@id/nav_bar_view"
+            android:layout_marginBottom="3dp"
+            tools:context=".MapsActivity" />
 
         <View
             android:id="@+id/nav_bar_view"

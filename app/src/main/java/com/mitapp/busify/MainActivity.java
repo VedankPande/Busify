@@ -61,6 +61,8 @@ import com.google.firebase.firestore.GeoPoint;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback{
@@ -72,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int PERMISSIONS_REQUEST_ENABLE_GPS = 9002;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 9003;
     private boolean isLocationGranted = false;
-    private GoogleMap mMap;
+    GoogleMap mMap;
     FusedLocationProviderClient fusedLocationProviderClient;
     FirebaseDatabase database;
     DatabaseReference reference;
@@ -115,15 +117,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-
-
-
-
-
-
-
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
 
@@ -147,10 +140,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(getApplicationContext(), app_info.class));
         }
         if (id == R.id.theme_black){
-            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this,R.raw.night));
+            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this,R.raw.night));
         }
         if (id == R.id.theme_dark){
-            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this,R.raw.dark));
+            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this,R.raw.dark));
         }
         if (id == R.id.logout_nav){
             FirebaseAuth.getInstance().signOut();
@@ -343,7 +336,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
         rlp.setMargins(0, 0, 200, 200);
 
-            try {
+            /*try {
                 // Customise the styling of the base map using a JSON object defined
                 // in a raw resource file.
                 boolean success = googleMap.setMapStyle(
@@ -355,6 +348,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             } catch (Resources.NotFoundException e) {
                 Log.e(TAG, "Can't find style. Error: ", e);
+            }*/
+            if(check==1)
+            {
+                mMap.setMapStyle(
+                        MapStyleOptions.loadRawResourceStyle(
+                                this, R.raw.dark));
+
+                check = 2;
             }
 
 
@@ -378,33 +379,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void sendCoordinateToFirebase(View view)
     {
-        sendlastknownlocation();
+
+
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            isLocationGranted = true;
+            sendlastknownlocation();
+            /*int delay = 5000;   // delay for 5 sec.
+            int interval = 1000;  // iterate every sec.
+            Timer timer = new Timer();
+
+            timer.scheduleAtFixedRate(new TimerTask() {
+                public void run() {
+                    sendlastknownlocation();
+                }
+            }, delay, interval);*/
+
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
 
     }
-
-    public void FirestoreCheck(View view)
+    public void changeM(View view)
     {
-        Map<String, Object> user = new HashMap<>();
-        user.put("first", "Ada");
-        user.put("last", "Lovelace");
-        user.put("born", 1815);
-
-// Add a new document with a generated ID
-        mDB.collection("users")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(getApplicationContext(),"saved",Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(),"not saved",Toast.LENGTH_SHORT).show();
-                    }
-                });
+        mMap.setMapStyle(
+                MapStyleOptions.loadRawResourceStyle(
+                        this, R.raw.night));
     }
-
 }
 
