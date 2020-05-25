@@ -336,31 +336,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
         rlp.setMargins(0, 0, 200, 200);
 
-            /*try {
-                // Customise the styling of the base map using a JSON object defined
-                // in a raw resource file.
-                boolean success = googleMap.setMapStyle(
-                        MapStyleOptions.loadRawResourceStyle(
-                                this, R.raw.dark));
-
-                if (!success) {
-                    Log.e(TAG, "Style parsing failed.");
-                }
-            } catch (Resources.NotFoundException e) {
-                Log.e(TAG, "Can't find style. Error: ", e);
-            }*/
-            if(check==1)
+            /*if(check==1)
             {
                 mMap.setMapStyle(
                         MapStyleOptions.loadRawResourceStyle(
                                 this, R.raw.dark));
 
                 check = 2;
-            }
+            }*/
 
-
-        //googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        //sendlastknownlocation();
 
 
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
