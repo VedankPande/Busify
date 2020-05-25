@@ -257,8 +257,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     isLocationGranted = true;
-                    //sendlastknownlocation();
-                    //Toast.makeText(this, "constant", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -369,8 +367,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             isLocationGranted = true;
-            sendlastknownlocation();
-            /*int delay = 5000;   // delay for 5 sec.
+            //sendlastknownlocation();
+            int delay = 5000;   // delay for 5 sec.
             int interval = 1000;  // iterate every sec.
             Timer timer = new Timer();
 
@@ -378,7 +376,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void run() {
                     sendlastknownlocation();
                 }
-            }, delay, interval);*/
+            }, delay, interval);
 
         } else {
             ActivityCompat.requestPermissions(this,
