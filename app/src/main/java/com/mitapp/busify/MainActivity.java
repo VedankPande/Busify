@@ -145,6 +145,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.theme_dark){
             mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this,R.raw.dark));
         }
+        if(id == R.id.theme_light)
+        {
+            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this,R.raw.lightmap));
+        }
+        if(id == R.id.theme_original)
+        {
+            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this,R.raw.standardmap));
+        }
         if (id == R.id.logout_nav){
             FirebaseAuth.getInstance().signOut();
             GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
