@@ -12,4 +12,5 @@
     <color name="colorButtonText">#333333</color>
     <color name="colorFabBackground">#B3ffc931</color>
     <color name="colorError">#CCB00020</color>
+    <color name="colorStatusBar">#ffc931</color>
 </resources>

@@ -7,7 +7,8 @@
     <color name="colorEditTextColor">#aaaaaa</color>
     <color name="colorEditTextBackground">#000000</color>
     <color name="colorBackground">#000000</color>
-    <color name="colorStatusbarBackground">#96FFFFFF</color>
+    <color name="colorStatusbarBackground">#96000000</color>
     <color name="colorText">#FFFFFF</color>
     <color name="colorButtonText">#000000</color>
+    <color name="colorStatusBar">#b58e16</color>
 </resources>
