@@ -22,8 +22,8 @@ import java.util.Objects;
 
 public class change_details extends AppCompatActivity {
 
-    EditText Name,Stop,Phone;
-    String bus_id, stop;
+    EditText Name,Phone;
+    String stop;
     FirebaseDatabase database;
     DatabaseReference reference;
 
@@ -51,8 +51,9 @@ public class change_details extends AppCompatActivity {
 
 
         Name = findViewById(R.id.signup_name);
-        Stop = findViewById(R.id.details_stop);
         Phone = findViewById(R.id.signup_phone);
+        EditText editText_stop = findViewById(R.id.changeDetails_layout_stop);
+        stop = editText_stop.getText().toString();
 
         findViewById(R.id.confirm_changes_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +64,7 @@ public class change_details extends AppCompatActivity {
                 String name = Name.getText().toString();
                 //String stop = Stop.getText().toString();
                 String phone = Phone.getText().toString();
-                User user = new User(name, "Home", "A", phone);
+                User user = new User(name, stop, "X", phone);
                 Toast.makeText(change_details.this, "values:"+ " "+name, Toast.LENGTH_SHORT).show();
                 reference.child("users").child(""+name).setValue(user);
                 reference.child("users").child("test").child("value").setValue("helloworld");
@@ -72,9 +73,6 @@ public class change_details extends AppCompatActivity {
             }
         });
 
-
-        EditText editText_stop = findViewById(R.id.changeDetails_layout_stop);
-        stop = editText_stop.getText().toString();
     }
 
     @Override
