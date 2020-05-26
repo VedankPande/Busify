@@ -32,7 +32,7 @@ public class sign_up extends AppCompatActivity implements AdapterView.OnItemSele
     EditText Name,Stop,Phone;
     FirebaseDatabase database;
     DatabaseReference reference;
-    String bus_id;
+    String bus_id, stop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +80,10 @@ public class sign_up extends AppCompatActivity implements AdapterView.OnItemSele
                 startActivity(new Intent(sign_up.this, MainActivity.class));
             }
         });
+
+
+        EditText editText_stop = findViewById(R.id.layout_stop);
+        stop = editText_stop.getText().toString();
     }
 
     @Override
