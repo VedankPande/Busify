@@ -16,6 +16,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Location;
@@ -399,6 +400,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     public void gototest(View view){
         startActivity(new Intent(getApplicationContext(), FirebaseGetDataTest.class));
+    }
+
+    @Override
+    public void onBackPressed() {
+        SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
+        Boolean regbool = sharedPreferences.getBoolean("Registered",false);
+        Boolean loginbool = sharedPreferences.getBoolean("LoggedIn",false);
+        if (regbool==loginbool&&loginbool==true)
+        {
+            
+        }
+        super.onBackPressed();
     }
 }
 

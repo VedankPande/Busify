@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -78,6 +79,7 @@ public class sign_up extends AppCompatActivity implements AdapterView.OnItemSele
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(sign_up.this, MainActivity.class));
+                setRegisteredBoolean();
             }
         });
 
@@ -106,5 +108,12 @@ public class sign_up extends AppCompatActivity implements AdapterView.OnItemSele
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+    }
+
+    public void setRegisteredBoolean()
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("Registered",true);
     }
 }
