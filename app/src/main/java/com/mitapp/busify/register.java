@@ -53,8 +53,8 @@ public class register extends AppCompatActivity {
     public void signupfunction(View view)
     {
         mAuth = FirebaseAuth.getInstance();
-        det_email = findViewById(R.id.signup_email);
-        det_pwd = findViewById(R.id.signup_password);
+        det_email = findViewById(R.id.register_activity_email_editText);
+        det_pwd = findViewById(R.id.register_activity_password_editText);
         mAuth.createUserWithEmailAndPassword(det_email.getText().toString(),det_pwd.getText().toString())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override

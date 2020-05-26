@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/setting"
+        android:icon="@drawable/ic_setting"
+        android:title="Settings"/>
+
+    <item
+        android:id="@+id/logout_nav"
+        android:icon="@drawable/round_delete_black_48"
+        android:title="Logout"/>
+
+    <item
+        android:id="@+id/bug_report"
+        android:icon="@drawable/round_bug_report_black_48"
+        android:title="Report Bug"/>
+
+    <item
+        android:id="@+id/app_info"
+        android:icon="@drawable/round_info_black_48"
+        android:title="App info"/>
+</menu>

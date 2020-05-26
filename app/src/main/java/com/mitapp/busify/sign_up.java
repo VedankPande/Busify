@@ -43,7 +43,7 @@ public class sign_up extends AppCompatActivity implements AdapterView.OnItemSele
         my_toolbar.setTitle("");
         setSupportActionBar(my_toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        Spinner bus_spinner = findViewById(R.id.bus_spinner);
+        Spinner bus_spinner = findViewById(R.id.signup_activity_bus_spinner);
         ArrayAdapter<CharSequence> bus_adapter = ArrayAdapter.createFromResource(sign_up.this,
                 R.array.buses_list, android.R.layout.simple_spinner_item);
         bus_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -51,9 +51,9 @@ public class sign_up extends AppCompatActivity implements AdapterView.OnItemSele
         bus_spinner.setOnItemSelectedListener(this);
 
 
-        Name = findViewById(R.id.signup_name);
+        Name = findViewById(R.id.signup_activity_name);
         Stop = findViewById(R.id.details_stop);
-        Phone = findViewById(R.id.signup_phone);
+        Phone = findViewById(R.id.signup_activity_phone);
 
         findViewById(R.id.details_submit).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +84,7 @@ public class sign_up extends AppCompatActivity implements AdapterView.OnItemSele
         });
 
 
-        EditText editText_stop = findViewById(R.id.layout_stop);
+        EditText editText_stop = findViewById(R.id.signup_activity_layout_stop);
         stop = editText_stop.getText().toString();
     }
 

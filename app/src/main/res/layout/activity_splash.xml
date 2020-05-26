@@ -8,17 +8,10 @@
     tools:context=".Splash">
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="361dp"
-        android:layout_height="347dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="192dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="192dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/spash_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="25dp"
         android:src="@drawable/new_logo_yellow"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

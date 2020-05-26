@@ -35,7 +35,7 @@ public class change_details extends AppCompatActivity {
         my_toolbar.setTitle("");
         setSupportActionBar(my_toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        Spinner spinner = (Spinner) findViewById(R.id.bus_spinner);
+        Spinner spinner = (Spinner) findViewById(R.id.change_details_activity_bus_letter_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.buses_list, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -50,9 +50,9 @@ public class change_details extends AppCompatActivity {
         });
 
 
-        Name = findViewById(R.id.signup_name);
-        Phone = findViewById(R.id.signup_phone);
-        EditText editText_stop = findViewById(R.id.changeDetails_layout_stop);
+        Name = findViewById(R.id.change_details_activity_name_editText);
+        Phone = findViewById(R.id.change_details_activity_phone_editText);
+        EditText editText_stop = findViewById(R.id.change_details_activity_stop_editText);
         stop = editText_stop.getText().toString();
 
         findViewById(R.id.confirm_changes_button).setOnClickListener(new View.OnClickListener() {

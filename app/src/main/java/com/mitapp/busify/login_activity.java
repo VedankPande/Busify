@@ -39,8 +39,8 @@ public class login_activity extends AppCompatActivity {
         setContentView(R.layout.activity_login_activity);
 
         mAuth = FirebaseAuth.getInstance();
-        pre_email = findViewById(R.id.login_email);
-        pre_password = findViewById(R.id.password);
+        pre_email = findViewById(R.id.login_activity_email_editText);
+        pre_password = findViewById(R.id.login_activity_password_editText);
 
         createRequest();
 
@@ -52,14 +52,14 @@ public class login_activity extends AppCompatActivity {
             setLoginBoolean();
         }
 
-        findViewById(R.id.Sign_in_google).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.login_activity_google_signin_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signIn();
             }
         });
 
-        final Button signup = findViewById(R.id.home_signup);
+        final Button signup = findViewById(R.id.login_activity_signup_button);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,8 +117,8 @@ public class login_activity extends AppCompatActivity {
     public void Email_login(View view)
     {
         mAuth = FirebaseAuth.getInstance();
-        pre_email = findViewById(R.id.login_email);
-        pre_password = findViewById(R.id.password);
+        pre_email = findViewById(R.id.login_activity_email_editText);
+        pre_password = findViewById(R.id.login_activity_password_editText);
         String email = pre_email.getText().toString();
         String password = pre_password.getText().toString();
         mAuth.signInWithEmailAndPassword(email, password)

@@ -119,8 +119,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         nToggle.syncState();
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.passenger_navView);
+        NavigationView navigationView = findViewById(R.id.passenger_navView);
         navigationView.setNavigationItemSelectedListener(this);
+
+
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
 

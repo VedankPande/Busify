@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:id="@+id/passenger_navigationMenu"
+    android:id="@+id/driver_navigationMenu"
     android:background="@color/colorBackground">
 
     <RelativeLayout
@@ -14,21 +13,21 @@
         android:layout_height="match_parent">
 
         <View
-            android:id="@+id/passenger_statusBar_spacer"
+            android:id="@+id/driver_statusBar_spacer"
             android:layout_width="match_parent"
             android:layout_height="0dp"/>
 
         <include
-            android:id="@+id/passenger_actionBar"
-            android:layout_below="@id/passenger_statusBar_spacer"
+            android:id="@+id/driver_actionBar"
+            android:layout_below="@id/driver_statusBar_spacer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             layout="@layout/action_bar_main"/>
 
         <Button
-            android:id="@+id/passenger_button_request_stop"
-            android:layout_above="@id/passenger_navigationBar_spacer"
+            android:id="@+id/driver_button_request_stop"
+            android:layout_above="@id/driver_navigationBar_spacer"
             android:layout_alignParentStart="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,14 +37,14 @@
             android:elevation="10dp"
             android:maxLines="1"
             android:onClick="gototest"
-            android:text="Request STOP"
+            android:text="All Buses"
             android:textColor="#FFFFFF"
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/passenger_button_send_location"
-            android:layout_above="@id/passenger_navigationBar_spacer"
-            android:layout_toEndOf="@id/passenger_button_request_stop"
+            android:id="@+id/driver_button_send_location"
+            android:layout_above="@id/driver_navigationBar_spacer"
+            android:layout_toEndOf="@id/driver_button_request_stop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -53,12 +52,12 @@
             android:background="@drawable/style_stop_button"
             android:elevation="10dp"
             android:onClick="sendCoordinateToFirebase"
-            android:text="send location"
+            android:text="My Bus"
             android:textColor="#FFFFFF"
             android:textAllCaps="false" />
 
         <fragment
-            android:id="@+id/passenger_mapView"
+            android:id="@+id/driver_mapView"
             android:layout_marginBottom="3dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -66,7 +65,7 @@
             tools:context=".MapsActivity" />
 
         <View
-            android:id="@+id/passenger_navigationBar_spacer"
+            android:id="@+id/driver_navigationBar_spacer"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="0dp"/>
@@ -75,10 +74,10 @@
 
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/passenger_navView"
+        android:id="@+id/driver_navView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:menu="@menu/navigation_menu_passenger"
+        app:menu="@menu/navigation_menu_driver"
         android:layout_gravity="start"
         app:headerLayout="@layout/navigation_header">
     </com.google.android.material.navigation.NavigationView>

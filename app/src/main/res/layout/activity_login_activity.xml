@@ -14,131 +14,135 @@
         android:padding="20dp">
 
         <ImageView
-            android:layout_margin="20dp"
-            android:id="@+id/welcome_image"
+            android:id="@+id/login_activity_welcome_image"
             android:layout_width="wrap_content"
             android:layout_height="200dp"
+            android:layout_margin="20dp"
             android:src="@drawable/busify_round_yellow_icon"/>
 
 
         <EditText
-            android:layout_below="@id/welcome_image"
-            android:textColor="@color/colorEditTextColor"
-            android:textColorHint="@color/colorEditTextHintColor"
-            android:id="@+id/login_email"
+            android:id="@+id/login_activity_email_editText"
+            android:layout_below="@id/login_activity_welcome_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
             android:hint="Email"
+            android:textColor="@color/colorEditTextColor"
+            android:textColorHint="@color/colorEditTextHintColor"
+            android:fontFamily="sans-serif"
             android:includeFontPadding="true"
             android:inputType="textEmailAddress"
             android:maxLines="1"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="10dp"
             android:textSize="18sp"
-            android:background="@drawable/style_edittext"
-            android:padding="10dp" />
+            android:background="@drawable/style_edittext"/>
 
         <EditText
+            android:id="@+id/login_activity_password_editText"
+            android:layout_below="@id/login_activity_email_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
             android:padding="10dp"
-            android:includeFontPadding="true"
-            android:layout_below="@id/login_email"
+            android:hint="Password"
             android:textColor="@color/colorEditTextColor"
             android:textColorHint="@color/colorEditTextHintColor"
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/style_edittext"
             android:fontFamily="sans-serif"
-            android:hint="Password"
+            android:includeFontPadding="true"
             android:inputType="textPassword"
             android:maxLines="1"
-            android:layout_marginVertical="10dp"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:background="@drawable/style_edittext"/>
 
         <Button
-            android:id="@+id/login"
+            android:id="@+id/login_activity_login_button"
+            android:layout_below="@id/login_activity_password_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/password"
             android:layout_marginTop="10dp"
-            android:background="@drawable/style_button"
-            android:fontFamily="sans-serif-medium"
-            android:onClick="Email_login"
             android:text="@string/login"
             android:textColor="@color/colorButtonText"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-medium"
+            android:onClick="Email_login"
+            android:background="@drawable/style_button"/>
 
 
         <RelativeLayout
+            android:layout_below="@id/login_activity_login_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/login">
+            android:layout_height="wrap_content">
 
             <Button
-                android:paddingRight="10dp"
-                android:textAlignment="textEnd"
-                android:layout_alignRight="@id/button_seperator"
-                android:textColor="@color/colorEditTextColor"
-                android:fontFamily="sans-serif"
-                android:background="@null"
-                android:textAllCaps="false"
-                android:id="@+id/forgot_password"
+                android:id="@+id/login_activity_forgot_password_button"
+                android:layout_alignEnd="@id/login_activity_button_seperator_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Forgot password"/>
+                android:paddingStart="0dp"
+                android:paddingEnd="10dp"
+                android:text="Forgot password"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorEditTextColor"
+                android:fontFamily="sans-serif"
+                android:textAllCaps="false"
+                android:background="@null"/>
 
             <View
-                android:background="@color/colorText"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/button_seperator"
+                android:id="@+id/login_activity_button_seperator_view"
                 android:layout_width="1dp"
-                android:layout_height="15dp"/>
+                android:layout_height="15dp"
+                android:layout_centerInParent="true"
+                android:background="@color/colorText"/>
 
             <Button
-                android:paddingLeft="10dp"
-                android:textAlignment="viewStart"
-                android:layout_toEndOf="@id/button_seperator"
-                android:textColor="@color/colorEditTextColor"
-                android:fontFamily="sans-serif"
-                android:background="@null"
-                android:textAllCaps="false"
-                android:id="@+id/home_signup"
+                android:id="@+id/login_activity_signup_button"
+                android:layout_toEndOf="@id/login_activity_button_seperator_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="New here? Sign up"/>
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
+                android:text="New here? Sign up"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorEditTextColor"
+                android:fontFamily="sans-serif"
+                android:textAllCaps="false"
+                android:background="@null"/>
         </RelativeLayout>
 
         <RelativeLayout
-            android:paddingHorizontal="15dp"
-            android:layout_marginVertical="10dp"
-            android:elevation="1dp"
-            android:clickable="true"
-            android:id="@+id/Sign_in_google"
+            android:id="@+id/login_activity_google_signin_button"
+            android:layout_alignParentBottom="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_marginVertical="10dp"
+            android:paddingHorizontal="15dp"
+            android:elevation="1dp"
+            android:clickable="true"
             android:layout_centerHorizontal="true"
+            android:focusable="true"
             android:background="@drawable/google_button">
 
             <ImageView
-                android:id="@+id/myimg"
+                android:id="@+id/login_activity_google_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/btn_google_light_normal_xxxhdpi"/>
 
             <TextView
-                android:paddingEnd="15dp"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@id/myimg"
+                android:layout_toEndOf="@id/login_activity_google_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingStart="0dp"
+                android:paddingEnd="15dp"
+                android:layout_centerVertical="true"
+                android:text="@string/google_signin_promt"
                 android:textColor="#777777"
                 android:textAllCaps="false"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/google_signin_promt"/>
+                android:fontFamily="sans-serif-medium"/>
         </RelativeLayout>
 
     </RelativeLayout>
+
 </LinearLayout>

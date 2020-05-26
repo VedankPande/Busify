@@ -19,74 +19,74 @@
 
         <TextView
             android:id="@+id/register_text"
-            android:textColor="@color/colorText"
-            android:paddingHorizontal="10dp"
-            android:textStyle="bold"
-            android:fontFamily="monospace"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            android:textColor="@color/colorText"
+            android:textStyle="bold"
+            android:fontFamily="monospace"
             android:text="Register"
             android:textAllCaps="true"
             android:textSize="30sp"/>
 
         <View
             android:id="@+id/first_seperator"
-            android:layout_marginVertical="20dp"
             android:layout_below="@id/register_text"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginVertical="20dp"
             android:background="#777777"/>
 
         <EditText
-            android:layout_marginVertical="10dp"
-            android:textColor="@color/colorEditTextColor"
-            android:textColorHint="@color/colorEditTextHintColor"
-            android:id="@+id/signup_name"
+            android:id="@+id/signup_activity_name"
             android:layout_below="@id/first_seperator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:padding="10dp"
+            android:textColor="@color/colorEditTextColor"
+            android:textColorHint="@color/colorEditTextHintColor"
             android:inputType="textPersonName"
             android:background="@drawable/style_edittext"
-            android:padding="10dp"
             android:hint="Full name"
             android:fontFamily="sans-serif"
             android:textSize="18sp"/>
 
         <EditText
-            android:layout_marginVertical="10dp"
-            android:textColor="@color/colorEditTextColor"
-            android:textColorHint="@color/colorEditTextHintColor"
-            android:id="@+id/signup_phone"
-            android:layout_below="@id/signup_name"
+            android:id="@+id/signup_activity_phone"
+            android:layout_below="@id/signup_activity_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:padding="10dp"
+            android:textColor="@color/colorEditTextColor"
+            android:textColorHint="@color/colorEditTextHintColor"
             android:inputType="phone"
             android:background="@drawable/style_edittext"
-            android:padding="10dp"
             android:hint="Phone"
             android:fontFamily="sans-serif"
             android:textSize="18sp"/>
 
         <RelativeLayout
-            android:id="@+id/layout_bus_letter"
-            android:background="@drawable/style_edittext"
-            android:layout_below="@id/signup_phone"
-            android:padding="10dp"
-            android:layout_marginVertical="10dp"
+            android:id="@+id/signup_activity_layout_bus_letter"
+            android:layout_below="@id/signup_activity_phone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:padding="10dp"
+            android:background="@drawable/style_edittext">
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:textSize="18sp"
                 android:textColor="@color/colorEditTextColor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="2.5dp"
                 android:text="Bus letter" />
 
             <Spinner
-                android:id="@+id/bus_spinner"
+                android:id="@+id/signup_activity_bus_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="viewEnd" />
@@ -94,38 +94,35 @@
         </RelativeLayout>
 
         <EditText
+            android:id="@+id/signup_activity_layout_stop"
+            android:layout_below="@id/signup_activity_layout_bus_letter"
+            android:layout_width="match_parent"
             android:layout_marginVertical="10dp"
+            android:padding="10dp"
             android:textColor="@color/colorEditTextColor"
             android:textColorHint="@color/colorEditTextHintColor"
-            android:id="@+id/layout_stop"
-            android:layout_below="@id/layout_bus_letter"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
             android:background="@drawable/style_edittext"
-            android:padding="10dp"
             android:hint="Stop"
             android:fontFamily="sans-serif"
             android:textSize="18sp"/>
 
         <View
             android:id="@+id/second_seperator"
-            android:layout_marginVertical="20dp"
-            android:layout_below="@id/layout_stop"
+            android:layout_below="@id/signup_activity_layout_stop"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginVertical="20dp"
             android:background="#777777"/>
 
         <ImageButton
             android:id="@+id/goto_mainactivity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_below="@id/second_seperator"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:background="@drawable/style_button"
             android:src="@drawable/round_navigate_next_black_36" />
 
