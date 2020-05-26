@@ -376,9 +376,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             isLocationGranted = true;
-            //sendlastknownlocation();
-            int delay = 5000;   // delay for 5 sec.
-            int interval = 1000;  // iterate every sec.
+
+            int delay = 1000;   // delay for 5 sec.
+            int interval = 3000;  // iterate every sec.
             Timer timer = new Timer();
 
             timer.scheduleAtFixedRate(new TimerTask() {
