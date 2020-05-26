@@ -88,13 +88,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         //This is for UI
-        View status_bar_tint = findViewById(R.id.statusbar_tint);
+        View status_bar_tint = findViewById(R.id.passenger_statusBar_spacer);
         status_bar_tint.bringToFront();
         status_bar_tint.getLayoutParams().height = getResources().getDimensionPixelSize(getResources().
                 getIdentifier("status_bar_height", "dimen", "android"));
         status_bar_tint.requestLayout();
 
-        View nav_bar = findViewById(R.id.nav_bar_view);
+        View nav_bar = findViewById(R.id.passenger_navigationBar_spacer);
         nav_bar.bringToFront();
         nav_bar.getLayoutParams().height = getResources().getDimensionPixelSize(getResources().
                 getIdentifier("navigation_bar_height", "dimen", "android"));
@@ -106,11 +106,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
                 WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 
-        Toolbar my_toolbar = findViewById(R.id.action_bar);
+        Toolbar my_toolbar = findViewById(R.id.passenger_actionBar);
         my_toolbar.setTitle("");
         setSupportActionBar(my_toolbar);
 
-        DrawerLayout nDrawerLayout = findViewById(R.id.nav_menu);
+        DrawerLayout nDrawerLayout = findViewById(R.id.passenger_navigationMenu);
         nToggle = new ActionBarDrawerToggle(this, nDrawerLayout, R.string.open, R.string.close);
 
 
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         nToggle.syncState();
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.passenger_navView);
         navigationView.setNavigationItemSelectedListener(this);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -294,7 +294,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void initmap()
     {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.passenger_mapView);
         mapFragment.getMapAsync(MainActivity.this);
 
     }
@@ -334,7 +334,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mMap = googleMap;
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.passenger_mapView);
 
         View locationButton = ((View) mapFragment.getView().findViewById(Integer.parseInt("1")).
                 getParent()).findViewById(Integer.parseInt("2"));
