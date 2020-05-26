@@ -23,7 +23,7 @@ import java.util.Objects;
 public class change_details extends AppCompatActivity {
 
     EditText Name,Stop,Phone;
-    String bus_id;
+    String bus_id, stop;
     FirebaseDatabase database;
     DatabaseReference reference;
 
@@ -71,6 +71,10 @@ public class change_details extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        EditText editText_stop = findViewById(R.id.changeDetails_layout_stop);
+        stop = editText_stop.getText().toString();
     }
 
     @Override
