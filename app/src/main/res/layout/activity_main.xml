@@ -38,8 +38,9 @@
             android:layout_marginBottom="36dp"
             android:background="@drawable/style_stop_button"
             android:elevation="10dp"
-            android:paddingHorizontal="15dp"
             android:maxLines="1"
+            android:onClick="gototest"
+            android:paddingHorizontal="15dp"
             android:text="Request STOP"
             android:textAllCaps="false"
             android:textColor="#FFFFFF" />

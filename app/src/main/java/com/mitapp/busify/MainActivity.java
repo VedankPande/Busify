@@ -394,5 +394,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
     }
+    public void gototest(View view){
+        startActivity(new Intent(getApplicationContext(), FirebaseGetDataTest.class));
+    }
 }
 

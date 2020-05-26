@@ -23,12 +23,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".FirebaseGetDataTest"></activity>
         <activity android:name=".sign_up" />
         <activity android:name=".DriverMainActivity" />
         <activity android:name=".register" />
         <activity android:name=".change_details" />
         <activity android:name=".app_info" />
-        <activity android:name=".LocationTester" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -56,10 +56,6 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".login_activity" />
-
-        <service
-            android:name=".LocationService"
-            android:stopWithTask="true" />
     </application>
 
 </manifest>
