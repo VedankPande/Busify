@@ -23,7 +23,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivityDriver"></activity>
+        <activity android:name=".Settings"></activity>
+        <activity android:name=".MainActivityDriver" />
         <activity android:name=".FirebaseGetDataTest" />
         <activity android:name=".sign_up" />
         <activity android:name=".register" />

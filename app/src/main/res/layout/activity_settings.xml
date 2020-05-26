@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Settings"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/action_bar"
+        android:id="@+id/action_bar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="30dp">
+
+        <TextView
+            android:id="@+id/settings_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            android:textColor="@color/colorText"
+            android:textStyle="bold"
+            android:fontFamily="monospace"
+            android:text="Settings"
+            android:textAllCaps="true"
+            android:textSize="30sp"/>
+
+        <View
+            android:id="@+id/first_seperator"
+            android:layout_below="@id/settings_text"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="20dp"
+            android:background="#777777"/>
+
+        <LinearLayout
+            android:id="@+id/settings_changetheme_layout"
+            android:layout_below="@id/first_seperator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/style_edittext"
+            android:layout_marginVertical="10dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/settings_changetheme_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:text="Change Theme"
+                android:padding="10dp"
+                android:textColor="@color/colorText"
+                android:fontFamily="sans-serif"
+                android:textSize="18sp"
+                android:textAllCaps="false"
+                android:textAlignment="viewStart"
+                style="?android:attr/borderlessButtonStyle"/>
+
+            <LinearLayout
+                android:visibility="visible"
+                android:id="@+id/settings_changetheme_option_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#777777"/>
+
+                <RadioGroup
+                    android:id="@+id/settings_changetheme_radioGroup"
+                    android:layout_margin="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/settings_theme_light"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Light"
+                        android:padding="10dp"
+                        android:textColor="@color/colorText"
+                        android:fontFamily="sans-serif"
+                        android:textSize="16sp"/>
+
+                    <RadioButton
+                        android:id="@+id/settings_theme_dark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Dark"
+                        android:padding="10dp"
+                        android:textColor="@color/colorText"
+                        android:fontFamily="sans-serif"
+                        android:textSize="16sp"/>
+
+                    <RadioButton
+                        android:id="@+id/settings_theme_white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="White"
+                        android:padding="10dp"
+                        android:textColor="@color/colorText"
+                        android:fontFamily="sans-serif"
+                        android:textSize="16sp"/>
+
+                    <RadioButton
+                        android:id="@+id/settings_theme_black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Black"
+                        android:padding="10dp"
+                        android:textColor="@color/colorText"
+                        android:fontFamily="sans-serif"
+                        android:textSize="16sp"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/second_seperator"
+            android:layout_below="@id/settings_changetheme_layout"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="20dp"
+            android:background="#777777"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

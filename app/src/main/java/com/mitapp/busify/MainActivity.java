@@ -142,6 +142,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.change_details){
             startActivity(new Intent(getApplicationContext(), change_details.class));
         }
+        if (id == R.id.settings){
+            startActivity(new Intent(getApplicationContext(), Settings.class));
+        }
+        if (id == R.id.logout_nav){
+            FirebaseAuth.getInstance().signOut();
+            GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .build()).signOut().addOnSuccessListener(new OnSuccessListener<Void>(){
+                @Override
+                public void onSuccess(Void aVoid){
+                    startActivity(new Intent(getApplicationContext(), login_activity.class));
+                }});
+        }
         if (id == R.id.app_info){
             startActivity(new Intent(getApplicationContext(), app_info.class));
         }
@@ -158,15 +170,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(id == R.id.theme_original)
         {
             mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this,R.raw.standardmap));
-        }
-        if (id == R.id.logout_nav){
-            FirebaseAuth.getInstance().signOut();
-            GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .build()).signOut().addOnSuccessListener(new OnSuccessListener<Void>(){
-                @Override
-                public void onSuccess(Void aVoid){
-                    startActivity(new Intent(getApplicationContext(), login_activity.class));
-                }});
         }
         return false;
     }
