@@ -21,29 +21,29 @@
             android:id="@+id/settings_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="10dp"
-            android:textColor="@color/colorText"
-            android:textStyle="bold"
             android:fontFamily="monospace"
+            android:paddingHorizontal="10dp"
             android:text="Settings"
             android:textAllCaps="true"
-            android:textSize="30sp"/>
+            android:textColor="@color/colorText"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <View
             android:id="@+id/first_seperator"
-            android:layout_below="@id/settings_text"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_below="@id/settings_text"
             android:layout_marginVertical="20dp"
-            android:background="#777777"/>
+            android:background="#777777" />
 
         <LinearLayout
             android:id="@+id/settings_changetheme_layout"
-            android:layout_below="@id/first_seperator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/style_edittext"
+            android:layout_below="@id/first_seperator"
             android:layout_marginVertical="10dp"
+            android:background="@drawable/style_edittext"
             android:orientation="vertical">
 
             <Button
@@ -62,80 +62,80 @@
                 android:textSize="18sp" />
 
             <LinearLayout
-                android:visibility="visible"
                 android:id="@+id/settings_changeTheme_option_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <View
-                    android:layout_marginHorizontal="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#777777"/>
+                    android:layout_marginHorizontal="5dp"
+                    android:background="#777777" />
 
                 <LinearLayout
-                    android:visibility="visible"
                     android:id="@+id/settings_theme_specific_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
                     <RadioGroup
                         android:id="@+id/settings_changetheme_radioGroup"
-                        android:layout_margin="10dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
 
                         <RadioButton
                             android:id="@+id/settings_theme_light"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Light"
-                            android:padding="10dp"
-                            android:textColor="@color/colorText"
                             android:fontFamily="sans-serif"
-                            android:textSize="16sp"/>
+                            android:padding="10dp"
+                            android:text="Light"
+                            android:textColor="@color/colorText"
+                            android:textSize="16sp" />
 
                         <RadioButton
                             android:id="@+id/settings_theme_dark"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Dark"
-                            android:padding="10dp"
-                            android:textColor="@color/colorText"
                             android:fontFamily="sans-serif"
-                            android:textSize="16sp"/>
+                            android:padding="10dp"
+                            android:text="Dark"
+                            android:textColor="@color/colorText"
+                            android:textSize="16sp" />
 
                         <RadioButton
                             android:id="@+id/settings_theme_white"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="White"
-                            android:padding="10dp"
-                            android:textColor="@color/colorText"
                             android:fontFamily="sans-serif"
-                            android:textSize="16sp"/>
+                            android:padding="10dp"
+                            android:text="White"
+                            android:textColor="@color/colorText"
+                            android:textSize="16sp" />
 
                         <RadioButton
                             android:id="@+id/settings_theme_black"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Black"
-                            android:padding="10dp"
-                            android:textColor="@color/colorText"
                             android:fontFamily="sans-serif"
-                            android:textSize="16sp"/>
+                            android:padding="10dp"
+                            android:text="Black"
+                            android:textColor="@color/colorText"
+                            android:textSize="16sp" />
 
                         <RadioButton
                             android:id="@+id/settings_theme_followSystem"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Follow System"
-                            android:padding="10dp"
-                            android:textColor="@color/colorText"
                             android:fontFamily="sans-serif"
-                            android:textSize="16sp"/>
+                            android:padding="10dp"
+                            android:text="Follow System"
+                            android:textColor="@color/colorText"
+                            android:textSize="16sp" />
 
                     </RadioGroup>
 
@@ -143,68 +143,68 @@
                         android:id="@+id/settings_theme_followSystem_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <RadioGroup
                             android:id="@+id/settings_changetheme_radioGroup_followSystem_light"
-                            android:layout_marginHorizontal="10dp"
-                            android:layout_marginBottom="10dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginBottom="10dp">
 
                             <RadioButton
-                                android:layout_marginStart="10dp"
                                 android:id="@+id/settings_theme_light_followSystem"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Light"
-                                android:padding="10dp"
-                                android:textColor="@color/colorText"
+                                android:layout_marginStart="10dp"
                                 android:fontFamily="sans-serif"
-                                android:textSize="16sp"/>
+                                android:padding="10dp"
+                                android:text="Light"
+                                android:textColor="@color/colorText"
+                                android:textSize="16sp" />
 
                             <RadioButton
-                                android:layout_marginStart="10dp"
                                 android:id="@+id/settings_theme_white_followSystem"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="White"
-                                android:padding="10dp"
-                                android:textColor="@color/colorText"
+                                android:layout_marginStart="10dp"
                                 android:fontFamily="sans-serif"
-                                android:textSize="16sp"/>
+                                android:padding="10dp"
+                                android:text="White"
+                                android:textColor="@color/colorText"
+                                android:textSize="16sp" />
 
                         </RadioGroup>
 
                         <RadioGroup
                             android:id="@+id/settings_changetheme_radioGroup_followSystem_dark"
-                            android:layout_marginHorizontal="10dp"
-                            android:layout_marginBottom="10dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginBottom="10dp">
 
                             <RadioButton
-                                android:layout_marginStart="10dp"
                                 android:id="@+id/settings_theme_dark_followSystem"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Dark"
-                                android:padding="10dp"
-                                android:textColor="@color/colorText"
+                                android:layout_marginStart="10dp"
                                 android:fontFamily="sans-serif"
-                                android:textSize="16sp"/>
+                                android:padding="10dp"
+                                android:text="Dark"
+                                android:textColor="@color/colorText"
+                                android:textSize="16sp" />
 
                             <RadioButton
-                                android:layout_marginStart="10dp"
                                 android:id="@+id/settings_theme_black_followSystem"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Black"
-                                android:padding="10dp"
-                                android:textColor="@color/colorText"
+                                android:layout_marginStart="10dp"
                                 android:fontFamily="sans-serif"
-                                android:textSize="16sp"/>
+                                android:padding="10dp"
+                                android:text="Black"
+                                android:textColor="@color/colorText"
+                                android:textSize="16sp" />
 
                         </RadioGroup>
 
@@ -218,11 +218,11 @@
 
         <View
             android:id="@+id/second_seperator"
-            android:layout_below="@id/settings_changetheme_layout"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_below="@id/settings_changetheme_layout"
             android:layout_marginVertical="20dp"
-            android:background="#777777"/>
+            android:background="#777777" />
 
     </RelativeLayout>
 
