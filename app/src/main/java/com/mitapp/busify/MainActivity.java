@@ -407,6 +407,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(new Intent(getApplicationContext(), FirebaseGetDataTest.class));
     }
 
+
     @Override
     public void onBackPressed() {
         SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
@@ -414,9 +415,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Boolean loginbool = sharedPreferences.getBoolean("LoggedIn",false);
         if (regbool==loginbool&&loginbool==true)
         {
-            
+            moveTaskToBack(true);
         }
-        super.onBackPressed();
+        else {
+            super.onBackPressed();
+        }
     }
 }
 

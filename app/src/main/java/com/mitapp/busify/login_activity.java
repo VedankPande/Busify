@@ -48,8 +48,18 @@ public class login_activity extends AppCompatActivity {
 
         if(signInAccount!=null || mAuth.getCurrentUser() != null)
         {
-            startActivity(new Intent(this, sign_up.class));
-            setLoginBoolean();
+            SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
+            Boolean check_on_login_reg_bool = sharedPreferences.getBoolean("Registered",false);
+            if(check_on_login_reg_bool!=true)
+            {
+                startActivity(new Intent(getApplicationContext(), sign_up.class));
+                setLoginBoolean();
+            }
+            else
+            {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                setLoginBoolean();
+            }
         }
 
         findViewById(R.id.login_activity_google_signin_button).setOnClickListener(new View.OnClickListener() {
@@ -97,11 +107,19 @@ public class login_activity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
+                            Boolean check_on_login_reg_bool = sharedPreferences.getBoolean("Registered",false);
                             // Sign in success, update UI with the signed-in user's information
-                            //FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent = new Intent(getApplicationContext(),sign_up.class);
-                            startActivity(intent);
-                            setLoginBoolean();
+                            if(check_on_login_reg_bool!=true)
+                            {
+                                startActivity(new Intent(getApplicationContext(), sign_up.class));
+                                setLoginBoolean();
+                            }
+                            else
+                            {
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                setLoginBoolean();
+                            }
 
                         } else {
                             Toast.makeText(login_activity.this, "Sorry auth failed.",
@@ -116,6 +134,7 @@ public class login_activity extends AppCompatActivity {
 
     public void Email_login(View view)
     {
+
         mAuth = FirebaseAuth.getInstance();
         pre_email = findViewById(R.id.login_activity_email_editText);
         pre_password = findViewById(R.id.login_activity_password_editText);
@@ -128,8 +147,19 @@ public class login_activity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            startActivity(new Intent(getApplicationContext(), sign_up.class));
-                            setLoginBoolean();
+                            SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
+                            Boolean check_on_login_reg_bool = sharedPreferences.getBoolean("Registered",false);
+                            if(check_on_login_reg_bool!=true)
+                            {
+                                startActivity(new Intent(getApplicationContext(), sign_up.class));
+                                setLoginBoolean();
+                            }
+                            else
+                            {
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                setLoginBoolean();
+                            }
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(login_activity.this, "Authentication failed.",
@@ -166,8 +196,8 @@ public class login_activity extends AppCompatActivity {
     {
         SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-
         editor.putBoolean("LoggedIn", true);
+        editor.apply();
     }
 
 }

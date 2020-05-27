@@ -115,5 +115,6 @@ public class sign_up extends AppCompatActivity implements AdapterView.OnItemSele
         SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("Registered",true);
+        editor.apply();
     }
 }
