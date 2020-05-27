@@ -44,6 +44,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -55,6 +56,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.GeoPoint;
@@ -124,6 +126,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
+        getDriverLocation();
 
 
     }
@@ -338,16 +342,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.passenger_mapView);
 
+        //moving location button to bottom right
         View locationButton = ((View) mapFragment.getView().findViewById(Integer.parseInt("1")).
                 getParent()).findViewById(Integer.parseInt("2"));
-
-        // and next place it, for exemple, on bottom right (as Google Maps app)
         RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
-        // position on right bottom
         rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
         rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
         rlp.setMargins(0, 0, 200, 200);
@@ -371,6 +372,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
 
+
+        //getting my location
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -383,6 +386,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
+
     }
 
     public void sendCoordinateToFirebase(View view)
@@ -432,5 +436,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
-}
+
+    public void getDriverLocation()
+    {
+        DocumentReference ref = mDB.collection("locations").document("bcByCOrEegSCbrhlew8Sr6epSjH2");
+        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        GeoPoint geoPoint = document.getGeoPoint("Location");
+                        double lat = geoPoint.getLatitude();
+                        double longitude = geoPoint.getLatitude();
+                        LatLng latLng = new LatLng(lat,longitude);
+                        mMap.addMarker(new MarkerOptions()
+                                .position(latLng)
+                                .title("please work"));
+
+                        //Map<String,Object> map = new HashMap<>();
+                        //map = document.getData();
+                        //Toast.makeText(MainActivity.this, map.get("Location").toString(), Toast.LENGTH_SHORT).show();
+
+                    } else {
+
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(),"error",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+
+        });
+    }
+    }
+
 

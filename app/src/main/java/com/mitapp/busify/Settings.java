@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -65,7 +66,7 @@ public class Settings extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt("theme",1);
                 editor.apply();
-
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
         });
 
@@ -77,6 +78,7 @@ public class Settings extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt("theme",2);
                 editor.apply();
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
         });
 
@@ -88,6 +90,7 @@ public class Settings extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt("theme",3);
                 editor.apply();
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
         });
 
@@ -99,6 +102,7 @@ public class Settings extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt("theme",4);
                 editor.apply();
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
         });
 
