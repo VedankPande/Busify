@@ -45,49 +45,20 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:885423670837:android:645f887f45bd57f88b937c",
-        "android_client_info": {
-          "package_name": "com.example.busifystable"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "885423670837-mmkg5jnbele326fvdhlogbr2kh3slb74.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.busifystable",
-            "certificate_hash": "51140a2ed3a8fb9b2a2ac67a4241183655bebada"
-          }
-        },
-        {
-          "client_id": "885423670837-0i0lf1l4imshapkg2nrub6177fh33t9t.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBdgnsnrsE1J45i1wSPdKLd7h5J9Cjx9ZU"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "885423670837-0i0lf1l4imshapkg2nrub6177fh33t9t.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:885423670837:android:459b548ea80f347e8b937c",
         "android_client_info": {
           "package_name": "com.mitapp.busify"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "885423670837-k1nqkhd5k5c6ccd0950r0g7t0taqkvju.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mitapp.busify",
+            "certificate_hash": "1e311dfe5cad28268aa4839268adc7beff710e63"
+          }
+        },
         {
           "client_id": "885423670837-65jsnrhfofiih9u4fet5mi56vpnsdt7b.apps.googleusercontent.com",
           "client_type": 1,

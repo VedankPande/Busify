@@ -195,7 +195,7 @@ public class login_activity extends AppCompatActivity {
 
     public void setLoginBoolean()
     {
-        SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("system global variables" ,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("LoggedIn", true);
         editor.apply();

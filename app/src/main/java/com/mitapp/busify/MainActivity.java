@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Camera;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -126,6 +127,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
+
+        // move camera to location
+
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                LatLng latlng1 = new LatLng(location.getLatitude(),location.getLongitude());
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng1,14.0f));
+            }
+        });
 
         getDriverLocation();
 
@@ -345,6 +357,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.passenger_mapView);
 
+
         //moving location button to bottom right
         View locationButton = ((View) mapFragment.getView().findViewById(Integer.parseInt("1")).
                 getParent()).findViewById(Integer.parseInt("2"));
@@ -439,6 +452,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void getDriverLocation()
     {
+
         DocumentReference ref = mDB.collection("locations").document("bcByCOrEegSCbrhlew8Sr6epSjH2");
         ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
