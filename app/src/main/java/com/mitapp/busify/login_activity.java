@@ -60,6 +60,7 @@ public class login_activity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 setLoginBoolean();
             }
+
         }
 
         findViewById(R.id.login_activity_google_signin_button).setOnClickListener(new View.OnClickListener() {

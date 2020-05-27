@@ -35,13 +35,6 @@ public class register extends AppCompatActivity {
         setSupportActionBar(my_toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        final ImageButton register = findViewById(R.id.goto_signup);
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(register.this, sign_up.class));
-            }
-        });
     }
 
     @Override

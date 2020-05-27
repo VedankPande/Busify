@@ -412,7 +412,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
     public void gototest(View view){
-        startActivity(new Intent(getApplicationContext(), FirebaseGetDataTest.class));
+        SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("Registered",false);
+        editor.apply();
     }
 
 
