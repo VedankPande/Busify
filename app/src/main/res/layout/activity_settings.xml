@@ -48,18 +48,18 @@
 
             <Button
                 android:id="@+id/settings_changetheme_button"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="0dp"
-                android:minWidth="0dp"
-                android:text="Change Theme"
-                android:padding="10dp"
-                android:textColor="@color/colorText"
                 android:fontFamily="sans-serif"
-                android:textSize="18sp"
-                android:textAllCaps="false"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="10dp"
+                android:text="Change Map Theme"
                 android:textAlignment="viewStart"
-                style="?android:attr/borderlessButtonStyle"/>
+                android:textAllCaps="false"
+                android:textColor="@color/colorText"
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:visibility="visible"

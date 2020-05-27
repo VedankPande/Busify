@@ -352,15 +352,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
         rlp.setMargins(0, 0, 200, 200);
 
-            /*if(check==1)
-            {
-                mMap.setMapStyle(
-                        MapStyleOptions.loadRawResourceStyle(
-                                this, R.raw.dark));
+        //setting map theme
 
-                check = 2;
-            }*/
-
+        SharedPreferences sharedPreferences = getSharedPreferences("Map Themes",MODE_PRIVATE);
+        int selectedTheme = sharedPreferences.getInt("theme",1);
+        // 1:light 2:dark 3:white 4:black
+        switch (selectedTheme)
+        {
+            case 1: mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this,R.raw.standardmap));
+            break;
+            case 2: mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this,R.raw.night));
+            break;
+            case 3: mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this,R.raw.lightmap));
+            break;
+            case 4: mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this,R.raw.dark));
+            break;
+            default:mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this,R.raw.standardmap));
+        }
 
 
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),

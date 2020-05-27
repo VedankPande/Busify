@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -59,7 +60,12 @@ public class Settings extends AppCompatActivity {
         settings_theme_light.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                update_theme();
+                //update_theme();
+                SharedPreferences sharedPreferences = getSharedPreferences("Map Themes",MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("theme",1);
+                editor.apply();
+
             }
         });
 
@@ -67,7 +73,10 @@ public class Settings extends AppCompatActivity {
         settings_theme_dark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                update_theme();
+                SharedPreferences sharedPreferences = getSharedPreferences("Map Themes",MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("theme",2);
+                editor.apply();
             }
         });
 
@@ -75,7 +84,10 @@ public class Settings extends AppCompatActivity {
         settings_theme_white.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                update_theme();
+                SharedPreferences sharedPreferences = getSharedPreferences("Map Themes",MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("theme",3);
+                editor.apply();
             }
         });
 
@@ -83,7 +95,10 @@ public class Settings extends AppCompatActivity {
         settings_theme_black.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                update_theme();
+                SharedPreferences sharedPreferences = getSharedPreferences("Map Themes",MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("theme",4);
+                editor.apply();
             }
         });
 
