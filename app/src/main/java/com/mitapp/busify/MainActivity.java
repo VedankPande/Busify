@@ -173,20 +173,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.app_info){
             startActivity(new Intent(getApplicationContext(), app_info.class));
         }
-        if (id == R.id.theme_black){
-            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this,R.raw.night));
-        }
-        if (id == R.id.theme_dark){
-            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this,R.raw.dark));
-        }
-        if(id == R.id.theme_light)
-        {
-            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this,R.raw.lightmap));
-        }
-        if(id == R.id.theme_original)
-        {
-            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this,R.raw.standardmap));
-        }
         return false;
     }
 
