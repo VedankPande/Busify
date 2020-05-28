@@ -46,18 +46,14 @@
             android:background="@drawable/style_edittext"
             android:orientation="vertical">
 
-            <Button
+            <TextView
+                android:textStyle="bold"
                 android:id="@+id/settings_changetheme_button"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
                 android:padding="10dp"
-                android:text="Change Theme"
-                android:textAlignment="viewStart"
-                android:textAllCaps="false"
+                android:text="Theme:"
                 android:textColor="@color/colorText"
                 android:textSize="18sp" />
 
@@ -65,8 +61,7 @@
                 android:id="@+id/settings_changeTheme_option_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:orientation="vertical">
 
                 <View
                     android:layout_width="match_parent"
@@ -98,22 +93,22 @@
                             android:textSize="16sp" />
 
                         <RadioButton
-                            android:id="@+id/settings_theme_dark"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif"
-                            android:padding="10dp"
-                            android:text="Dark"
-                            android:textColor="@color/colorText"
-                            android:textSize="16sp" />
-
-                        <RadioButton
                             android:id="@+id/settings_theme_white"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
                             android:padding="10dp"
                             android:text="White"
+                            android:textColor="@color/colorText"
+                            android:textSize="16sp" />
+
+                        <RadioButton
+                            android:id="@+id/settings_theme_dark"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:padding="10dp"
+                            android:text="Dark"
                             android:textColor="@color/colorText"
                             android:textSize="16sp" />
 

@@ -19,6 +19,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Camera;
 import android.location.Location;
@@ -353,6 +354,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        Toast.makeText(getApplicationContext(), "running", Toast.LENGTH_SHORT).show();
         mMap = googleMap;
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.passenger_mapView);
@@ -371,20 +373,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences sharedPreferences = getSharedPreferences("Map Themes",MODE_PRIVATE);
         int selectedTheme = sharedPreferences.getInt("theme",1);
         // 1:light 2:dark 3:white 4:black
-        switch (selectedTheme)
-        {
-            case 1: mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this,R.raw.standardmap));
-            break;
-            case 2: mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this,R.raw.night));
-            break;
-            case 3: mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this,R.raw.lightmap));
-            break;
-            case 4: mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this,R.raw.dark));
-            break;
-            default:mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this,R.raw.standardmap));
+        if (selectedTheme == 1) mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this, R.raw.standardmap));
+        else if (selectedTheme == 2) mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this, R.raw.night));
+        else if (selectedTheme == 3) mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this, R.raw.lightmap));
+        else if (selectedTheme == 4) mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this, R.raw.dark));
+        else if (selectedTheme/100 == 5){
+            selectedTheme%=100;
+            switch (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
+                case Configuration.UI_MODE_NIGHT_NO:
+                    if (selectedTheme/10 == 1) mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this, R.raw.standardmap));
+                    else if (selectedTheme/10 == 3) mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this, R.raw.lightmap));
+                    break;
+            case Configuration.UI_MODE_NIGHT_YES:
+                selectedTheme%=10;
+                if (selectedTheme == 2) mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this, R.raw.night));
+                else if (selectedTheme == 4) mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MainActivity.this, R.raw.dark));
+                break;
+            }
         }
-
-
 
         //getting my location
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),

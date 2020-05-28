@@ -2,6 +2,7 @@ package com.mitapp.busify;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,8 +36,10 @@ public class login_activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_activity);
+
 
         mAuth = FirebaseAuth.getInstance();
         pre_email = findViewById(R.id.login_activity_email_editText);
@@ -75,6 +78,14 @@ public class login_activity extends AppCompatActivity {
                 startActivity(new Intent(login_activity.this, register.class));
             }
         });
+    }
+
+    private void setTheme(){
+        SharedPreferences sharedPreferences = getSharedPreferences("Map Themes",MODE_PRIVATE);
+        int fileData = sharedPreferences.getInt("theme", 512);
+        if (fileData == 1 || fileData == 3) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        else if (fileData == 2 || fileData == 4) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        else if (fileData/100 == 5) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
     }
 
     //Google signin functions
