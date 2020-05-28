@@ -50,15 +50,16 @@ public class login_activity extends AppCompatActivity {
         {
             SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
             Boolean check_on_login_reg_bool = sharedPreferences.getBoolean("Registered",false);
-            if(check_on_login_reg_bool!=true)
-            {
-                startActivity(new Intent(getApplicationContext(), sign_up.class));
-                setLoginBoolean();
-            }
-            else
-            {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                setLoginBoolean();
+            if(checkForDriverLogin())
+                startActivity(new Intent(getApplicationContext(),MainActivityDriver.class));
+            else {
+                if (check_on_login_reg_bool != true) {
+                    startActivity(new Intent(getApplicationContext(), sign_up.class));
+                    setLoginBoolean();
+                } else {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    setLoginBoolean();
+                }
             }
 
         }
@@ -110,16 +111,21 @@ public class login_activity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
                             Boolean check_on_login_reg_bool = sharedPreferences.getBoolean("Registered",false);
+                            // check driver login
+                            if(checkForDriverLogin())
+                                startActivity(new Intent(getApplicationContext(), MainActivityDriver.class));
                             // Sign in success, update UI with the signed-in user's information
-                            if(check_on_login_reg_bool!=true)
-                            {
-                                startActivity(new Intent(getApplicationContext(), sign_up.class));
-                                setLoginBoolean();
-                            }
-                            else
-                            {
-                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                setLoginBoolean();
+                            else {
+                                if (check_on_login_reg_bool != true) {
+                                    startActivity(new Intent(getApplicationContext(), sign_up.class));
+                                    setLoginBoolean();
+
+                                } else {
+
+                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                    setLoginBoolean();
+
+                                }
                             }
 
                         } else {
@@ -159,6 +165,7 @@ public class login_activity extends AppCompatActivity {
                             {
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                 setLoginBoolean();
+                                checkForDriverLogin();
                             }
 
                         } else {
@@ -200,5 +207,18 @@ public class login_activity extends AppCompatActivity {
         editor.putBoolean("LoggedIn", true);
         editor.apply();
     }
+
+    public Boolean checkForDriverLogin()
+    {
+        String check = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String[] ID = {"c6j3SIAX38W1uSWGBjDGeXmHBVw2"};
+        for (String i : ID)
+        {
+            if(check.equals(i))
+                return true;
+        }
+        return  false;
+    }
+
 
 }

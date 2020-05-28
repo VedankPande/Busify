@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -95,8 +96,28 @@ public class MainActivityDriver extends AppCompatActivity implements NavigationV
         {
         }
         if (id == R.id.logout_nav){
+            FirebaseAuth.getInstance().signOut();
+            GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .build()).signOut().addOnSuccessListener(new OnSuccessListener<Void>(){
+                @Override
+                public void onSuccess(Void aVoid){
+                    startActivity(new Intent(getApplicationContext(), login_activity.class));
+                }});
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
+        Boolean loginbool = sharedPreferences.getBoolean("LoggedIn",false);
+        if (loginbool==true)
+        {
+            moveTaskToBack(true);
+        }
+        else {
+            super.onBackPressed();
+        }
     }
 }
 
