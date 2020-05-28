@@ -27,34 +27,36 @@
 
         <Button
             android:id="@+id/driver_button_request_stop"
-            android:layout_above="@id/driver_navigationBar_spacer"
-            android:layout_alignParentStart="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:paddingHorizontal="15dp"
+            android:layout_above="@id/driver_navigationBar_spacer"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/style_stop_button"
             android:elevation="10dp"
             android:maxLines="1"
-            android:onClick="gototest"
+            android:paddingHorizontal="15dp"
             android:text="All Buses"
-            android:textColor="#FFFFFF"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF" />
 
         <Button
             android:id="@+id/driver_button_send_location"
-            android:layout_above="@id/driver_navigationBar_spacer"
-            android:layout_toEndOf="@id/driver_button_request_stop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_above="@id/driver_navigationBar_spacer"
             android:layout_marginBottom="20dp"
-            android:paddingHorizontal="15dp"
+            android:layout_toEndOf="@id/driver_button_request_stop"
             android:background="@drawable/style_stop_button"
             android:elevation="10dp"
-            android:onClick="sendCoordinateToFirebase"
-            android:text="My Bus"
-            android:textColor="#FFFFFF"
-            android:textAllCaps="false" />
+            android:onClick="sendDriverCoordinateToFirebase"
+            android:paddingHorizontal="15dp"
+            android:text="Send location to DB"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF" />
 
         <fragment
             android:id="@+id/driver_mapView"

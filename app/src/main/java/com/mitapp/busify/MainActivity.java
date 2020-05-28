@@ -56,11 +56,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.annotations.Nullable;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -422,7 +427,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    @Override
+    /*@Override
     public void onBackPressed() {
         SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
         Boolean regbool = sharedPreferences.getBoolean("Registered",false);
@@ -434,7 +439,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else {
             super.onBackPressed();
         }
-    }
+    }*/
 
     public void getDriverLocation()
     {
@@ -468,6 +473,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         });
+    }
+    public void getDriverLocationLive(View view)
+    {
+        mDB.collection("locations")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value,
+                                        @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Log.w(TAG, "Listen failed.", e);
+                            return;
+                        }
+                        Map<String,Object> DriverLocations = new HashMap<>();
+
+                        //List<String> cities = new ArrayList<>();
+                        for (QueryDocumentSnapshot doc : value) {
+                            if (doc.getGeoPoint("Location") != null) {
+
+                                DriverLocations.put(doc.get("UID").toString(),doc.getGeoPoint("Location"));
+                                Toast.makeText(MainActivity.this, doc.get("UID").toString(), Toast.LENGTH_SHORT).show();
+                                //cities.add(doc.getString("name"));
+                            }
+                        }
+                        //Log.d(TAG, "Current cites in CA: " + cities);
+                    }
+                });
     }
     }
 

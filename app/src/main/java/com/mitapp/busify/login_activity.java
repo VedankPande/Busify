@@ -48,19 +48,16 @@ public class login_activity extends AppCompatActivity {
 
         if(signInAccount!=null || mAuth.getCurrentUser() != null)
         {
-            SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
-            Boolean check_on_login_reg_bool = sharedPreferences.getBoolean("Registered",false);
-            if(checkForDriverLogin())
-                startActivity(new Intent(getApplicationContext(),MainActivityDriver.class));
-            else {
-                if (check_on_login_reg_bool != true) {
+            //SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
+            //Boolean check_on_login_reg_bool = sharedPreferences.getBoolean("Registered",false);
+                //if (check_on_login_reg_bool != true) {
                     startActivity(new Intent(getApplicationContext(), sign_up.class));
-                    setLoginBoolean();
-                } else {
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    setLoginBoolean();
-                }
-            }
+                    //setLoginBoolean();
+                // else {
+                    //startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    //setLoginBoolean();
+                //}
+
 
         }
 
@@ -109,24 +106,23 @@ public class login_activity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
-                            Boolean check_on_login_reg_bool = sharedPreferences.getBoolean("Registered",false);
+                            //SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
+                            //Boolean check_on_login_reg_bool = sharedPreferences.getBoolean("Registered",false);
                             // check driver login
-                            if(checkForDriverLogin())
-                                startActivity(new Intent(getApplicationContext(), MainActivityDriver.class));
+
                             // Sign in success, update UI with the signed-in user's information
-                            else {
-                                if (check_on_login_reg_bool != true) {
+
+                                //if (check_on_login_reg_bool != true) {
                                     startActivity(new Intent(getApplicationContext(), sign_up.class));
-                                    setLoginBoolean();
+                                    //setLoginBoolean();
 
-                                } else {
+                                //} else {
 
-                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                    setLoginBoolean();
+                                    //startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                    //setLoginBoolean();
 
-                                }
-                            }
+                                //}
+
 
                         } else {
                             Toast.makeText(login_activity.this, "Sorry auth failed.",
@@ -159,13 +155,12 @@ public class login_activity extends AppCompatActivity {
                             if(check_on_login_reg_bool!=true)
                             {
                                 startActivity(new Intent(getApplicationContext(), sign_up.class));
-                                setLoginBoolean();
+                                //setLoginBoolean();
                             }
                             else
                             {
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                setLoginBoolean();
-                                checkForDriverLogin();
+                                //setLoginBoolean();
                             }
 
                         } else {

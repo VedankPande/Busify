@@ -127,18 +127,11 @@
             android:src="@drawable/round_navigate_next_black_36" />
 
         <Button
-            android:layout_below="@id/goto_mainactivity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/details_submit"
-            android:text="submit"/>
-
-        <EditText
-            android:layout_below="@id/details_submit"
-            android:id="@+id/details_stop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Enter stop"/>
+            android:layout_below="@id/goto_mainactivity"
+            android:text="Go to driverMap" />
 
     </RelativeLayout>
 

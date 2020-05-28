@@ -52,13 +52,14 @@ public class sign_up extends AppCompatActivity implements AdapterView.OnItemSele
 
 
         Name = findViewById(R.id.signup_activity_name);
-        Stop = findViewById(R.id.details_stop);
+        Stop = findViewById(R.id.signup_activity_layout_stop);
         Phone = findViewById(R.id.signup_activity_phone);
 
         findViewById(R.id.details_submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                database = FirebaseDatabase.getInstance();
+                startActivity(new Intent(getApplicationContext(), MainActivityDriver.class));
+                /*database = FirebaseDatabase.getInstance();
                 reference = database.getReference();
 
                 String name = Name.getText().toString();
@@ -68,9 +69,8 @@ public class sign_up extends AppCompatActivity implements AdapterView.OnItemSele
                 Toast.makeText(sign_up.this, "values:"+ " "+name+" "+bus_id, Toast.LENGTH_SHORT).show();
                 reference.child("users").child(""+name).setValue(user);
                 reference.child("users").child("test").child("value").setValue("hello");
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("bus",bus_id);
-                startActivity(intent);
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));*/
+                //setRegisteredBoolean();
             }
         });
 
@@ -78,14 +78,20 @@ public class sign_up extends AppCompatActivity implements AdapterView.OnItemSele
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(sign_up.this, MainActivity.class));
-                setRegisteredBoolean();
+                database = FirebaseDatabase.getInstance();
+                reference = database.getReference();
+                String name = Name.getText().toString();
+                String stop = Stop.getText().toString();
+                String phone = Phone.getText().toString();
+                User user = new User(name, stop, bus_id, phone);
+                Toast.makeText(sign_up.this, "values:"+ " "+name+" "+bus_id, Toast.LENGTH_SHORT).show();
+                reference.child("users").child(""+name).setValue(user);
+                reference.child("users").child("test").child("value").setValue("hello");
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                //setRegisteredBoolean();
             }
         });
 
-
-        EditText editText_stop = findViewById(R.id.signup_activity_layout_stop);
-        stop = editText_stop.getText().toString();
     }
 
     @Override
