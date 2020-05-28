@@ -68,7 +68,9 @@ import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Timer;
@@ -330,7 +332,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onSuccess(Location location) {
                 GeoPoint geoPoint = new GeoPoint(location.getLatitude(),location.getLongitude());
                 Map<String,Object> data = new HashMap<>();
-                data.put("hello","world");
                 data.put("UID",UId);
                 data.put("Location",geoPoint);
                 //Toast.makeText(MainActivity.this, "point" + data, Toast.LENGTH_SHORT).show();
@@ -495,16 +496,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         }
                         Map<String,Object> DriverLocations = new HashMap<>();
 
-                        //List<String> cities = new ArrayList<>();
+                        List<GeoPoint> Driverlocations = new ArrayList<>();
                         for (QueryDocumentSnapshot doc : value) {
                             if (doc.getGeoPoint("Location") != null) {
-
-                                DriverLocations.put(doc.get("UID").toString(),doc.getGeoPoint("Location"));
-                                Toast.makeText(MainActivity.this, doc.get("UID").toString(), Toast.LENGTH_SHORT).show();
+                                Driverlocations.add(doc.getGeoPoint("Location"));
+                                //DriverLocations.put(doc.get("UID").toString(),doc.getGeoPoint("Location"));
+                                //Toast.makeText(MainActivity.this, DriverLocations.get("bcByCOrEegSCbrhlew8Sr6epSjH2").toString(),Toast.LENGTH_SHORT).show();
                                 //cities.add(doc.getString("name"));
                             }
                         }
-                        //Log.d(TAG, "Current cites in CA: " + cities);
+                        List<LatLng> Driverlatlong = new ArrayList<>();
+                        for(GeoPoint g : Driverlocations)
+                        {
+                            Driverlatlong.add(new LatLng(g.getLatitude(),g.getLongitude()));
+
+
+                        }
+                        for(LatLng l : Driverlatlong)
+                        {
+                            mMap.addMarker(new MarkerOptions()
+                                    .position(l)
+                                    .title("please work"));
+                        }
                     }
                 });
     }

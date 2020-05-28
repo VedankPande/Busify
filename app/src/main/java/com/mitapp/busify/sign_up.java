@@ -1,6 +1,7 @@
 package com.mitapp.busify;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.ActionBar;
@@ -38,6 +39,7 @@ public class sign_up extends AppCompatActivity implements AdapterView.OnItemSele
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         setContentView(R.layout.activity_sign_up);
         Toolbar my_toolbar = findViewById(R.id.action_bar);
         my_toolbar.setTitle("");
