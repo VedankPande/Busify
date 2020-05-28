@@ -85,16 +85,6 @@ public class MainActivityDriver extends AppCompatActivity implements NavigationV
         if (id == R.id.app_info){
             startActivity(new Intent(getApplicationContext(), app_info.class));
         }
-        if (id == R.id.theme_black){
-        }
-        if (id == R.id.theme_dark){
-        }
-        if(id == R.id.theme_light)
-        {
-        }
-        if(id == R.id.theme_original)
-        {
-        }
         if (id == R.id.logout_nav){
             FirebaseAuth.getInstance().signOut();
             GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
