@@ -3,6 +3,7 @@ package com.mitapp.busify;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -136,15 +137,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // move camera to location
 
-        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                LatLng latlng1 = new LatLng(location.getLatitude(),location.getLongitude());
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng1,14.0f));
-            }
-        });
 
-        getDriverLocation();
+
+        //getDriverLocation();
 
 
     }
@@ -196,6 +191,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getLocationPermission();
             }
         }
+    }
+
+    @Override
+    protected void onStart() {
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                LatLng latlng1 = new LatLng(location.getLatitude(),location.getLongitude());
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng1,14.0f));
+            }
+        });
+        getDriverLocation();
+        super.onStart();
     }
 
     private boolean checkMapServices(){
@@ -500,6 +508,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
     }
+
+
     }
 
 
