@@ -502,7 +502,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final Map<String,Marker> driverMarkers = new HashMap<>();
         driverMarkers.put("c6j3SIAX38W1uSWGBjDGeXmHBVw2",marker1);
         driverMarkers.put("SOzNZgTpoNZj14OC2F97vqrqI2k1",marker2);
-
         mDB.collection("locations")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -515,6 +514,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         List<GeoPoint> Driverlocations = new ArrayList<>();
                         for (QueryDocumentSnapshot doc : value) {
                             if (doc.getGeoPoint("Location") != null) {
+                                GeoPoint geoPoint = doc.getGeoPoint("Location");
+                                LatLng latLng = new LatLng(geoPoint.getLatitude(),geoPoint.getLongitude());
+                                if(doc.getId().equals("c6j3SIAX38W1uSWGBjDGeXmHBVw2"))
+                                {
+                                    marker1.setPosition(latLng);
+                                }
+                                if(doc.getId().equals("SOzNZgTpoNZj14OC2F97vqrqI2k1"))
+                                {
+                                    marker2.setPosition(latLng);
+                                }
                                 Driverlocations.add(doc.getGeoPoint("Location"));
 
                                 SharedPreferences sharedPreferences = getSharedPreferences("DriverUID",MODE_PRIVATE);
@@ -525,22 +534,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                             }
                         }
-                        List<LatLng> Driverlatlong = new ArrayList<>();
-                        for(GeoPoint g : Driverlocations)
-                        {
-                            Driverlatlong.add(new LatLng(g.getLatitude(),g.getLongitude()));
-
-                        }
-                        for(LatLng l : Driverlatlong)
-                        {
-                            SharedPreferences sharedPreferences = getSharedPreferences("DriverUID",MODE_PRIVATE);
-                            //Toast.makeText(MainActivity.this, sharedPreferences.getString("Selected Driver","none found"), Toast.LENGTH_SHORT).show();
-                            if(sharedPreferences.getString("Selected Driver","none found").equals("c6j3SIAX38W1uSWGBjDGeXmHBVw2"))
-                            marker1.setPosition(l);
-                            else if(sharedPreferences.getString("Selected Driver","none found").equals("SOzNZgTpoNZj14OC2F97vqrqI2k1"));
-                            marker2.setPosition(l);
-                        }
-
                     }
                 });
     }
