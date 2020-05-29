@@ -1,28 +1,28 @@
 package com.mitapp.busify;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
 import java.util.Objects;
 
 public class Settings extends AppCompatActivity {
 
-    boolean isChangeThemeExpanded = false;
-    LinearLayout settings_theme_followSystem_view;
-    int choice, dataFromFile;
-    Button changeTheme;
+    LinearLayout settings_changeTheme_option_view, settings_theme_followSystem_view;
+    int fileData;
+    RadioGroup settings_changetheme_radioGroup, settings_changetheme_radioGroup_followSystem_light,settings_changetheme_radioGroup_followSystem_dark;
     RadioButton settings_theme_light_followSystem, settings_theme_dark_followSystem, settings_theme_light,settings_theme_dark, settings_theme_white, settings_theme_black,settings_theme_followSystem,settings_theme_white_followSystem,settings_theme_black_followSystem;
 
     SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+    SharedPreferences.Editor fileEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,77 +39,60 @@ public class Settings extends AppCompatActivity {
     }
 
     private void initializeVariables(){
-        changeTheme = findViewById(R.id.settings_changetheme_button);
+
+        settings_changeTheme_option_view = findViewById(R.id.settings_changeTheme_option_view);
+        settings_theme_followSystem_view = findViewById(R.id.settings_theme_followSystem_view);
+
+        settings_changetheme_radioGroup = findViewById(R.id.settings_changetheme_radioGroup);
+        settings_changetheme_radioGroup_followSystem_light = findViewById(R.id.settings_changetheme_radioGroup_followSystem_light);
+        settings_changetheme_radioGroup_followSystem_dark = findViewById(R.id.settings_changetheme_radioGroup_followSystem_dark);
 
         settings_theme_light = findViewById(R.id.settings_theme_light);
         settings_theme_dark = findViewById(R.id.settings_theme_dark);
         settings_theme_white = findViewById(R.id.settings_theme_white);
         settings_theme_black = findViewById(R.id.settings_theme_black);
-
-        settings_theme_followSystem_view = findViewById(R.id.settings_theme_followSystem_view);
         settings_theme_followSystem = findViewById(R.id.settings_theme_followSystem);
+
         settings_theme_light_followSystem = findViewById(R.id.settings_theme_light_followSystem);
         settings_theme_dark_followSystem = findViewById(R.id.settings_theme_dark_followSystem);
         settings_theme_white_followSystem = findViewById(R.id.settings_theme_white_followSystem);
         settings_theme_black_followSystem = findViewById(R.id.settings_theme_black_followSystem);
 
         sharedPreferences = getSharedPreferences("Map Themes",MODE_PRIVATE);
-        editor = sharedPreferences.edit();
+        fileEditor = sharedPreferences.edit();
+        fileData = sharedPreferences.getInt("theme", 512);
     }
 
     private void initializeRadioButtons(){
-
-        dataFromFile = sharedPreferences.getInt("theme", 0);
-        if (dataFromFile == 1){
+        if (fileData == 1){
             settings_theme_light.setChecked(true);
-            settings_theme_followSystem_view.setVisibility(View.GONE);
         }
-        else if (dataFromFile == 2){
+        else if (fileData == 2){
             settings_theme_dark.setChecked(true);
-            settings_theme_followSystem_view.setVisibility(View.GONE);
         }
-        else if (dataFromFile ==3){
+        else if (fileData ==3){
             settings_theme_white.setChecked(true);
-            settings_theme_followSystem_view.setVisibility(View.GONE);
         }
-        else if (dataFromFile == 4){
+        else if (fileData == 4){
             settings_theme_black.setChecked(true);
-            settings_theme_followSystem_view.setVisibility(View.GONE);
         }
-        else if (dataFromFile/100 == 5){
+        else if (fileData /100 == 5){
             settings_theme_followSystem.setChecked(true);
             settings_theme_followSystem_view.setVisibility(View.VISIBLE);
-            dataFromFile%=100;
-            if(dataFromFile/10 == 1) settings_theme_light_followSystem.setChecked(true);
-            else if(dataFromFile/10 == 3) settings_theme_light_followSystem.setChecked(true);
-            dataFromFile%=10;
-            if(dataFromFile == 2) settings_theme_dark_followSystem.setChecked(true);
-            else if(dataFromFile == 4) settings_theme_black_followSystem.setChecked(true);
+            if(fileData %100/10 == 1) settings_theme_light_followSystem.setChecked(true);
+            else if(fileData %100/10 == 3) settings_theme_white_followSystem.setChecked(true);
+            if(fileData %10 == 2) settings_theme_dark_followSystem.setChecked(true);
+            else if(fileData %10 == 4) settings_theme_black_followSystem.setChecked(true);
         }
     }
 
     private void initializeOnClickListeners(){
 
-        changeTheme.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LinearLayout settings_changeTheme_option_view = findViewById(R.id.settings_changeTheme_option_view);
-                if (isChangeThemeExpanded){
-                    settings_changeTheme_option_view.setVisibility(View.GONE);
-                    isChangeThemeExpanded = false;
-                }
-                else{
-                    settings_changeTheme_option_view.setVisibility(View.VISIBLE);
-                    isChangeThemeExpanded = true;
-                }
-            }
-        });
-
-
         settings_theme_light.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 update_theme_specific();
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
         });
 
@@ -117,6 +100,7 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 update_theme_specific();
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             }
         });
 
@@ -124,6 +108,7 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 update_theme_specific();
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
         });
 
@@ -131,103 +116,105 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 update_theme_specific();
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             }
         });
+
         settings_theme_followSystem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (fileData/100 != 5){
+                    fileData = 512;
+                    initializeRadioButtons();
+                }
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
                 update_theme_followSystem();
                 settings_theme_followSystem_view.setVisibility(View.VISIBLE);
-                settings_theme_light_followSystem.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        update_theme_followSystem();
-                    }
-                });
+            }
+        });
 
-                settings_theme_white_followSystem.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        update_theme_followSystem();
-                    }
-                });
+        settings_theme_light_followSystem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                update_theme_followSystem();
+            }
+        });
 
-                settings_theme_dark_followSystem.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        update_theme_followSystem();
-                    }
-                });
+        settings_theme_white_followSystem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                update_theme_followSystem();
+            }
+        });
 
-                settings_theme_black_followSystem.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        update_theme_followSystem();
-                    }
-                });
+        settings_theme_dark_followSystem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                update_theme_followSystem();
+            }
+        });
+
+        settings_theme_black_followSystem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                update_theme_followSystem();
             }
         });
     }
 
     private void update_theme_specific(){
-        RadioGroup radioGroup = findViewById(R.id.settings_changetheme_radioGroup);
-        int selectedId = radioGroup.getCheckedRadioButtonId();
+        int selectedId = settings_changetheme_radioGroup.getCheckedRadioButtonId();
         RadioButton radioButton = findViewById(selectedId);
         String selectedTheme = radioButton.getText().toString();
 
         switch (selectedTheme) {
             case "Light":
-                choice = 1;
+                fileData = 1;
                 break;
             case "Dark":
-                choice = 2;
+                fileData = 2;
                 break;
             case "White":
-                choice = 3;
+                fileData = 3;
                 break;
             case "Black":
-                choice = 4;
+                fileData = 4;
                 break;
         }
 
-        Toast.makeText(getApplicationContext(), String.valueOf(choice), Toast.LENGTH_SHORT).show();
-
-        editor.putInt("theme",choice);
-        editor.apply();
+        fileEditor.putInt("theme", fileData);
+        fileEditor.apply();
 
         settings_theme_followSystem_view.setVisibility(View.GONE);
     }
 
     private void update_theme_followSystem(){
-        choice = 5;
-        RadioGroup radioGroupLight = findViewById(R.id.settings_changetheme_radioGroup_followSystem_light);
-        int selectedIdLight = radioGroupLight.getCheckedRadioButtonId();
+        int selectedIdLight = settings_changetheme_radioGroup_followSystem_light.getCheckedRadioButtonId();
         RadioButton radioButtonLight = findViewById(selectedIdLight);
         String selectedThemeLight = radioButtonLight.getText().toString();
-        choice*=10;
+        fileData = 50;
         switch (selectedThemeLight) {
             case "Light":
-                choice += 1;
+                fileData += 1;
                 break;
             case "White":
-                choice += 3;
+                fileData += 3;
                 break;
         }
-        RadioGroup radioGroupDark = findViewById(R.id.settings_changetheme_radioGroup_followSystem_dark);
-        int selectedIdDark = radioGroupDark.getCheckedRadioButtonId();
+        int selectedIdDark = settings_changetheme_radioGroup_followSystem_dark.getCheckedRadioButtonId();
         RadioButton radioButtonDark = findViewById(selectedIdDark);
         String selectedThemeDark = radioButtonDark.getText().toString();
-        choice*=10;
+        fileData *= 10;
         switch (selectedThemeDark) {
             case "Dark":
-                choice += 2;
+                fileData += 2;
                 break;
             case "Black":
-                choice += 4;
+                fileData += 4;
                 break;
         }
-        editor.putInt("theme",choice);
-        editor.apply();
+        fileEditor.putInt("theme", fileData);
+        fileEditor.apply();
     }
 
     @Override
