@@ -356,7 +356,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Toast.makeText(getApplicationContext(), "running", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "running", Toast.LENGTH_SHORT).show();
         mMap = googleMap;
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.passenger_mapView);
