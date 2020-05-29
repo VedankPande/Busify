@@ -33,6 +33,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -101,6 +103,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Functions for check boxes
+        CheckBox checkbox_do_not_show_buses = findViewById(R.id.checkbox_do_not_show_buses);
+        checkbox_do_not_show_buses.bringToFront();
+        checkbox_do_not_show_buses.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) Toast.makeText(getApplicationContext(), "checked", Toast.LENGTH_SHORT).show();
+                else Toast.makeText(getApplicationContext(), "un checked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        CheckBox checkbox_show_my_buses = findViewById(R.id.checkbox_show_my_buses);
+        checkbox_show_my_buses.bringToFront();
+        checkbox_show_my_buses.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) Toast.makeText(getApplicationContext(), "checked", Toast.LENGTH_SHORT).show();
+                else Toast.makeText(getApplicationContext(), "un checked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        CheckBox checkbox_show_all_buses = findViewById(R.id.checkbox_show_all_buses);
+        checkbox_show_all_buses.bringToFront();
+        checkbox_show_all_buses.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) Toast.makeText(getApplicationContext(), "checked", Toast.LENGTH_SHORT).show();
+                else Toast.makeText(getApplicationContext(), "un checked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         //This is for UI
         View status_bar_tint = findViewById(R.id.passenger_statusBar_spacer);
