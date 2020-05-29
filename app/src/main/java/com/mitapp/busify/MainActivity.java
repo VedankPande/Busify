@@ -30,6 +30,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -46,6 +47,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DatabaseReference reference;
     FirebaseFirestore mDB = FirebaseFirestore.getInstance();
     String UId = FirebaseAuth.getInstance().getUid();
-    public int check = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -338,7 +340,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mDB.collection("locations").document(UId).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(MainActivity.this, "saved", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "saved", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -399,6 +401,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
+
+        Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(37.7750, 122.4183)));
 
     }
 
@@ -482,9 +486,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         });
+
     }
     public void getDriverLocationLive(View view)
     {
+
+        final Marker marker1 = mMap.addMarker(new MarkerOptions().position(new LatLng(30,30)).title("Vedank"));
+        final Marker marker2 = mMap.addMarker(new MarkerOptions().position(new LatLng(60,60)).title("Shantanu"));
+        final Map<String,Marker> driverMarkers = new HashMap<>();
+        driverMarkers.put("c6j3SIAX38W1uSWGBjDGeXmHBVw2",marker1);
+        driverMarkers.put("SOzNZgTpoNZj14OC2F97vqrqI2k1",marker2);
+
         mDB.collection("locations")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -494,15 +506,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Log.w(TAG, "Listen failed.", e);
                             return;
                         }
-                        Map<String,Object> DriverLocations = new HashMap<>();
-
                         List<GeoPoint> Driverlocations = new ArrayList<>();
                         for (QueryDocumentSnapshot doc : value) {
                             if (doc.getGeoPoint("Location") != null) {
                                 Driverlocations.add(doc.getGeoPoint("Location"));
-                                //DriverLocations.put(doc.get("UID").toString(),doc.getGeoPoint("Location"));
-                                //Toast.makeText(MainActivity.this, DriverLocations.get("bcByCOrEegSCbrhlew8Sr6epSjH2").toString(),Toast.LENGTH_SHORT).show();
-                                //cities.add(doc.getString("name"));
+
+                                SharedPreferences sharedPreferences = getSharedPreferences("DriverUID",MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("Selected Driver",doc.getId());
+                                editor.apply();
+
+
                             }
                         }
                         List<LatLng> Driverlatlong = new ArrayList<>();
@@ -510,14 +524,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         {
                             Driverlatlong.add(new LatLng(g.getLatitude(),g.getLongitude()));
 
-
                         }
                         for(LatLng l : Driverlatlong)
                         {
-                            mMap.addMarker(new MarkerOptions()
-                                    .position(l)
-                                    .title("please work"));
+                            SharedPreferences sharedPreferences = getSharedPreferences("DriverUID",MODE_PRIVATE);
+                            //Toast.makeText(MainActivity.this, sharedPreferences.getString("Selected Driver","none found"), Toast.LENGTH_SHORT).show();
+                            if(sharedPreferences.getString("Selected Driver","none found").equals("c6j3SIAX38W1uSWGBjDGeXmHBVw2"))
+                            marker1.setPosition(l);
+                            else if(sharedPreferences.getString("Selected Driver","none found").equals("SOzNZgTpoNZj14OC2F97vqrqI2k1"));
+                            marker2.setPosition(l);
                         }
+
                     }
                 });
     }
