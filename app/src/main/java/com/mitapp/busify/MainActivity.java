@@ -37,6 +37,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -99,39 +101,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String UId = FirebaseAuth.getInstance().getUid();
 
 
+    RadioButton checkbox_do_not_show_buses, checkbox_show_my_buses, checkbox_show_all_buses;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //Functions for check boxes
-        CheckBox checkbox_do_not_show_buses = findViewById(R.id.checkbox_do_not_show_buses);
-        checkbox_do_not_show_buses.bringToFront();
-        checkbox_do_not_show_buses.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        RadioGroup main_menu_radio_group = findViewById(R.id.main_menu_radio_group);
+        main_menu_radio_group.bringToFront();
+
+        checkbox_do_not_show_buses = findViewById(R.id.checkbox_do_not_show_buses);
+        checkbox_do_not_show_buses.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) Toast.makeText(getApplicationContext(), "checked", Toast.LENGTH_SHORT).show();
-                else Toast.makeText(getApplicationContext(), "un checked", Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+                checkbox_do_not_show_buses.setChecked(true);
             }
         });
-
-        CheckBox checkbox_show_my_buses = findViewById(R.id.checkbox_show_my_buses);
-        checkbox_show_my_buses.bringToFront();
-        checkbox_show_my_buses.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        checkbox_show_my_buses = findViewById(R.id.checkbox_show_my_buses);
+        checkbox_show_my_buses.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) Toast.makeText(getApplicationContext(), "checked", Toast.LENGTH_SHORT).show();
-                else Toast.makeText(getApplicationContext(), "un checked", Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+                checkbox_show_my_buses.setChecked(true);
             }
         });
-
-        CheckBox checkbox_show_all_buses = findViewById(R.id.checkbox_show_all_buses);
-        checkbox_show_all_buses.bringToFront();
-        checkbox_show_all_buses.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        checkbox_show_all_buses = findViewById(R.id.checkbox_show_all_buses);
+        checkbox_show_all_buses.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) Toast.makeText(getApplicationContext(), "checked", Toast.LENGTH_SHORT).show();
-                else Toast.makeText(getApplicationContext(), "un checked", Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+                checkbox_show_all_buses.setChecked(true);
             }
         });
 
