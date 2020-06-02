@@ -21,6 +21,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Camera;
 import android.location.Location;
 import android.location.LocationManager;
@@ -41,6 +43,8 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -80,6 +84,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.lang.Object;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback{
@@ -97,6 +102,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DatabaseReference reference;
     FirebaseFirestore mDB = FirebaseFirestore.getInstance();
     String UId = FirebaseAuth.getInstance().getUid();
+
+
+
 
 
     @Override
@@ -172,13 +180,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
-
-        // move camera to location
-
-
-
-        //getDriverLocation();
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                LatLng latlng1 = new LatLng(location.getLatitude(),location.getLongitude());
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng1,14.0f));
+            }
+        });
 
 
     }
@@ -232,18 +240,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    @Override
-    protected void onStart() {
-        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                LatLng latlng1 = new LatLng(location.getLatitude(),location.getLongitude());
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng1,14.0f));
-            }
-        });
-        getDriverLocation();
-        super.onStart();
-    }
 
     private boolean checkMapServices(){
         if(isServicesOK()){
@@ -391,6 +387,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onMapReady(GoogleMap googleMap) {
         //Toast.makeText(getApplicationContext(), "running", Toast.LENGTH_SHORT).show();
+
         mMap = googleMap;
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.passenger_mapView);
@@ -528,8 +525,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void getDriverLocationLive(View view)
     {
 
-        final Marker marker1 = mMap.addMarker(new MarkerOptions().position(new LatLng(30,30)).title("Vedank"));
-        final Marker marker2 = mMap.addMarker(new MarkerOptions().position(new LatLng(60,60)).title("Shantanu"));
+        final Marker marker1 = mMap.addMarker(new MarkerOptions().position(new LatLng(30,30)).title("Vedank").icon(BitmapDescriptorFactory.fromResource((R.drawable.busify_g))));
+        final Marker marker2 = mMap.addMarker(new MarkerOptions().position(new LatLng(60,60)).title("Shantanu").icon(BitmapDescriptorFactory.fromResource(R.drawable.busifyh)));
         final Map<String,Marker> driverMarkers = new HashMap<>();
         driverMarkers.put("c6j3SIAX38W1uSWGBjDGeXmHBVw2",marker1);
         driverMarkers.put("SOzNZgTpoNZj14OC2F97vqrqI2k1",marker2);
