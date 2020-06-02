@@ -28,6 +28,9 @@ import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonObject;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,120 +44,69 @@ public class FirebaseGetDataTest extends AppCompatActivity {
     private static final String TAG = "MyFirebaseMsgService";
     private RequestQueue requestQueue;
     private String URL = "https://fcm.googleapis.com/fcm/send";
+
+    String NOTIFICATION_TITLE;
+    String NOTIFICATION_MESSAGE;
+    String TOPIC;
+    final private String FCM_API = "https://fcm.googleapis.com/fcm/send";
+    final private String serverKey = "key=" + "AAAAziddBjU:APA91bFbgbTc_GhQThZhqCrBb5K_xvHgLWO3DIqspDLzNsP87huLcHKKrGxVRtqGiVGC0RNF-umUCo3dwD8SoU-0anZHSgqfruikrFtahIpbyPMfJ3Ot5uzSZ-Lqf0izVAEbdojnCXd6";
+    final private String contentType = "application/json";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        FirebaseMessaging.getInstance().subscribeToTopic("busify")
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        String msg = "Subscribed";
-                        if (!task.isSuccessful()) {
-                            msg = "not subscribed";
-                        }
-                        Log.d(TAG, msg);
-                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-                    }
-                });
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_firebase_get_data_test);
-        text = findViewById(R.id.textView);
-        requestQueue = Volley.newRequestQueue(this);
-        FirebaseMessaging.getInstance().subscribeToTopic("news");
 
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendNotification();
+                TOPIC = "/topics/Busify";
+                NOTIFICATION_TITLE = "Some title";
+                NOTIFICATION_MESSAGE = "Some message";
+
+
+                JSONObject notification = new JSONObject();
+                JSONObject notificationBody = new JSONObject();
+                try {
+                    notificationBody.put("title", NOTIFICATION_TITLE);
+                    notificationBody.put("message", NOTIFICATION_MESSAGE);
+
+                    notification.put("to", TOPIC);
+                    notification.put("data", notificationBody);
+                } catch (JSONException e) {
+                    Log.e(TAG, "onCreate: " + e.getMessage() );
+                }
+                sendNotification(notification);
             }
         });
-    }
-
-    public void sendNotification()
-    {
-        JSONObject mainObject = new JSONObject();
-        try {
-            mainObject.put("to","/topic/"+"news");
-            JSONObject notifObject= new JSONObject();
-            notifObject.put("title","any title");
-            notifObject.put("body","any body");
-            mainObject.put("notification",notifObject);
-
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, mainObject,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            Toast.makeText(FirebaseGetDataTest.this, "success", Toast.LENGTH_SHORT).show();
-                            FirebaseInstanceId.getInstance().getInstanceId()
-                                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                                            if (!task.isSuccessful()) {
-
-                                                return;
-                                            }
-
-                                            // Get new Instance ID token
-                                            String token = task.getResult().getToken();
-
-                                            // Log and toast
-                                            Log.d(TAG, "Token: " + token);
-
-                                            Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
-                                            text.setText(token);
-                                        }
-                                    });
-
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(FirebaseGetDataTest.this, "failure", Toast.LENGTH_SHORT).show();
-                }
-            }
-            )
-            {
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    Map<String,String> header = new HashMap<>();
-                    header.put("content-type","application/json");
-                    header.put("authorization","key=AAAAziddBjU:APA91bFbgbTc_GhQThZhqCrBb5K_xvHgLWO3DIqspDLzNsP87huLcHKKrGxVRtqGiVGC0RNF-umUCo3dwD8SoU-0anZHSgqfruikrFtahIpbyPMfJ3Ot5uzSZ-Lqf0izVAEbdojnCXd6");
-                    return header;
-                }
-            };
-            requestQueue.add(request);
-
-        }
-        catch(JSONException e)
-        {
-            e.printStackTrace();
-        }
 
     }
-    public void getFromFirebase(View view)
-    {
-        DocumentReference ref = mDB.collection("locations").document(UId);
-        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        GeoPoint geoPoint = document.getGeoPoint("Location");
-                        //Toast.makeText(FirebaseGetDataTest.this, geoPoint.toString(), Toast.LENGTH_SHORT).show();
-                        text.setText(geoPoint.toString());
-                        Map<String,Object> map = new HashMap<>();
-                        map = document.getData();
-                        Toast.makeText(FirebaseGetDataTest.this, map.get("Location").toString(), Toast.LENGTH_SHORT).show();
 
-                    } else {
+    private void sendNotification(JSONObject notification) {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(FCM_API, notification,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG, "onResponse: " + response.toString());
 
                     }
-                } else {
-                    Toast.makeText(getApplicationContext(),"error",Toast.LENGTH_SHORT).show();
-                }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Request error", Toast.LENGTH_LONG).show();
+                        Log.i(TAG, "onErrorResponse: Didn't work");
+                    }
+                }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", serverKey);
+                headers.put("Content-Type", contentType);
+                return headers;
             }
-
-
-        });
+        };
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
     }
+
 }
