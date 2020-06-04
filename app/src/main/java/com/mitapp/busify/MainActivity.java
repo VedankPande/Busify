@@ -41,8 +41,14 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -78,6 +84,9 @@ import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -109,6 +118,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Map<String,String> UID_Bus_map = new HashMap<>();
     Map<String,Marker> driverMarkers = new HashMap<>();
     List<Marker> driverMarker = new ArrayList<>();
+    private RequestQueue requestQueue;
+    private String URL = "https://fcm.googleapis.com/fcm/send";
+
+    String NOTIFICATION_TITLE;
+    String NOTIFICATION_MESSAGE;
+    String TOPIC;
+    final private String FCM_API = "https://fcm.googleapis.com/fcm/send";
+    final private String serverKey = "key=" + "AAAAziddBjU:APA91bFbgbTc_GhQThZhqCrBb5K_xvHgLWO3DIqspDLzNsP87huLcHKKrGxVRtqGiVGC0RNF-umUCo3dwD8SoU-0anZHSgqfruikrFtahIpbyPMfJ3Ot5uzSZ-Lqf0izVAEbdojnCXd6";
+    final private String contentType = "application/json";
 
 
 
@@ -206,7 +224,58 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        //for notification
 
+        findViewById(R.id.passenger_button_request_stop).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TOPIC = "/topics/Busify";
+                NOTIFICATION_TITLE = "Some title";
+                NOTIFICATION_MESSAGE = "Some message";
+
+
+                JSONObject notification = new JSONObject();
+                JSONObject notificationBody = new JSONObject();
+                try {
+                    notificationBody.put("title", NOTIFICATION_TITLE);
+                    notificationBody.put("message", NOTIFICATION_MESSAGE);
+
+                    notification.put("to", TOPIC);
+                    notification.put("data", notificationBody);
+                } catch (JSONException e) {
+                    Log.e(TAG, "onCreate: " + e.getMessage() );
+                }
+                sendNotification(notification);
+            }
+        });
+
+
+    }
+    private void sendNotification(JSONObject notification) {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(FCM_API, notification,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG, "onResponse: " + response.toString());
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Request error", Toast.LENGTH_LONG).show();
+                        Log.i(TAG, "onErrorResponse: Didn't work");
+                    }
+                }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", serverKey);
+                headers.put("Content-Type", contentType);
+                return headers;
+            }
+        };
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
     }
 
     @Override
