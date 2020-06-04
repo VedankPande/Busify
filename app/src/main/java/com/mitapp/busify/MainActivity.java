@@ -558,7 +558,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final Marker myMarker = driverMarkers.get(myBus);  // gets marker for the users bus letter
         myMarker.setVisible(true); //make users driver marker visible
 
-        mDB.collection("locations")
+        /*mDB.collection("locations")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value,
@@ -579,7 +579,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             }
                         }
                     }
-                });
+                });*/
     }
 
 
