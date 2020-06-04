@@ -25,6 +25,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class login_activity extends AppCompatActivity {
 
@@ -33,9 +34,11 @@ public class login_activity extends AppCompatActivity {
     private final static int RC_SIGN_IN = 1337;
     FirebaseAuth mAuth;
     EditText pre_email,pre_password;
+    private static final String SUBSCRIBE_TO = "Busify";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FirebaseMessaging.getInstance().subscribeToTopic(SUBSCRIBE_TO);
         setTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_activity);

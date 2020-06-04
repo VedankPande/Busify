@@ -51,7 +51,7 @@
                 android:textColor="#FF0000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Show all buses"/>
+                android:text="Show all buses" />
 
         </RadioGroup>
 
@@ -61,41 +61,25 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/passenger_navigationBar_spacer"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="86dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="7dp"
             android:background="@drawable/style_stop_button"
             android:elevation="10dp"
             android:maxLines="1"
-            android:onClick="getDriverLocationLive"
             android:paddingHorizontal="15dp"
             android:text="Request STOP"
             android:textAllCaps="false"
             android:textColor="#FFFFFF" />
 
         <Button
-            android:id="@+id/passenger_button_send_location"
-            android:layout_above="@id/passenger_navigationBar_spacer"
-            android:layout_toEndOf="@id/passenger_button_request_stop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:paddingHorizontal="15dp"
-            android:background="@drawable/style_stop_button"
-            android:elevation="10dp"
-            android:onClick="sendCoordinateToFirebase"
-            android:text="send location"
-            android:textColor="#FFFFFF"
-            android:textAllCaps="false" />
-
-        <Button
             android:id="@+id/passenger_button_send_location2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@id/passenger_navigationBar_spacer"
-            android:layout_marginStart="137dp"
-            android:layout_marginBottom="17dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginBottom="8dp"
             android:layout_toEndOf="@id/passenger_button_request_stop"
             android:background="@drawable/style_stop_button"
             android:elevation="10dp"
@@ -107,10 +91,10 @@
 
         <fragment
             android:id="@+id/passenger_mapView"
-            android:layout_marginBottom="3dp"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_marginBottom="3dp"
             tools:context=".MapsActivity" />
 
         <View

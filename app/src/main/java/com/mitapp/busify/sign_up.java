@@ -35,6 +35,8 @@ public class sign_up extends AppCompatActivity implements AdapterView.OnItemSele
     FirebaseDatabase database;
     DatabaseReference reference;
     String bus_id, stop;
+    private static final String USER_DETAILS = "User Details";
+    private static final String SELECTED_BUS= "Selected Bus";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,10 +88,13 @@ public class sign_up extends AppCompatActivity implements AdapterView.OnItemSele
                 String stop = Stop.getText().toString();
                 String phone = Phone.getText().toString();
                 User user = new User(name, stop, bus_id, phone);
-                Toast.makeText(sign_up.this, "values:"+ " "+name+" "+bus_id, Toast.LENGTH_SHORT).show();
                 reference.child("users").child(""+name).setValue(user);
                 reference.child("users").child("test").child("value").setValue("hello");
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                SharedPreferences sharedPreferences = getSharedPreferences(USER_DETAILS,MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(SELECTED_BUS,bus_id);
+                editor.apply();
                 //setRegisteredBoolean();
             }
         });

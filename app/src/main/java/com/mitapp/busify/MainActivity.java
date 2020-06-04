@@ -8,7 +8,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.Manifest;
 import android.app.ActionBar;
 import android.app.ActivityManager;
@@ -98,15 +97,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int PERMISSIONS_REQUEST_ENABLE_GPS = 9002;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 9003;
     private boolean isLocationGranted = false;
+    private static final String USER_DETAILS = "User Details";
+    private static final String SELECTED_BUS= "Selected Bus";
     GoogleMap mMap;
     FusedLocationProviderClient fusedLocationProviderClient;
     FirebaseDatabase database;
     DatabaseReference reference;
     FirebaseFirestore mDB = FirebaseFirestore.getInstance();
     String UId = FirebaseAuth.getInstance().getUid();
-
-
     RadioButton checkbox_do_not_show_buses, checkbox_show_my_buses, checkbox_show_all_buses;
+    Map<String,String> UID_Bus_map = new HashMap<>();
+    Map<String,Marker> driverMarkers = new HashMap<>();
+    List<Marker> driverMarker = new ArrayList<>();
 
 
 
@@ -116,6 +118,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        UID_Bus_map.put("G","c6j3SIAX38W1uSWGBjDGeXmHBVw2");
+        UID_Bus_map.put("H","SOzNZgTpoNZj14OC2F97vqrqI2k1");
+        final SharedPreferences sharedPreferences = getSharedPreferences(USER_DETAILS,MODE_PRIVATE);
+        final String selectedBus = sharedPreferences.getString(SELECTED_BUS,null);
+        //getDriverLocationLive(selectedBus,1);
+
 
         //Functions for check boxes
         RadioGroup main_menu_radio_group = findViewById(R.id.main_menu_radio_group);
@@ -125,6 +133,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         checkbox_do_not_show_buses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                for(Marker marker : driverMarker)
+                {
+                    marker.setVisible(false);
+                }
                 checkbox_do_not_show_buses.setChecked(true);
             }
         });
@@ -132,6 +144,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         checkbox_show_my_buses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                sendCoordinateToFirebase();
+                getDriverLocationLive();
+                getMyDriverLocationLive(selectedBus);
                 checkbox_show_my_buses.setChecked(true);
             }
         });
@@ -140,8 +155,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 checkbox_show_all_buses.setChecked(true);
+                sendCoordinateToFirebase();
+                getDriverLocationLive();
             }
         });
+
 
 
         //This is for UI
@@ -439,11 +457,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
 
-        Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(37.7750, 122.4183)));
 
     }
 
-    public void sendCoordinateToFirebase(View view)
+    public void sendCoordinateToFirebase()
     {
 
 
@@ -488,48 +505,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }*/
 
-    public void getDriverLocation()
+    public void getDriverLocationLive()
     {
 
-        DocumentReference ref = mDB.collection("locations").document("bcByCOrEegSCbrhlew8Sr6epSjH2");
-        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        GeoPoint geoPoint = document.getGeoPoint("Location");
-                        double lat = geoPoint.getLatitude();
-                        double longitude = geoPoint.getLatitude();
-                        LatLng latLng = new LatLng(lat,longitude);
-                        mMap.addMarker(new MarkerOptions()
-                                .position(latLng)
-                                .title("please work"));
-
-                        //Map<String,Object> map = new HashMap<>();
-                        //map = document.getData();
-                        //Toast.makeText(MainActivity.this, map.get("Location").toString(), Toast.LENGTH_SHORT).show();
-
-                    } else {
-
-                    }
-                } else {
-                    Toast.makeText(getApplicationContext(),"error",Toast.LENGTH_SHORT).show();
-                }
-            }
-
-
-        });
-
-    }
-    public void getDriverLocationLive(View view)
-    {
-
-        final Marker marker1 = mMap.addMarker(new MarkerOptions().position(new LatLng(30,30)).title("Vedank").icon(BitmapDescriptorFactory.fromResource((R.drawable.busify_g))));
-        final Marker marker2 = mMap.addMarker(new MarkerOptions().position(new LatLng(60,60)).title("Shantanu").icon(BitmapDescriptorFactory.fromResource(R.drawable.busifyh)));
-        final Map<String,Marker> driverMarkers = new HashMap<>();
+        final Marker marker1 = mMap.addMarker(new MarkerOptions().position(new LatLng(30,30)).title("Vedank").icon(BitmapDescriptorFactory.fromResource((R.drawable.busify_g))).visible(true));
+        final Marker marker2 = mMap.addMarker(new MarkerOptions().position(new LatLng(60,60)).title("Shantanu").icon(BitmapDescriptorFactory.fromResource(R.drawable.busifyh)).visible(true));
+        driverMarker.add(marker1);
+        driverMarker.add(marker2);
         driverMarkers.put("c6j3SIAX38W1uSWGBjDGeXmHBVw2",marker1);
         driverMarkers.put("SOzNZgTpoNZj14OC2F97vqrqI2k1",marker2);
+            for(Marker marker:driverMarker)
+            {
+                marker.setVisible(true);
+            }
+
         mDB.collection("locations")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -539,32 +528,61 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Log.w(TAG, "Listen failed.", e);
                             return;
                         }
-                        List<GeoPoint> Driverlocations = new ArrayList<>();
                         for (QueryDocumentSnapshot doc : value) {
                             if (doc.getGeoPoint("Location") != null) {
+
                                 GeoPoint geoPoint = doc.getGeoPoint("Location");
                                 LatLng latLng = new LatLng(geoPoint.getLatitude(),geoPoint.getLongitude());
-                                if(doc.getId().equals("c6j3SIAX38W1uSWGBjDGeXmHBVw2"))
-                                {
-                                    marker1.setPosition(latLng);
-                                }
-                                if(doc.getId().equals("SOzNZgTpoNZj14OC2F97vqrqI2k1"))
-                                {
-                                    marker2.setPosition(latLng);
-                                }
-                                Driverlocations.add(doc.getGeoPoint("Location"));
-
-                                SharedPreferences sharedPreferences = getSharedPreferences("DriverUID",MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("Selected Driver",doc.getId());
-                                editor.apply();
-
+                                    if(doc.getId().equals("c6j3SIAX38W1uSWGBjDGeXmHBVw2"))
+                                    {
+                                        marker1.setPosition(latLng);
+                                    }
+                                    if(doc.getId().equals("SOzNZgTpoNZj14OC2F97vqrqI2k1"))
+                                    {
+                                        marker2.setPosition(latLng);
+                                    }
 
                             }
                         }
                     }
                 });
     }
+
+    public void getMyDriverLocationLive(String selectedBus)
+    {
+        for (Marker markers : driverMarker)
+        {
+            markers.setVisible(false); //setting all markers to hidden
+        }
+        final String myBus = UID_Bus_map.get(selectedBus); //gets UID from users bus letter
+        final Marker myMarker = driverMarkers.get(myBus);  // gets marker for the users bus letter
+        myMarker.setVisible(true); //make users driver marker visible
+
+        mDB.collection("locations")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value,
+                                        @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Log.w(TAG, "Listen failed.", e);
+                            return;
+                        }
+                        for (QueryDocumentSnapshot doc : value) {
+                            if (doc.getGeoPoint("Location") != null) {
+                                GeoPoint geoPoint = doc.getGeoPoint("Location");
+                                LatLng latLng = new LatLng(geoPoint.getLatitude(),geoPoint.getLongitude());
+                                if(doc.getId().equals(myBus))
+                                {
+                                    myMarker.setPosition(latLng); //set position of only users driver marker
+                                }
+
+                            }
+                        }
+                    }
+                });
+    }
+
+
 
 
     }
