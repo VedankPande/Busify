@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -95,7 +96,7 @@ public class sign_up extends AppCompatActivity implements AdapterView.OnItemSele
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(SELECTED_BUS,bus_id);
                 editor.apply();
-                //setRegisteredBoolean();
+                setRegisteredBoolean();
             }
         });
 
@@ -129,5 +130,18 @@ public class sign_up extends AppCompatActivity implements AdapterView.OnItemSele
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("Registered",true);
         editor.apply();
+    }
+
+    @Override
+    public void onBackPressed() {
+        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
+
+        if (signInAccount != null)
+        {
+            moveTaskToBack(true);
+        }
+        else {
+            super.onBackPressed();
+        }
     }
 }

@@ -27,6 +27,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class login_activity extends AppCompatActivity {
 
     GoogleSignInOptions gso;
@@ -36,13 +39,13 @@ public class login_activity extends AppCompatActivity {
     EditText pre_email,pre_password;
     private static final String SUBSCRIBE_TO = "Busify";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         FirebaseMessaging.getInstance().subscribeToTopic(SUBSCRIBE_TO);
         setTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_activity);
-
 
         mAuth = FirebaseAuth.getInstance();
         pre_email = findViewById(R.id.login_activity_email_editText);
@@ -54,17 +57,7 @@ public class login_activity extends AppCompatActivity {
 
         if(signInAccount!=null || mAuth.getCurrentUser() != null)
         {
-            //SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
-            //Boolean check_on_login_reg_bool = sharedPreferences.getBoolean("Registered",false);
-                //if (check_on_login_reg_bool != true) {
                     startActivity(new Intent(getApplicationContext(), sign_up.class));
-                    //setLoginBoolean();
-                // else {
-                    //startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    //setLoginBoolean();
-                //}
-
-
         }
 
         findViewById(R.id.login_activity_google_signin_button).setOnClickListener(new View.OnClickListener() {
@@ -120,24 +113,7 @@ public class login_activity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            //SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
-                            //Boolean check_on_login_reg_bool = sharedPreferences.getBoolean("Registered",false);
-                            // check driver login
-
-                            // Sign in success, update UI with the signed-in user's information
-
-                                //if (check_on_login_reg_bool != true) {
                                     startActivity(new Intent(getApplicationContext(), sign_up.class));
-                                    //setLoginBoolean();
-
-                                //} else {
-
-                                    //startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                    //setLoginBoolean();
-
-                                //}
-
-
                         } else {
                             Toast.makeText(login_activity.this, "Sorry auth failed.",
                                     Toast.LENGTH_SHORT).show();

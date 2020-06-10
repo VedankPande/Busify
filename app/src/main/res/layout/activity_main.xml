@@ -71,7 +71,7 @@
             android:paddingHorizontal="15dp"
             android:text="Request STOP"
             android:textAllCaps="false"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorButtonText" />
 
         <Button
             android:id="@+id/passenger_button_send_location2"

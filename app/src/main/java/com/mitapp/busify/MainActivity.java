@@ -110,8 +110,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final String SELECTED_BUS= "Selected Bus";
     GoogleMap mMap;
     FusedLocationProviderClient fusedLocationProviderClient;
-    FirebaseDatabase database;
-    DatabaseReference reference;
     FirebaseFirestore mDB = FirebaseFirestore.getInstance();
     String UId = FirebaseAuth.getInstance().getUid();
     RadioButton checkbox_do_not_show_buses, checkbox_show_my_buses, checkbox_show_all_buses;
@@ -564,15 +562,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onBackPressed() {
         SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
         Boolean regbool = sharedPreferences.getBoolean("Registered",false);
-        Boolean loginbool = sharedPreferences.getBoolean("LoggedIn",false);
-        if (regbool==loginbool&&loginbool==true)
+        if (regbool)
         {
             moveTaskToBack(true);
         }
         else {
             super.onBackPressed();
         }
-    }*/
+    }*/ //uncomment this before presentation, keep commented during development
 
     public void getDriverLocationLive()
     {
