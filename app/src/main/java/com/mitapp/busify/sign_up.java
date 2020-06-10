@@ -79,6 +79,13 @@ public class sign_up extends AppCompatActivity implements AdapterView.OnItemSele
             }
         });
 
+        findViewById(R.id.details_notif).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), Request_Stop_Respond.class));
+            }
+        });
+
         ImageButton register = findViewById(R.id.goto_mainactivity);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
