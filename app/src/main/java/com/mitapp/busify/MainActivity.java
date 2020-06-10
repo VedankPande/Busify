@@ -230,8 +230,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 TOPIC = "/topics/Busify";
-                NOTIFICATION_TITLE = "Some title";
-                NOTIFICATION_MESSAGE = "Some message";
+                NOTIFICATION_TITLE = "STOP REQUESTED";
+                NOTIFICATION_MESSAGE = FirebaseAuth.getInstance().getCurrentUser().getDisplayName()+" has requested for stop. Tap to open";
 
 
                 JSONObject notification = new JSONObject();

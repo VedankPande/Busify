@@ -2,6 +2,7 @@ package com.mitapp.busify;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -49,6 +50,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         int notificationID = new Random().nextInt(3000);
+        Intent resultIntent = new Intent(getApplicationContext(),MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 1, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             setupChannels(notificationManager);
@@ -64,12 +67,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentTitle(remoteMessage.getData().get("title"))
                 .setContentText(remoteMessage.getData().get("message"))
                 .setAutoCancel(true)
-                .setSound(notificationSoundUri);
+                .setSound(notificationSoundUri)
+                .setContentIntent(pendingIntent);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             notificationBuilder.setColor(getResources().getColor(R.color.colorPrimaryDark));
         }
         notificationManager.notify(notificationID, notificationBuilder.build());
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
