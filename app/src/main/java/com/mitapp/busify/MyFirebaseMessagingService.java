@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -50,7 +51,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         int notificationID = new Random().nextInt(3000);
-        Intent resultIntent = new Intent(getApplicationContext(),MainActivity.class);
+        Intent resultIntent = new Intent(getApplicationContext(),FirebaseGetDataTest.class);
+        resultIntent.putExtra("location", remoteMessage.getData().get("location"));
+        resultIntent.putExtra("method", "marker");
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 1, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -68,6 +71,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentText(remoteMessage.getData().get("message"))
                 .setAutoCancel(true)
                 .setSound(notificationSoundUri)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(remoteMessage.getData().get("location")))
                 .setContentIntent(pendingIntent);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){

@@ -1,6 +1,9 @@
 package com.mitapp.busify;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -10,12 +13,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
+import java.lang.*;
 
 public class FirebaseGetDataTest extends AppCompatActivity {
     FirebaseFirestore mDB = FirebaseFirestore.getInstance();
@@ -35,6 +40,10 @@ public class FirebaseGetDataTest extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(getIntent().getStringExtra("method").equals("marker"))
+        {
+            Toast.makeText(this, "yeet", Toast.LENGTH_SHORT).show();
+        }
         setContentView(R.layout.activity_firebase_get_data_test);
 
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
@@ -60,7 +69,13 @@ public class FirebaseGetDataTest extends AppCompatActivity {
             }
         });
 
+
+
+        //Toast.makeText(this, getIntent().getStringExtra("location").substring(10,31), Toast.LENGTH_SHORT).show();
+
+
     }
+
 
     private void sendNotification(JSONObject notification) {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(FCM_API, notification,
