@@ -28,6 +28,8 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +40,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -125,6 +128,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     final private String FCM_API = "https://fcm.googleapis.com/fcm/send";
     final private String serverKey = "key=" + "AAAAziddBjU:APA91bFbgbTc_GhQThZhqCrBb5K_xvHgLWO3DIqspDLzNsP87huLcHKKrGxVRtqGiVGC0RNF-umUCo3dwD8SoU-0anZHSgqfruikrFtahIpbyPMfJ3Ot5uzSZ-Lqf0izVAEbdojnCXd6";
     final private String contentType = "application/json";
+
+    PopupWindow popupWindow;
+    EditText edittext;
+    View popupView;
 
 
 
@@ -227,6 +234,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         findViewById(R.id.passenger_button_request_stop).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //For PopUp
+                LayoutInflater config_sockets_inflater = (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                popupView = config_sockets_inflater.inflate(R.layout.popup_bus_select,null);
+                popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+                popupWindow.setElevation(100);
+                popupWindow.showAtLocation(findViewById(R.id.passenger_navigationMenu), Gravity.CENTER, 0, 0);
+
+                popupView.findViewById(R.id.send_button).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        popupWindow.dismiss();
+                        edittext = popupView.findViewById(R.id.popup_edittext);
+                        String popup_slelected_bus = edittext.getText().toString();
+                        Toast.makeText(getApplicationContext(), popup_slelected_bus, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                popupView.findViewById(R.id.cancel_button).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        popupWindow.dismiss();
+                    }
+                });
 
                 fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
                 fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
