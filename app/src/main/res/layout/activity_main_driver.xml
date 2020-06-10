@@ -60,10 +60,10 @@
 
         <fragment
             android:id="@+id/driver_mapView"
-            android:layout_marginBottom="3dp"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_marginBottom="3dp"
             tools:context=".MapsActivity" />
 
         <View

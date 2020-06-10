@@ -65,13 +65,13 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="7dp"
-            android:background="@drawable/style_stop_button"
+            android:background="@drawable/style_floating_view"
             android:elevation="10dp"
             android:maxLines="1"
             android:paddingHorizontal="15dp"
             android:text="Request STOP"
             android:textAllCaps="false"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/colorAccent" />
 
         <Button
             android:id="@+id/passenger_button_send_location2"
@@ -81,13 +81,13 @@
             android:layout_marginStart="19dp"
             android:layout_marginBottom="8dp"
             android:layout_toEndOf="@id/passenger_button_request_stop"
-            android:background="@drawable/style_stop_button"
+            android:background="@drawable/style_floating_view"
             android:elevation="10dp"
             android:onClick="gototest"
             android:paddingHorizontal="15dp"
             android:text="gototest"
             android:textAllCaps="false"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/colorButtonText" />
 
         <fragment
             android:id="@+id/passenger_mapView"
