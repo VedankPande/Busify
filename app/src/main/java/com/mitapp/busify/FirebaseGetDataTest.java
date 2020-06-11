@@ -40,10 +40,6 @@ public class FirebaseGetDataTest extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getIntent().getStringExtra("method").equals("marker"))
-        {
-            Toast.makeText(this, "yeet", Toast.LENGTH_SHORT).show();
-        }
         setContentView(R.layout.activity_firebase_get_data_test);
 
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {

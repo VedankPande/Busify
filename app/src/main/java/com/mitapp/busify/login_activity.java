@@ -38,11 +38,13 @@ public class login_activity extends AppCompatActivity {
     FirebaseAuth mAuth;
     EditText pre_email,pre_password;
     private static final String SUBSCRIBE_TO = "Busify";
+    private static final String MY_TOPIC = FirebaseAuth.getInstance().getUid();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         FirebaseMessaging.getInstance().subscribeToTopic(SUBSCRIBE_TO);
+        FirebaseMessaging.getInstance().subscribeToTopic(MY_TOPIC);
         setTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_activity);

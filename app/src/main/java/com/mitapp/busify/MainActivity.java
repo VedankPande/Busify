@@ -84,6 +84,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -119,9 +121,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Map<String,String> UID_Bus_map = new HashMap<>();
     Map<String,Marker> driverMarkers = new HashMap<>();
     List<Marker> driverMarker = new ArrayList<>();
+    List<ListenerRegistration> registrationList= new ArrayList();
     private RequestQueue requestQueue;
     private String URL = "https://fcm.googleapis.com/fcm/send";
-
     String NOTIFICATION_TITLE;
     String NOTIFICATION_MESSAGE;
     String TOPIC;
@@ -158,9 +160,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View view) {
                 for(Marker marker : driverMarker)
                 {
-                    marker.setVisible(false);
+                    marker.remove();
                 }
                 checkbox_do_not_show_buses.setChecked(true);
+                if(registrationList!=null)
+                {
+                    for(ListenerRegistration reg : registrationList)
+                    {
+                        reg.remove();
+                    }
+                }
+
             }
         });
         checkbox_show_my_buses = findViewById(R.id.checkbox_show_my_buses);
@@ -219,15 +229,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.passenger_navView);
         navigationView.setNavigationItemSelectedListener(this);
 
+        if(isLocationGranted==true)
+        {
+            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    LatLng latlng1 = new LatLng(location.getLatitude(),location.getLongitude());
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng1,14.0f));
+                }
+            });
+        }
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                LatLng latlng1 = new LatLng(location.getLatitude(),location.getLongitude());
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng1,14.0f));
-            }
-        });
 
         //for notification
 
@@ -246,8 +259,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     public void onClick(View view) {
                         popupWindow.dismiss();
                         edittext = popupView.findViewById(R.id.popup_edittext);
-                        String popup_slelected_bus = edittext.getText().toString();
-                        Toast.makeText(getApplicationContext(), popup_slelected_bus, Toast.LENGTH_SHORT).show();
+                        String popup_selected_bus = edittext.getText().toString();
+                        Toast.makeText(getApplicationContext(), popup_selected_bus, Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -258,6 +271,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
 
+                //for message sending
                 fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
                 fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
                     @Override
@@ -273,6 +287,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             notificationBody.put("title", NOTIFICATION_TITLE);
                             notificationBody.put("message", NOTIFICATION_MESSAGE);
                             notificationBody.put("location",latlng1);
+                            notificationBody.put("ID", FirebaseAuth.getInstance().getUid());
+                            notificationBody.put("destination","driver");
 
                             notification.put("to", TOPIC);
                             notification.put("data", notificationBody);
@@ -314,6 +330,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         };
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -429,7 +446,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if(GoogleApiAvailability.getInstance().isUserResolvableError(available)){
             //an error occured but we can resolve it
-            Log.d(TAG, "isServicesOK: an error occured but we can fix it");
+            Log.d(TAG, "isServicesOK: an error occurred but we can fix it");
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this, available, ERROR_DIALOG_REQUEST);
             dialog.show();
         }else{
@@ -612,7 +629,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void getDriverLocationLive()
     {
-
         final Marker marker1 = mMap.addMarker(new MarkerOptions().position(new LatLng(30,30)).title("Vedank").icon(BitmapDescriptorFactory.fromResource((R.drawable.busify_g))).visible(true));
         final Marker marker2 = mMap.addMarker(new MarkerOptions().position(new LatLng(60,60)).title("Shantanu").icon(BitmapDescriptorFactory.fromResource(R.drawable.busifyh)).visible(true));
         driverMarker.add(marker1);
@@ -624,7 +640,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 marker.setVisible(true);
             }
 
-        mDB.collection("locations")
+        ListenerRegistration registration = mDB.collection("locations")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value,
@@ -635,7 +651,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         }
                         for (QueryDocumentSnapshot doc : value) {
                             if (doc.getGeoPoint("Location") != null) {
-
+                                Toast.makeText(MainActivity.this, "working", Toast.LENGTH_SHORT).show();
                                 GeoPoint geoPoint = doc.getGeoPoint("Location");
                                 LatLng latLng = new LatLng(geoPoint.getLatitude(),geoPoint.getLongitude());
                                     if(doc.getId().equals("c6j3SIAX38W1uSWGBjDGeXmHBVw2"))
@@ -651,6 +667,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         }
                     }
                 });
+            registrationList.add(registration);
+
+
     }
 
     public void getMyDriverLocationLive(String selectedBus)
@@ -661,33 +680,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         final String myBus = UID_Bus_map.get(selectedBus); //gets UID from users bus letter
         final Marker myMarker = driverMarkers.get(myBus);  // gets marker for the users bus letter
-        myMarker.setVisible(true); //make users driver marker visible
-
-        /*mDB.collection("locations")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value,
-                                        @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-                            Log.w(TAG, "Listen failed.", e);
-                            return;
-                        }
-                        for (QueryDocumentSnapshot doc : value) {
-                            if (doc.getGeoPoint("Location") != null) {
-                                GeoPoint geoPoint = doc.getGeoPoint("Location");
-                                LatLng latLng = new LatLng(geoPoint.getLatitude(),geoPoint.getLongitude());
-                                if(doc.getId().equals(myBus))
-                                {
-                                    myMarker.setPosition(latLng); //set position of only users driver marker
-                                }
-
-                            }
-                        }
-                    }
-                });*/
+        if(myMarker!=null)
+        {
+            myMarker.setVisible(true); //make users driver marker visible
+        }
     }
-
-
 
 
     }

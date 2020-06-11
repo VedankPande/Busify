@@ -19,12 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -36,6 +31,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "mFirebaseIIDService";
     private static final String SUBSCRIBE_TO = "Busify";
     private final String ADMIN_CHANNEL_ID ="admin_channel";
+    private final String MY_TOPIC = FirebaseAuth.getInstance().getUid();
+    String destination;
+    Intent resIntent,passengerIntent,driverIntent;
+    PendingIntent pendingIntent;
     @Override
     public void onNewToken(@NonNull String s) {
 
@@ -44,40 +43,79 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // Once the token is generated, subscribe to topic with the userId
 
         FirebaseMessaging.getInstance().subscribeToTopic(SUBSCRIBE_TO);
+        FirebaseMessaging.getInstance().subscribeToTopic(MY_TOPIC);
         //Log.i(TAG, "onTokenRefresh completed with token: " + token);
     }
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
+        destination = remoteMessage.getData().get("destination");
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         int notificationID = new Random().nextInt(3000);
-        Intent resultIntent = new Intent(getApplicationContext(),FirebaseGetDataTest.class);
-        resultIntent.putExtra("location", remoteMessage.getData().get("location"));
-        resultIntent.putExtra("method", "marker");
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 1, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            setupChannels(notificationManager);
+        if(destination.equals("passenger")) //if current notification is from driver to passenger
+        {
+            passengerIntent = new Intent(getApplicationContext(),MainActivity.class);
+            passengerIntent.putExtra("location", remoteMessage.getData().get("location"));
+            passengerIntent.putExtra("method", "marker");
+            passengerIntent.putExtra("ID",remoteMessage.getData().get("ID"));
+            pendingIntent = PendingIntent.getActivity(getApplicationContext(), 1, passengerIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                setupChannels(notificationManager);
+            }
+
+            Bitmap largeIcon = BitmapFactory.decodeResource(getResources(),
+                    R.drawable.busifylogofinal);
+
+            Uri notificationSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, ADMIN_CHANNEL_ID)
+                    .setSmallIcon(R.drawable.busifylogofinal)
+                    .setLargeIcon(largeIcon)
+                    .setContentTitle(remoteMessage.getData().get("title"))
+                    .setContentText(remoteMessage.getData().get("message"))
+                    .setAutoCancel(true)
+                    .setSound(notificationSoundUri)
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText(remoteMessage.getData().get("message")))
+                    .setContentIntent(pendingIntent);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                notificationBuilder.setColor(getResources().getColor(R.color.colorPrimaryDark));
+            }
+            notificationManager.notify(notificationID, notificationBuilder.build());
+
+        }
+        else if(destination.equals("driver")) //if current notification is from passenger to driver
+        {
+            driverIntent = new Intent(getApplicationContext(),Request_Stop_Respond.class);
+            driverIntent.putExtra("location", remoteMessage.getData().get("location"));
+            driverIntent.putExtra("method", "marker");
+            driverIntent.putExtra("ID",remoteMessage.getData().get("ID"));
+            pendingIntent = PendingIntent.getActivity(getApplicationContext(), 1, driverIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                setupChannels(notificationManager);
+            }
+
+            Bitmap largeIcon = BitmapFactory.decodeResource(getResources(),
+                    R.drawable.busifylogofinal);
+
+            Uri notificationSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, ADMIN_CHANNEL_ID)
+                    .setSmallIcon(R.drawable.busifylogofinal)
+                    .setLargeIcon(largeIcon)
+                    .setContentTitle(remoteMessage.getData().get("title"))
+                    .setContentText(remoteMessage.getData().get("message"))
+                    .setAutoCancel(true)
+                    .setSound(notificationSoundUri)
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText(remoteMessage.getData().get("message")))
+                    .setContentIntent(pendingIntent);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                notificationBuilder.setColor(getResources().getColor(R.color.colorPrimaryDark));
+            }
+            notificationManager.notify(notificationID, notificationBuilder.build());
+
         }
 
-        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(),
-                R.drawable.busifylogofinal);
-
-        Uri notificationSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, ADMIN_CHANNEL_ID)
-                .setSmallIcon(R.drawable.busifylogofinal)
-                .setLargeIcon(largeIcon)
-                .setContentTitle(remoteMessage.getData().get("title"))
-                .setContentText(remoteMessage.getData().get("message"))
-                .setAutoCancel(true)
-                .setSound(notificationSoundUri)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(remoteMessage.getData().get("location")))
-                .setContentIntent(pendingIntent);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            notificationBuilder.setColor(getResources().getColor(R.color.colorPrimaryDark));
-        }
-        notificationManager.notify(notificationID, notificationBuilder.build());
 
     }
 

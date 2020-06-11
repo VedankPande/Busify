@@ -43,11 +43,11 @@
         android:textColor="@color/colorButtonText" />
 
     <fragment
-        android:id="@+id/passenger_mapView"
+        android:id="@+id/request_mapView"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="3dp"
-        tools:context=".MapsActivity" />
+        tools:context="com.mitapp.busify.Request_Stop_Respond" />
 
 </RelativeLayout>
