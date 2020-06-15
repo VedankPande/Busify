@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     final private String FCM_API = "https://fcm.googleapis.com/fcm/send";
     final private String serverKey = "key=" + "AAAAziddBjU:APA91bFbgbTc_GhQThZhqCrBb5K_xvHgLWO3DIqspDLzNsP87huLcHKKrGxVRtqGiVGC0RNF-umUCo3dwD8SoU-0anZHSgqfruikrFtahIpbyPMfJ3Ot5uzSZ-Lqf0izVAEbdojnCXd6";
     final private String contentType = "application/json";
-
+    Boolean centerMap = true;
     PopupWindow popupWindow;
     EditText edittext;
     View popupView;
@@ -228,18 +228,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = findViewById(R.id.passenger_navView);
         navigationView.setNavigationItemSelectedListener(this);
-
-        if(isLocationGranted==true)
-        {
-            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-                @Override
-                public void onSuccess(Location location) {
-                    LatLng latlng1 = new LatLng(location.getLatitude(),location.getLongitude());
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng1,14.0f));
-                }
-            });
-        }
 
 
         //for notification
@@ -528,7 +516,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onMapReady(GoogleMap googleMap) {
         //Toast.makeText(getApplicationContext(), "running", Toast.LENGTH_SHORT).show();
-
+        if(centerMap)
+        {
+            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    LatLng latlng1 = new LatLng(location.getLatitude(),location.getLongitude());
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng1,14.0f));
+                    centerMap = false;
+                }
+            });
+        }
         mMap = googleMap;
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.passenger_mapView);
