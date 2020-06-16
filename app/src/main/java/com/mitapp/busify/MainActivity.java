@@ -44,6 +44,7 @@ import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.AuthFailureError;
@@ -134,6 +135,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     PopupWindow popupWindow;
     EditText edittext;
     View popupView;
+    NavigationView navigationView;
+    Switch drawerSwitch;
 
     //TODO: Give actual values to these Strings
     String bus_letter = "F";
@@ -234,14 +237,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         nToggle.syncState();
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        NavigationView navigationView = findViewById(R.id.passenger_navView);
+        navigationView = findViewById(R.id.passenger_navView);
+        MenuItem menuItem = navigationView.getMenu().findItem(R.id.switch_show_all_buses); // This is the menu item that contains your switch
+        drawerSwitch = menuItem.getActionView().findViewById(R.id.switcher);
         View navHeaderView = navigationView.getHeaderView(0);
-        Button navigation_menu_bus_letter = navHeaderView.findViewById(R.id.navigation_menu_bus_letter);
+        TextView navigation_menu_bus_letter = navHeaderView.findViewById(R.id.navigation_menu_bus_letter);
         navigation_menu_bus_letter.setText(bus_letter);
         TextView navigation_menu_driver_name = navHeaderView.findViewById(R.id.navigation_menu_driver_name);
         navigation_menu_driver_name.setText(driver_name);
         TextView navigation_menu_driver_phone = navHeaderView.findViewById(R.id.navigation_menu_driver_phone);
         navigation_menu_driver_phone.setText(driver_phone);
+        //TODO: complete the function
+//        drawerSwitch.setChecked();
         navigationView.setNavigationItemSelectedListener(this);
 
         //for notification
@@ -334,6 +341,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        navigationView.setCheckedItem(R.id.switch_show_all_buses);
+        navigationView.getMenu().performIdentifierAction(R.id.switch_show_all_buses, 0);
         if (nToggle.onOptionsItemSelected(item)){
             return true;
         }
@@ -360,6 +369,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if (id == R.id.app_info){
             startActivity(new Intent(getApplicationContext(), app_info.class));
+        }
+        if (id == R.id.switch_show_all_buses){
+            drawerSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        //TODO: Write your code here
+                    } else {
+                        //TODO: Write your code here
+                    }
+                }
+            });
         }
         return false;
     }

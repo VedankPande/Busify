@@ -26,8 +26,14 @@
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
+
     <style name="HamburgerStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@color/colorButtonText</item>
+    </style>
+
+    <style name="switch_style">
+        <item name="thumbColor">@color/colorPrimary</item>
+        <item name="trackColorActive">@color/colorPrimaryDark</item>
     </style>
 
 </resources>

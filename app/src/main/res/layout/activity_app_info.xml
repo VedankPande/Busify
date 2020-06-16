@@ -37,21 +37,24 @@
             android:paddingVertical="10dp"
             android:paddingHorizontal="20dp">
 
-            <ImageButton
-                android:id="@+id/linkedin1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentEnd="true"
-                android:scaleType="centerInside"
-                app:srcCompat="@drawable/linkedin" />
-
             <TextView
+                android:layout_centerVertical="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:text="Shantanu Patil"
                 android:textColor="@color/colorText"
                 android:textSize="13sp" />
+
+            <ImageButton
+                android:background="@null"
+                android:layout_centerVertical="true"
+                android:id="@+id/linkedin1"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/linkedin" />
 
         </RelativeLayout>
 
@@ -65,14 +68,6 @@
             android:paddingVertical="10dp"
             android:paddingHorizontal="20dp">
 
-            <ImageButton
-                android:id="@+id/linkedin2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentEnd="true"
-                android:scaleType="centerInside"
-                app:srcCompat="@drawable/linkedin" />
-
             <TextView
                 android:layout_centerVertical="true"
                 android:textSize="13sp"
@@ -81,6 +76,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Vedank Pande"/>
+
+            <ImageButton
+                android:background="@null"
+                android:id="@+id/linkedin2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/linkedin" />
 
         </RelativeLayout>
 
@@ -94,14 +98,6 @@
             android:paddingVertical="10dp"
             android:paddingHorizontal="20dp">
 
-            <ImageButton
-                android:id="@+id/linkedin3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentEnd="true"
-                android:scaleType="centerInside"
-                app:srcCompat="@drawable/linkedin" />
-
             <TextView
                 android:layout_centerVertical="true"
                 android:textSize="13sp"
@@ -110,6 +106,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Anant Mokashi"/>
+
+            <ImageButton
+                android:background="@null"
+                android:id="@+id/linkedin3"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/linkedin" />
 
         </RelativeLayout>
 
@@ -123,14 +128,6 @@
             android:paddingVertical="10dp"
             android:paddingHorizontal="20dp">
 
-            <ImageButton
-                android:id="@+id/linkedin4"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentEnd="true"
-                android:scaleType="centerInside"
-                app:srcCompat="@drawable/linkedin" />
-
             <TextView
                 android:layout_centerVertical="true"
                 android:textSize="13sp"
@@ -139,6 +136,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Akshaj Pratap Singh"/>
+
+            <ImageButton
+                android:background="@null"
+                android:id="@+id/linkedin4"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/linkedin" />
 
         </RelativeLayout>
 
