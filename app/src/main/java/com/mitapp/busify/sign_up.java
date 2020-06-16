@@ -64,18 +64,6 @@ public class sign_up extends AppCompatActivity implements AdapterView.OnItemSele
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), MainActivityDriver.class));
-                /*database = FirebaseDatabase.getInstance();
-                reference = database.getReference();
-
-                String name = Name.getText().toString();
-                String stop = Stop.getText().toString();
-                String phone = Phone.getText().toString();
-                User user = new User(name, stop, bus_id, phone);
-                Toast.makeText(sign_up.this, "values:"+ " "+name+" "+bus_id, Toast.LENGTH_SHORT).show();
-                reference.child("users").child(""+name).setValue(user);
-                reference.child("users").child("test").child("value").setValue("hello");
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));*/
-                //setRegisteredBoolean();
             }
         });
 
@@ -97,13 +85,16 @@ public class sign_up extends AppCompatActivity implements AdapterView.OnItemSele
                 String phone = Phone.getText().toString();
                 User user = new User(name, stop, bus_id, phone);
                 reference.child("users").child(""+name).setValue(user);
-                reference.child("users").child("test").child("value").setValue("hello");
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 SharedPreferences sharedPreferences = getSharedPreferences(USER_DETAILS,MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(SELECTED_BUS,bus_id);
                 editor.apply();
                 setRegisteredBoolean();
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                intent.putExtra("name",name);
+                intent.putExtra("phone",phone);
+                startActivity(intent);
+
             }
         });
 

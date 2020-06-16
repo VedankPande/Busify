@@ -137,8 +137,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //TODO: Give actual values to these Strings
     String bus_letter = "F";
-    String driver_name = "Akshaj Pratap Singh";
-    String driver_phone = "+91 987 656 (5743)";
+    String driver_name = "xyz";
+    String driver_phone = "123";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,6 +148,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         UID_Bus_map.put("H","SOzNZgTpoNZj14OC2F97vqrqI2k1");
         final SharedPreferences sharedPreferences = getSharedPreferences(USER_DETAILS,MODE_PRIVATE);
         final String selectedBus = sharedPreferences.getString(SELECTED_BUS,null);
+        bus_letter = selectedBus;
+        if(getIntent().hasExtra("name"))
+        {
+            driver_name = getIntent().getStringExtra("name");
+            driver_phone = getIntent().getStringExtra("phone");
+        }
+
         //getDriverLocationLive(selectedBus,1);
 
 

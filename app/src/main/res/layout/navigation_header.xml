@@ -37,13 +37,13 @@
             android:paddingTop="7dp">
 
             <TextView
-                android:textColor="@color/colorButtonText"
                 android:id="@+id/textView2"
+                style="@style/text_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:text="Driver Name:\t"
-                style="@style/text_style"/>
+                android:text="Name:\t"
+                android:textColor="@color/colorButtonText"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/navigation_menu_driver_name"
