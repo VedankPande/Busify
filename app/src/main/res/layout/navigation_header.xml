@@ -3,27 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:background="@color/colorPrimary"/>
+    android:orientation="vertical"
+    android:id="@+id/layout_navigation_menu">
 
     <LinearLayout
+        android:paddingTop="24dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp"
-        android:background="#263238">
+        android:paddingHorizontal="10dp"
+        android:paddingBottom="10dp"
+        android:background="@color/colorPrimary">
 
         <Button
+            android:id="@+id/navigation_menu_bus_letter"
+            android:elevation="0dp"
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_style"
             android:backgroundTintMode="add"
-            android:text="F"
+            android:text="-"
             android:textAlignment="center"
             android:textColor="#ECEFF1"
             android:textSize="35sp"
@@ -37,19 +37,23 @@
             android:paddingTop="7dp">
 
             <TextView
+                android:textColor="@color/colorButtonText"
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:text="Driver Name:  "
+                android:text="Driver Name:\t"
                 style="@style/text_style"/>
 
             <TextView
+                android:id="@+id/navigation_menu_driver_name"
+                android:textColor="@color/colorButtonText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Akshaj Singh"
+                android:text="Not found"
                 android:textSize="14sp"
                 style="@style/text_style"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -58,19 +62,21 @@
             android:layout_marginBottom="7dp">
 
             <TextView
+                android:textColor="@color/colorButtonText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:text="Phone:  "
+                android:text="Phone:\t"
                 style="@style/text_style"/>
 
             <TextView
+                android:id="@+id/navigation_menu_driver_phone"
+                android:textColor="@color/colorButtonText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+91 12345 67890"
+                android:text="Not found"
                 android:textSize="13sp"
                 style="@style/text_style"/>
-
 
         </LinearLayout>
 

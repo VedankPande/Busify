@@ -110,10 +110,9 @@
         android:id="@+id/passenger_navView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:menu="@menu/navigation_menu_passenger"
         android:layout_gravity="start"
-        app:headerLayout="@layout/navigation_header">
-    </com.google.android.material.navigation.NavigationView>
+        app:headerLayout="@layout/navigation_header"
+        app:menu="@menu/navigation_menu_passenger"/>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

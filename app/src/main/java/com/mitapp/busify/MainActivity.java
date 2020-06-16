@@ -46,8 +46,8 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
+import com.android.volley.Header;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -135,9 +135,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     EditText edittext;
     View popupView;
 
-
-
-
+    //TODO: Give actual values to these Strings
+    String bus_letter = "F";
+    String driver_name = "Akshaj Pratap Singh";
+    String driver_phone = "+91 987 656 (5743)";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -227,11 +228,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         NavigationView navigationView = findViewById(R.id.passenger_navView);
+        View navHeaderView = navigationView.getHeaderView(0);
+        Button navigation_menu_bus_letter = navHeaderView.findViewById(R.id.navigation_menu_bus_letter);
+        navigation_menu_bus_letter.setText(bus_letter);
+        TextView navigation_menu_driver_name = navHeaderView.findViewById(R.id.navigation_menu_driver_name);
+        navigation_menu_driver_name.setText(driver_name);
+        TextView navigation_menu_driver_phone = navHeaderView.findViewById(R.id.navigation_menu_driver_phone);
+        navigation_menu_driver_phone.setText(driver_phone);
         navigationView.setNavigationItemSelectedListener(this);
 
-
         //for notification
-
         findViewById(R.id.passenger_button_request_stop).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -289,7 +295,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             }
         });
-
 
     }
     private void sendNotification(JSONObject notification) {
