@@ -339,8 +339,6 @@ public class MainActivityDriver extends AppCompatActivity implements NavigationV
 
     private void sendDriverlastknownlocation()
     {
-
-
         Task<Location> locationtask = fusedLocationProviderClient.getLastLocation();
         locationtask.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
@@ -350,7 +348,6 @@ public class MainActivityDriver extends AppCompatActivity implements NavigationV
                 data.put("hello","world");
                 data.put("UID",UId);
                 data.put("Location",geoPoint);
-                //Toast.makeText(MainActivity.this, "point" + data, Toast.LENGTH_SHORT).show();
                 mDB.collection("locations").document(UId).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -393,17 +390,5 @@ public class MainActivityDriver extends AppCompatActivity implements NavigationV
 
     }
 
-    /*@Override
-    public void onBackPressed() {
-        SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
-        Boolean loginbool = sharedPreferences.getBoolean("LoggedIn",false);
-        if (loginbool==true)
-        {
-            moveTaskToBack(true);
-        }
-        else {
-            super.onBackPressed();
-        }
-    }*/
 }
 
