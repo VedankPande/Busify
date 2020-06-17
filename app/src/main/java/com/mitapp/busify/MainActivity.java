@@ -3,14 +3,11 @@ package com.mitapp.busify;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import android.Manifest;
-import android.app.ActionBar;
-import android.app.ActivityManager;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -20,13 +17,9 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Camera;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -34,12 +27,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -48,13 +37,11 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.AuthFailureError;
-import com.android.volley.Header;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
@@ -67,7 +54,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -75,18 +61,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.annotations.Nullable;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.ListenerRegistration;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -142,6 +122,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String bus_letter = "F";
     String driver_name = "xyz";
     String driver_phone = "123";
+
+    int height_passenger_statusBar_spacer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -209,14 +191,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //This is for UI
         View status_bar_tint = findViewById(R.id.passenger_statusBar_spacer);
         status_bar_tint.bringToFront();
-        status_bar_tint.getLayoutParams().height = getResources().getDimensionPixelSize(getResources().
+        height_passenger_statusBar_spacer = getResources().getDimensionPixelSize(getResources().
                 getIdentifier("status_bar_height", "dimen", "android"));
+        status_bar_tint.getLayoutParams().height = height_passenger_statusBar_spacer;
         status_bar_tint.requestLayout();
 
         View nav_bar = findViewById(R.id.passenger_navigationBar_spacer);
         nav_bar.bringToFront();
-        nav_bar.getLayoutParams().height = getResources().getDimensionPixelSize(getResources().
+        height_passenger_statusBar_spacer = getResources().getDimensionPixelSize(getResources().
                 getIdentifier("navigation_bar_height", "dimen", "android"));
+        nav_bar.getLayoutParams().height = height_passenger_statusBar_spacer;
         nav_bar.requestLayout();
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
@@ -311,6 +295,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
     }
+
     private void sendNotification(JSONObject notification) {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(FCM_API, notification,
                 new Response.Listener<JSONObject>() {
@@ -337,7 +322,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         };
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -386,8 +370,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
         initmap();
         if(checkMapServices())
@@ -401,7 +384,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
     }
-
 
     private boolean checkMapServices(){
         if(isServicesOK()){
@@ -477,9 +459,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String permissions[],
-                                           @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
         isLocationGranted = false;
         switch (requestCode) {
             case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
@@ -509,17 +489,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    private void initmap()
-    {
+    private void initmap() {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.passenger_mapView);
         mapFragment.getMapAsync(MainActivity.this);
 
     }
 
-    private void sendlastknownlocation()
-    {
-
+    private void sendlastknownlocation() {
 
         Task<Location> locationtask = fusedLocationProviderClient.getLastLocation();
         locationtask.addOnSuccessListener(new OnSuccessListener<Location>() {
@@ -545,6 +522,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
+    public static int dpToPx(int dp) {
+        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+    }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -567,15 +548,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         //moving location button to bottom right
-        View locationButton = ((View) mapFragment.getView().findViewById(Integer.parseInt("1")).
-                getParent()).findViewById(Integer.parseInt("2"));
+        View locationButton = ((View) mapFragment.getView().findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
         RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
-        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
-        rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-        rlp.setMargins(0, 0, 200, 200);
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+        rlp.setMargins(0, 0, dpToPx(10), height_passenger_statusBar_spacer + dpToPx(75));
 
         //setting map theme
-
         SharedPreferences sharedPreferences = getSharedPreferences("Map Themes",MODE_PRIVATE);
         int selectedTheme = sharedPreferences.getInt("theme",1);
         // 1:light 2:dark 3:white 4:black
@@ -615,10 +593,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    public void sendCoordinateToFirebase()
-    {
-
-
+    public void sendCoordinateToFirebase() {
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -639,12 +614,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
-
     }
+
     public void gototest(View view){
         startActivity(new Intent(getApplicationContext(),FirebaseGetDataTest.class));
     }
-
 
     /*@Override
     public void onBackPressed() {
@@ -659,8 +633,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }*/ //uncomment this before presentation, keep commented during development
 
-    public void getDriverLocationLive()
-    {
+    public void getDriverLocationLive() {
         final Marker marker1 = mMap.addMarker(new MarkerOptions().position(new LatLng(30,30)).title("Vedank").icon(BitmapDescriptorFactory.fromResource((R.drawable.busify_g))).visible(true));
         final Marker marker2 = mMap.addMarker(new MarkerOptions().position(new LatLng(60,60)).title("Shantanu").icon(BitmapDescriptorFactory.fromResource(R.drawable.busifyh)).visible(true));
         driverMarker.add(marker1);
@@ -704,8 +677,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    public void getMyDriverLocationLive(String selectedBus)
-    {
+    public void getMyDriverLocationLive(String selectedBus) {
         for (Marker markers : driverMarker)
         {
             markers.setVisible(false); //setting all markers to hidden
@@ -718,7 +690,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
     }
-
-
