@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Switch drawerSwitch;
     Boolean mapready = false;
     Boolean initlocation = false;
+    String selected_bus_for_stop;
 
     //TODO: Give actual values to these Strings
     String bus_letter = "F";
@@ -259,8 +260,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     public void onClick(View view) {
                         popupWindow.dismiss();
                         edittext = popupView.findViewById(R.id.popup_edittext);
-                        String popup_selected_bus = edittext.getText().toString();
-                        Toast.makeText(getApplicationContext(), popup_selected_bus, Toast.LENGTH_SHORT).show();
+                        selected_bus_for_stop = edittext.getText().toString();
+                        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
+                        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                            @Override
+                            public void onSuccess(Location location) {
+                                LatLng latlng1 = new LatLng(location.getLatitude(),location.getLongitude());
+                                TOPIC = "/topics/" + UID_Bus_map.get(selected_bus_for_stop);
+                                NOTIFICATION_TITLE = "STOP REQUESTED";
+                                NOTIFICATION_MESSAGE = FirebaseAuth.getInstance().getCurrentUser().getDisplayName()+" has requested for stop. Tap to open.";
+
+                                JSONObject notification = new JSONObject();
+                                JSONObject notificationBody = new JSONObject();
+                                try {
+                                    notificationBody.put("title", NOTIFICATION_TITLE);
+                                    notificationBody.put("message", NOTIFICATION_MESSAGE);
+                                    notificationBody.put("location",latlng1);
+                                    notificationBody.put("ID", FirebaseAuth.getInstance().getUid());
+                                    notificationBody.put("destination","driver");
+
+                                    notification.put("to", TOPIC);
+                                    notification.put("data", notificationBody);
+                                } catch (JSONException e) {
+                                    Log.e(TAG, "onCreate: " + e.getMessage() );
+                                }
+                                sendNotification(notification);
+                            }
+                        });
                     }
                 });
 
@@ -272,32 +298,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
 
                 //for message sending
-                fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
-                fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        LatLng latlng1 = new LatLng(location.getLatitude(),location.getLongitude());
-                        TOPIC = "/topics/Busify";
-                        NOTIFICATION_TITLE = "STOP REQUESTED";
-                        NOTIFICATION_MESSAGE = FirebaseAuth.getInstance().getCurrentUser().getDisplayName()+" has requested for stop. Tap to open.";
 
-                        JSONObject notification = new JSONObject();
-                        JSONObject notificationBody = new JSONObject();
-                        try {
-                            notificationBody.put("title", NOTIFICATION_TITLE);
-                            notificationBody.put("message", NOTIFICATION_MESSAGE);
-                            notificationBody.put("location",latlng1);
-                            notificationBody.put("ID", FirebaseAuth.getInstance().getUid());
-                            notificationBody.put("destination","driver");
-
-                            notification.put("to", TOPIC);
-                            notification.put("data", notificationBody);
-                        } catch (JSONException e) {
-                            Log.e(TAG, "onCreate: " + e.getMessage() );
-                        }
-                        sendNotification(notification);
-                    }
-                });
 
             }
         });
