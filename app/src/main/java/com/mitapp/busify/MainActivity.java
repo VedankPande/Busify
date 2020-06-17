@@ -117,6 +117,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     View popupView;
     NavigationView navigationView;
     Switch drawerSwitch;
+    Boolean mapready = false;
+    Boolean initlocation = false;
 
     //TODO: Give actual values to these Strings
     String bus_letter = "F";
@@ -372,7 +374,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onResume() {
         super.onResume();
-        initmap();
+
         if(checkMapServices())
         {
             if(isLocationGranted)
@@ -529,7 +531,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        //Toast.makeText(getApplicationContext(), "running", Toast.LENGTH_SHORT).show();
         if(centerMap)
         {
             fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -581,7 +582,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             isLocationGranted = true;
-            initmap();
             googleMap.setMyLocationEnabled(true);
             //Toast.makeText(this, "constant", Toast.LENGTH_SHORT).show();
         } else {
@@ -634,6 +634,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }*/ //uncomment this before presentation, keep commented during development
 
     public void getDriverLocationLive() {
+        if(registrationList!=null)
+        {
+            for(ListenerRegistration reg : registrationList)
+            {
+                reg.remove();
+            }
+        }
         final Marker marker1 = mMap.addMarker(new MarkerOptions().position(new LatLng(30,30)).title("Vedank").icon(BitmapDescriptorFactory.fromResource((R.drawable.busify_g))).visible(true));
         final Marker marker2 = mMap.addMarker(new MarkerOptions().position(new LatLng(60,60)).title("Shantanu").icon(BitmapDescriptorFactory.fromResource(R.drawable.busifyh)).visible(true));
         driverMarker.add(marker1);
@@ -656,7 +663,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         }
                         for (QueryDocumentSnapshot doc : value) {
                             if (doc.getGeoPoint("Location") != null) {
-                                Toast.makeText(MainActivity.this, "working", Toast.LENGTH_SHORT).show();
                                 GeoPoint geoPoint = doc.getGeoPoint("Location");
                                 LatLng latLng = new LatLng(geoPoint.getLatitude(),geoPoint.getLongitude());
                                     if(doc.getId().equals("c6j3SIAX38W1uSWGBjDGeXmHBVw2"))

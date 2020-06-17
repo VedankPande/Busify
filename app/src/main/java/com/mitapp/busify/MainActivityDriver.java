@@ -159,7 +159,6 @@ public class MainActivityDriver extends AppCompatActivity implements NavigationV
     protected void onResume()
     {
         super.onResume();
-        initmap();
         if(checkMapServices())
         {
             if(isLocationGranted)
@@ -326,7 +325,6 @@ public class MainActivityDriver extends AppCompatActivity implements NavigationV
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             isLocationGranted = true;
-            initmap();
             googleMap.setMyLocationEnabled(true);
             //Toast.makeText(this, "constant", Toast.LENGTH_SHORT).show();
         } else {

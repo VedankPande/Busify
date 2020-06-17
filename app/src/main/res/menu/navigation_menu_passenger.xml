@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/switch_show_all_buses"
-        android:title="Show all Busses"
+        android:title="Show all Buses"
         android:icon="@drawable/ic_bus"
         app:actionLayout="@layout/switch_layout"/>
 

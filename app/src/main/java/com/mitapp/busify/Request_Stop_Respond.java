@@ -133,6 +133,7 @@ public class Request_Stop_Respond extends AppCompatActivity implements OnMapRead
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        Toast.makeText(this, "runresp", Toast.LENGTH_SHORT).show();
         mMap = googleMap;
         LatLng sydney = new LatLng(-33.852, 151.211);
         googleMap.addMarker(new MarkerOptions()
@@ -148,7 +149,6 @@ public class Request_Stop_Respond extends AppCompatActivity implements OnMapRead
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             isLocationGranted = true;
-            initmap();
             googleMap.setMyLocationEnabled(true);
             //Toast.makeText(this, "constant", Toast.LENGTH_SHORT).show();
         } else {
@@ -165,7 +165,6 @@ public class Request_Stop_Respond extends AppCompatActivity implements OnMapRead
     {
         super.onResume();
         i=1;
-        initmap();
         if(checkMapServices())
         {
             if(isLocationGranted)
