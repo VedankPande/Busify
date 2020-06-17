@@ -19,6 +19,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationManager;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -29,6 +30,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -69,6 +71,7 @@ import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -233,6 +236,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigation_menu_driver_name.setText(driver_name);
         TextView navigation_menu_driver_phone = navHeaderView.findViewById(R.id.navigation_menu_driver_phone);
         navigation_menu_driver_phone.setText(driver_phone);
+        ImageView user_image = navHeaderView.findViewById(R.id.navigation_menu_profile_image);
+        Picasso.get().load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl()).into(user_image);
+
         //TODO: complete the function
 //        drawerSwitch.setChecked();
         navigationView.setNavigationItemSelectedListener(this);
