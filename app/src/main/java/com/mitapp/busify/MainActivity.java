@@ -131,6 +131,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     int height_passenger_statusBar_spacer;
 
+    RadioGroup rg1, rg2, rg3, rg4, rg5;
+    RadioGroup.OnCheckedChangeListener listener1, listener2,listener3,listener4,listener5;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -248,61 +251,231 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         findViewById(R.id.passenger_button_request_stop).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //For PopUp
-                LayoutInflater config_sockets_inflater = (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                popupView = config_sockets_inflater.inflate(R.layout.popup_bus_select,null);
-                popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
-                popupWindow.setElevation(100);
-                popupWindow.showAtLocation(findViewById(R.id.passenger_navigationMenu), Gravity.CENTER, 0, 0);
-
-                popupView.findViewById(R.id.send_button).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        popupWindow.dismiss();
-                        edittext = popupView.findViewById(R.id.popup_edittext);
-                        selected_bus_for_stop = edittext.getText().toString();
-                        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
-                        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-                            @Override
-                            public void onSuccess(Location location) {
-                                LatLng latlng1 = new LatLng(location.getLatitude(),location.getLongitude());
-                                TOPIC = "/topics/" + UID_Bus_map.get(selected_bus_for_stop);
-                                NOTIFICATION_TITLE = "STOP REQUESTED";
-                                NOTIFICATION_MESSAGE = FirebaseAuth.getInstance().getCurrentUser().getDisplayName()+" has requested for stop. Tap to open.";
-
-                                JSONObject notification = new JSONObject();
-                                JSONObject notificationBody = new JSONObject();
-                                try {
-                                    notificationBody.put("title", NOTIFICATION_TITLE);
-                                    notificationBody.put("message", NOTIFICATION_MESSAGE);
-                                    notificationBody.put("location",latlng1);
-                                    notificationBody.put("ID", FirebaseAuth.getInstance().getUid());
-                                    notificationBody.put("destination","driver");
-
-                                    notification.put("to", TOPIC);
-                                    notification.put("data", notificationBody);
-                                } catch (JSONException e) {
-                                    Log.e(TAG, "onCreate: " + e.getMessage() );
-                                }
-                                sendNotification(notification);
-                            }
-                        });
-                    }
-                });
-
-                popupView.findViewById(R.id.cancel_button).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        popupWindow.dismiss();
-                    }
-                });
-
-                //for message sending
+                showPopUP();
+            }
+        });
+    }
 
 
+
+    private void showPopUP(){
+        //For PopUp
+        LayoutInflater config_sockets_inflater = (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        popupView = config_sockets_inflater.inflate(R.layout.popup_bus_select,null);
+        popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+        popupWindow.setElevation(100);
+        popupWindow.showAtLocation(findViewById(R.id.passenger_navigationMenu), Gravity.CENTER, 0, 0);
+
+        rg1 = popupView.findViewById(R.id.popup_radioGroup1);
+        rg2 = popupView.findViewById(R.id.popup_radioGroup2);
+        rg3 = popupView.findViewById(R.id.popup_radioGroup3);
+        rg4 = popupView.findViewById(R.id.popup_radioGroup4);
+        rg5 = popupView.findViewById(R.id.popup_radioGroup5);
+
+        rg1.clearCheck();
+        rg2.clearCheck();
+        rg3.clearCheck();
+        rg4.clearCheck();
+        rg5.clearCheck();
+
+        rg1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId != -1) {
+                    fun2();
+                    fun3();
+                    fun4();
+                    fun5();
+                }
+                getBusLetter(checkedId);
             }
         });
 
+        rg2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId != -1) {
+                    fun1();
+                    fun3();
+                    fun4();
+                    fun5();
+                }
+                getBusLetter(checkedId);
+            }
+        });
+
+        rg3.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId != -1) {
+                    fun1();
+                    fun2();
+                    fun4();
+                    fun5();
+                }
+                getBusLetter(checkedId);
+            }
+        });
+
+        rg4.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId != -1) {
+                    fun1();
+                    fun2();
+                    fun3();
+                    fun5();
+                }
+                getBusLetter(checkedId);
+            }
+        });
+
+        rg5.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId != -1) {
+                    fun1();
+                    fun2();
+                    fun3();
+                    fun4();
+                }
+                getBusLetter(checkedId);
+            }
+        });
+
+        popupView.findViewById(R.id.send_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+                fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
+                fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        LatLng latlng1 = new LatLng(location.getLatitude(),location.getLongitude());
+                        TOPIC = "/topics/" + UID_Bus_map.get(selected_bus_for_stop);
+                        NOTIFICATION_TITLE = "STOP REQUESTED";
+                        NOTIFICATION_MESSAGE = FirebaseAuth.getInstance().getCurrentUser().getDisplayName()+" has requested for stop. Tap to open.";
+
+                        JSONObject notification = new JSONObject();
+                        JSONObject notificationBody = new JSONObject();
+                        try {
+                            notificationBody.put("title", NOTIFICATION_TITLE);
+                            notificationBody.put("message", NOTIFICATION_MESSAGE);
+                            notificationBody.put("location",latlng1);
+                            notificationBody.put("ID", FirebaseAuth.getInstance().getUid());
+                            notificationBody.put("destination","driver");
+
+                            notification.put("to", TOPIC);
+                            notification.put("data", notificationBody);
+                        } catch (JSONException e) {
+                            Log.e(TAG, "onCreate: " + e.getMessage() );
+                        }
+                        sendNotification(notification);
+                    }
+                });
+            }
+        });
+
+        popupView.findViewById(R.id.cancel_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+            }
+        });
+    }
+
+    public void getBusLetter(int id){
+        while (id > 22) id-=22;
+        String[] stringArray = getResources().getStringArray(R.array.buses_list);
+        selected_bus_for_stop = stringArray[id-1];
+    }
+
+    public void fun1() {
+        rg1.setOnCheckedChangeListener(null);
+        rg1.clearCheck();
+        rg1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                fun2();
+                fun3();
+                fun4();
+                fun5();
+                getBusLetter(checkedId);
+            }
+        });
+    }
+
+    public void fun2() {
+        rg2.setOnCheckedChangeListener(null);
+        rg2.clearCheck();
+        rg2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                fun1();
+                fun3();
+                fun4();
+                fun5();
+                getBusLetter(checkedId);
+
+            }
+        });
+    }
+
+    public void fun3() {
+        rg3.setOnCheckedChangeListener(null);
+        rg3.clearCheck();
+        rg3.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                fun1();
+                fun2();
+                fun4();
+                fun5();
+                getBusLetter(checkedId);
+
+            }
+        });
+    }
+
+    public void fun4() {
+        rg4.setOnCheckedChangeListener(null);
+        rg4.clearCheck();
+        rg4.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                fun1();
+                fun2();
+                fun3();
+                fun5();
+                getBusLetter(checkedId);
+
+            }
+        });
+    }
+
+    public void fun5() {
+        rg5.setOnCheckedChangeListener(null);
+        rg5.clearCheck();
+        rg5.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                fun1();
+                fun2();
+                fun3();
+                fun4();
+                getBusLetter(checkedId);
+
+            }
+        });
     }
 
     private void sendNotification(JSONObject notification) {

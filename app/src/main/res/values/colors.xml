@@ -7,7 +7,7 @@
     <color name="colorEditTextColor">#555555</color>
     <color name="colorEditTextBackground">#F4F4F4</color>
     <color name="colorBackground">#FFFFFF</color>
-    <color name="colorStatusbarBackground">#33FFFFFF</color>
+    <color name="colorStatusBarBackground">#33FFFFFF</color>
     <color name="colorText">#333333</color>
     <color name="colorButtonText">#333333</color>
     <color name="colorFabBackground">#B3ffc931</color>

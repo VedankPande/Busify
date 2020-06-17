@@ -6,40 +6,360 @@
     android:background="#80000000">
 
     <androidx.cardview.widget.CardView
+        app:cardBackgroundColor="@color/colorBackground"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp">
 
         <RelativeLayout
-            android:padding="10dp"
+            android:paddingHorizontal="25dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <TextView
+                android:layout_marginVertical="10dp"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"
                 android:id="@+id/popup_heading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select bus"/>
+                android:text="Select bus"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
 
             <EditText
                 android:id="@+id/popup_edittext"
                 android:layout_below="@id/popup_heading"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="0dp"/>
+
+            <View
+                android:layout_marginVertical="10dp"
+                android:id="@+id/first_seperator"
+                android:layout_below="@id/popup_heading"
+                android:layout_width="215dp"
+                android:layout_height="1dp"
+                android:background="#777777"/>
 
             <LinearLayout
-                android:layout_below="@id/popup_edittext"
+                android:layout_below="@id/first_seperator"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/layout_radioGroup"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioGroup
+                    android:id="@+id/popup_radioGroup1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="A"/>
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="A1"/>
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="B"/>
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="B1"/>
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="B2"/>
+
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/popup_radioGroup2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="C"/>
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="D"/>
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="E"/>
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="E1"/>
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="F"/>
+
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/popup_radioGroup3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="G"/>
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="H"/>
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="H2"/>
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="I"/>
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="EA"/>
+
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/popup_radioGroup4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="EB"/>
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="EC"/>
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="ED"/>
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="EE"/>
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="EF"/>
+
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/popup_radioGroup5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:text="EH"/>
+
+                    <RadioButton
+                        android:layout_margin="3dp"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                        android:background="@drawable/style_popup_radio_button"
+                        android:button="@android:color/transparent"
+                        android:layout_width="48dp"
+                        android:layout_height="37dp"
+                        android:text="EH2"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <View
+                android:layout_marginTop="10dp"
+                android:id="@+id/second_seperator"
+                android:layout_below="@id/layout_radioGroup"
+                android:layout_width="215dp"
+                android:layout_height="1dp"
+                android:background="#777777"/>
+
+            <LinearLayout
+                android:layout_below="@id/second_seperator"
+                android:layout_marginVertical="5dp"
+                android:layout_width="215dp"
                 android:layout_height="wrap_content">
 
                 <Button
+                    android:layout_weight="1"
+                    android:background="@null"
                     android:id="@+id/cancel_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Cancel"/>
 
                 <Button
+                    android:textColor="@color/colorError"
+                    android:layout_weight="1"
+                    android:background="@null"
                     android:id="@+id/send_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
