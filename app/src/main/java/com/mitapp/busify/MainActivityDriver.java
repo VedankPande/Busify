@@ -139,6 +139,9 @@ public class MainActivityDriver extends AppCompatActivity implements NavigationV
         if (id == R.id.change_details){
             startActivity(new Intent(getApplicationContext(), change_details.class));
         }
+        if (id == R.id.settings){
+            startActivity(new Intent(getApplicationContext(), Settings.class));
+        }
         if (id == R.id.app_info){
             startActivity(new Intent(getApplicationContext(), app_info.class));
         }
