@@ -21,69 +21,69 @@
             android:id="@+id/register_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="10dp"
-            android:textColor="@color/colorText"
-            android:textStyle="bold"
             android:fontFamily="monospace"
+            android:paddingHorizontal="10dp"
             android:text="Register"
             android:textAllCaps="true"
-            android:textSize="30sp"/>
+            android:textColor="@color/colorText"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <View
             android:id="@+id/first_seperator"
-            android:layout_below="@id/register_text"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_below="@id/register_text"
             android:layout_marginVertical="20dp"
-            android:background="#777777"/>
+            android:background="#777777" />
 
         <EditText
             android:id="@+id/signup_activity_name"
-            android:layout_below="@id/first_seperator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/first_seperator"
             android:layout_marginVertical="10dp"
+            android:background="@drawable/style_edittext"
+            android:fontFamily="sans-serif"
+            android:hint="Full name"
+            android:inputType="textPersonName"
             android:padding="10dp"
             android:textColor="@color/colorEditTextColor"
             android:textColorHint="@color/colorEditTextHintColor"
-            android:inputType="textPersonName"
-            android:background="@drawable/style_edittext"
-            android:hint="Full name"
-            android:fontFamily="sans-serif"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/signup_activity_phone"
-            android:layout_below="@id/signup_activity_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/signup_activity_name"
             android:layout_marginVertical="10dp"
+            android:background="@drawable/style_edittext"
+            android:fontFamily="sans-serif"
+            android:hint="Phone"
+            android:inputType="phone"
             android:padding="10dp"
             android:textColor="@color/colorEditTextColor"
             android:textColorHint="@color/colorEditTextHintColor"
-            android:inputType="phone"
-            android:background="@drawable/style_edittext"
-            android:hint="Phone"
-            android:fontFamily="sans-serif"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <RelativeLayout
             android:id="@+id/signup_activity_layout_bus_letter"
-            android:layout_below="@id/signup_activity_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/signup_activity_phone"
             android:layout_marginVertical="10dp"
-            android:padding="10dp"
-            android:background="@drawable/style_edittext">
+            android:background="@drawable/style_edittext"
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:textSize="18sp"
-                android:textColor="@color/colorEditTextColor"
                 android:layout_marginStart="2.5dp"
-                android:text="Bus letter" />
+                android:fontFamily="sans-serif"
+                android:text="Bus letter"
+                android:textColor="@color/colorEditTextColor"
+                android:textSize="18sp" />
 
             <Spinner
                 android:id="@+id/signup_activity_bus_spinner"
@@ -95,33 +95,33 @@
 
         <EditText
             android:id="@+id/signup_activity_layout_stop"
-            android:layout_below="@id/signup_activity_layout_bus_letter"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signup_activity_layout_bus_letter"
             android:layout_marginVertical="10dp"
+            android:background="@drawable/style_edittext"
+            android:fontFamily="sans-serif"
+            android:hint="Stop"
+            android:inputType="text"
             android:padding="10dp"
             android:textColor="@color/colorEditTextColor"
             android:textColorHint="@color/colorEditTextHintColor"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:background="@drawable/style_edittext"
-            android:hint="Stop"
-            android:fontFamily="sans-serif"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <View
             android:id="@+id/second_seperator"
-            android:layout_below="@id/signup_activity_layout_stop"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_below="@id/signup_activity_layout_stop"
             android:layout_marginVertical="20dp"
-            android:background="#777777"/>
+            android:background="#777777" />
 
         <ImageButton
             android:id="@+id/goto_mainactivity"
-            android:layout_below="@id/second_seperator"
-            android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/second_seperator"
+            android:layout_alignParentEnd="true"
             android:layout_margin="10dp"
             android:background="@drawable/style_button"
             android:src="@drawable/round_navigate_next_black_36" />
