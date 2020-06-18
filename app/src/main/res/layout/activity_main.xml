@@ -26,35 +26,58 @@
             android:layout_margin="10dp"
             layout="@layout/action_bar_main"/>
 
-        <RadioGroup
+
+        <RelativeLayout
+            android:visibility="visible"
+            android:elevation="7dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/main_menu_radio_group"
-            android:layout_above="@id/passenger_button_request_stop">
+            android:layout_marginBottom="10dp"
+            android:layout_above="@id/passenger_navigationBar_spacer">
 
-            <RadioButton
-                android:id="@+id/checkbox_do_not_show_buses"
-                android:textColor="#FF0000"
+            <RadioGroup
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Don't show buses"/>
+                android:id="@+id/passenger_radio_group"
+                android:paddingEnd="25dp"
+                android:paddingVertical="15dp"
+                android:background="@drawable/style_radio_group">
 
-            <RadioButton
-                android:id="@+id/checkbox_show_my_buses"
-                android:textColor="#FF0000"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Show my bus"/>
+                <RadioButton
+                    android:id="@+id/checkbox_do_not_show_buses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Don't show buses"/>
 
-            <RadioButton
-                android:id="@+id/checkbox_show_all_buses"
-                android:textColor="#FF0000"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Show all buses" />
+                <RadioButton
+                    android:id="@+id/checkbox_show_my_buses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Show my bus"/>
 
-        </RadioGroup>
+                <RadioButton
+                    android:id="@+id/checkbox_show_all_buses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Show all buses" />
+            </RadioGroup>
+            
+            <View
+                android:layout_width="0dp"
+                android:layout_height="130dp"/>
 
+            <ImageView
+                android:layout_toEndOf="@id/passenger_radio_group"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/passenger_radioGroup_arrow"
+                android:layout_margin="5dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/round_navigate_next_black_18"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
 
 
         <Button

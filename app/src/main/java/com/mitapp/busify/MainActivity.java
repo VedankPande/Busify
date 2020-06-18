@@ -133,6 +133,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     RadioGroup rg1, rg2, rg3, rg4, rg5;
     RadioGroup.OnCheckedChangeListener listener1, listener2,listener3,listener4,listener5;
+    boolean condition = true;
+    boolean isRadioGroupVisible = false;
+
+    ImageView imgMyLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         //Functions for check boxes
-        RadioGroup main_menu_radio_group = findViewById(R.id.main_menu_radio_group);
+        RadioGroup main_menu_radio_group = findViewById(R.id.passenger_radio_group);
         main_menu_radio_group.bringToFront();
 
         checkbox_do_not_show_buses = findViewById(R.id.checkbox_do_not_show_buses);
@@ -172,7 +176,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         reg.remove();
                     }
                 }
-
             }
         });
         checkbox_show_my_buses = findViewById(R.id.checkbox_show_my_buses);
@@ -198,6 +201,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         //This is for UI
+
+        findViewById(R.id.passenger_radioGroup_arrow).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isRadioGroupVisible = !isRadioGroupVisible;
+                findViewById(R.id.passenger_radio_group).setVisibility(isRadioGroupVisible ? View.VISIBLE : View.GONE);
+            }
+        });
+
+
+
         View status_bar_tint = findViewById(R.id.passenger_statusBar_spacer);
         status_bar_tint.bringToFront();
         height_passenger_statusBar_spacer = getResources().getDimensionPixelSize(getResources().
@@ -231,8 +245,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         navigationView = findViewById(R.id.passenger_navView);
-        MenuItem menuItem = navigationView.getMenu().findItem(R.id.switch_show_all_buses); // This is the menu item that contains your switch
-        drawerSwitch = menuItem.getActionView().findViewById(R.id.switcher);
+//        MenuItem menuItem = navigationView.getMenu().findItem(R.id.switch_show_all_buses); // This is the menu item that contains your switch
+//        drawerSwitch = menuItem.getActionView().findViewById(R.id.switcher);
         View navHeaderView = navigationView.getHeaderView(0);
         TextView navigation_menu_bus_letter = navHeaderView.findViewById(R.id.navigation_menu_bus_letter);
         navigation_menu_bus_letter.setText(bus_letter);
@@ -252,6 +266,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 showPopUP();
+            }
+        });
+
+        imgMyLocation = (ImageView) findViewById(R.id.passenger_location_button);
+        imgMyLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: loaction ka yaha kar
+//                getMyLocation();
             }
         });
     }
@@ -507,8 +530,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        navigationView.setCheckedItem(R.id.switch_show_all_buses);
-        navigationView.getMenu().performIdentifierAction(R.id.switch_show_all_buses, 0);
+//        navigationView.setCheckedItem(R.id.switch_show_all_buses);
+//        navigationView.getMenu().performIdentifierAction(R.id.switch_show_all_buses, 0);
         if (nToggle.onOptionsItemSelected(item)){
             return true;
         }
@@ -536,18 +559,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.app_info){
             startActivity(new Intent(getApplicationContext(), app_info.class));
         }
-        if (id == R.id.switch_show_all_buses){
-            drawerSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        //TODO: Write your code here
-                    } else {
-                        //TODO: Write your code here
-                    }
-                }
-            });
-        }
+//        if (id == R.id.switch_show_all_buses){
+//            drawerSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                @Override
+//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                    if (isChecked) {
+//                        Toast.makeText(getApplicationContext(), "on", Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "off", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
+//        }
         return false;
     }
 
