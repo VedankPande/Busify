@@ -346,13 +346,12 @@ public class MainActivityDriver extends AppCompatActivity implements NavigationV
             public void onSuccess(Location location) {
                 GeoPoint geoPoint = new GeoPoint(location.getLatitude(),location.getLongitude());
                 Map<String,Object> data = new HashMap<>();
-                data.put("hello","world");
                 data.put("UID",UId);
                 data.put("Location",geoPoint);
                 mDB.collection("locations").document(UId).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(MainActivityDriver.this, "saved", Toast.LENGTH_SHORT).show();
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

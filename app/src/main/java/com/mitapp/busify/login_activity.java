@@ -39,6 +39,7 @@ public class login_activity extends AppCompatActivity {
     EditText pre_email,pre_password;
     private static final String SUBSCRIBE_TO = "Busify";
     private static final String MY_TOPIC = FirebaseAuth.getInstance().getUid();
+    String currentUID;
 
 
     @Override
@@ -59,7 +60,15 @@ public class login_activity extends AppCompatActivity {
 
         if(signInAccount!=null || mAuth.getCurrentUser() != null)
         {
-                    startActivity(new Intent(getApplicationContext(), sign_up.class));
+            currentUID = FirebaseAuth.getInstance().getUid();
+            if(currentUID.equals("c6j3SIAX38W1uSWGBjDGeXmHBVw2")||currentUID.equals("SOzNZgTpoNZj14OC2F97vqrqI2k1"))
+            {
+                startActivity(new Intent(getApplicationContext(),MainActivityDriver.class));
+            }
+            else{
+                startActivity(new Intent(getApplicationContext(), sign_up.class));
+            }
+
         }
 
         findViewById(R.id.login_activity_google_signin_button).setOnClickListener(new View.OnClickListener() {

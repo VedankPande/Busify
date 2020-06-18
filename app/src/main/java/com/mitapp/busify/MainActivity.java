@@ -44,6 +44,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
@@ -182,7 +183,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         checkbox_show_my_buses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendCoordinateToFirebase();
                 getDriverLocationLive();
                 getMyDriverLocationLive(selectedBus);
                 checkbox_show_my_buses.setChecked(true);
@@ -193,7 +193,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 checkbox_show_all_buses.setChecked(true);
-                sendCoordinateToFirebase();
                 getDriverLocationLive();
             }
         });
@@ -274,7 +273,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 //TODO: loaction ka yaha kar
-//                getMyLocation();
+                fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
+                fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        LatLng locationbuttonlatlng = new LatLng(location.getLatitude(),location.getLongitude());
+                        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(locationbuttonlatlng,14.0f);
+                        mMap.animateCamera(cameraUpdate);
+                    }
+                });
+
             }
         });
     }
@@ -734,6 +742,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        googleMap.getUiSettings().setMyLocationButtonEnabled(false);
         if(centerMap)
         {
             fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -820,7 +829,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    /*@Override
+    @Override
     public void onBackPressed() {
         SharedPreferences sharedPreferences = getSharedPreferences("system global variables",MODE_PRIVATE);
         Boolean regbool = sharedPreferences.getBoolean("Registered",false);
@@ -831,7 +840,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else {
             super.onBackPressed();
         }
-    }*/ //uncomment this before presentation, keep commented during development
+    }
 
     public void getDriverLocationLive() {
         if(registrationList!=null)
