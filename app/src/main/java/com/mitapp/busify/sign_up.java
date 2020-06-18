@@ -60,20 +60,6 @@ public class sign_up extends AppCompatActivity implements AdapterView.OnItemSele
         Stop = findViewById(R.id.signup_activity_layout_stop);
         Phone = findViewById(R.id.signup_activity_phone);
 
-        findViewById(R.id.details_submit).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), MainActivityDriver.class));
-            }
-        });
-
-        findViewById(R.id.details_notif).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), Request_Stop_Respond.class));
-            }
-        });
-
         ImageButton register = findViewById(R.id.goto_mainactivity);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
