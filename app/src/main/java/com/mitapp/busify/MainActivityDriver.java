@@ -33,6 +33,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -67,6 +68,7 @@ public class MainActivityDriver extends AppCompatActivity implements NavigationV
     FusedLocationProviderClient fusedLocationProviderClient;
     FirebaseFirestore mDB = FirebaseFirestore.getInstance();
     String UId = FirebaseAuth.getInstance().getUid();
+    Boolean centermap = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,14 +114,18 @@ public class MainActivityDriver extends AppCompatActivity implements NavigationV
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-
-        // move camera to location
-
-        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+        findViewById(R.id.passenger_location_button).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSuccess(Location location) {
-                LatLng latlngdriver = new LatLng(location.getLatitude(),location.getLongitude());
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlngdriver,14.0f));
+            public void onClick(View view) {
+                fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
+                fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        LatLng locationbuttonlatlng = new LatLng(location.getLatitude(),location.getLongitude());
+                        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(locationbuttonlatlng,14.0f);
+                        mMap.animateCamera(cameraUpdate);
+                    }
+                });
             }
         });
 
@@ -290,7 +296,20 @@ public class MainActivityDriver extends AppCompatActivity implements NavigationV
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        if(centermap)
+        {
+            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    LatLng latlng1 = new LatLng(location.getLatitude(),location.getLongitude());
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng1,14.0f));
+                    centermap = false;
+                }
+            });
+        }
         mMap = googleMap;
+        googleMap.getUiSettings().setMyLocationButtonEnabled(false);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.driver_mapView);
 
