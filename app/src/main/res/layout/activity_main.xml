@@ -75,21 +75,6 @@
             android:textAllCaps="false"
             android:textColor="#FFFFFF" />
 
-        <Button
-            android:id="@+id/passenger_button_send_location2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/passenger_navigationBar_spacer"
-            android:layout_marginStart="19dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/style_floating_view"
-            android:elevation="10dp"
-            android:onClick="gototest"
-            android:paddingHorizontal="15dp"
-            android:text="gototest"
-            android:textAllCaps="false"
-            android:textColor="@color/colorButtonText" />
-
         <ImageView
             android:elevation="10dp"
             android:padding="15dp"
