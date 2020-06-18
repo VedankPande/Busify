@@ -124,13 +124,7 @@ public class login_activity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            if(currentUID.equals("c6j3SIAX38W1uSWGBjDGeXmHBVw2")||currentUID.equals("SOzNZgTpoNZj14OC2F97vqrqI2k1"))
-                            {
-                                startActivity(new Intent(getApplicationContext(),MainActivityDriver.class));
-                            }
-                            else{
-                                startActivity(new Intent(getApplicationContext(), sign_up.class));
-                            }
+                                    startActivity(new Intent(getApplicationContext(), sign_up.class));
                         } else {
                             Toast.makeText(login_activity.this, "Sorry auth failed.",
                                     Toast.LENGTH_SHORT).show();
