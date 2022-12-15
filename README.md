@@ -5,7 +5,7 @@
 ## About The Project
 A native android application to help students track and manage their college bus timings/route.
 <br>
-<img src="Images/img_flowchart.png" alt="Logo">
+
 
 <br/>
 
@@ -15,6 +15,10 @@ A native android application to help students track and manage their college bus
     - Send a STOP request to drivers 
     - View other buses on your route
     - Firebase authentication for passengers and drivers
+    
+<img src="images/busify_notif.png" alt="Logo" width = "300">
+<img src="images/busify_gps.png" alt="Logo" width = "300">
+
  
 ### Built With
 
