@@ -19,6 +19,7 @@ A native android application to help students track and manage their college bus
 <p align = "center">
 <img src="images/busify_notif.png" alt="Logo" width = "300">
 <img src="images/busify_gps.png" alt="Logo" width = "300">
+<img src="images/busify_select_bus.png" alt="Logo" width = "300">
 </p>
 
  
