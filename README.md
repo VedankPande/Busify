@@ -15,9 +15,11 @@ A native android application to help students track and manage their college bus
     - Send a STOP request to drivers 
     - View other buses on your route
     - Firebase authentication for passengers and drivers
-    
+
+<p align = "center">
 <img src="images/busify_notif.png" alt="Logo" width = "300">
 <img src="images/busify_gps.png" alt="Logo" width = "300">
+</p>
 
  
 ### Built With
